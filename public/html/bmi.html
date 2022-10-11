@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/format.css">
+    <link rel="stylesheet" href="./assets/css/responsive.css">
+    <title>FitCal - Fitness and Nutrition</title>
+</head>
+
+<body>
+    <!-- header with fitCal logo and date-->
+    <header class="header">
+        <a href="/"><img class='logo' src="./images/fitcal_logo.jpeg" alt="FitCal"></a>
+        <!-- Navigation bar three functionalities -->
+        <nav>
+            <a class='white' href="/bmi"><span id="bmiBtn">&nbsp;&nbsp;&nbsp;&nbsp;BMI&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+            <a class='white' href="/nutrition"><span id="nutriBtn">Nutrition</span></a>
+            <a class='white' href="/exercise"><span id="exerBtn">Exercise</span></a>
+        </nav>
+    </header>
+
+    <!-- BMI Section -->
+    <section id='bmiSection' class="bmiSection">
+        <br>
+        <h3>BMI Calculator</h3>
+        <!-- BMI input -->
+        <label for="weight">Weight</label>
+        <input placeholder="lbs" id="weight" type="number" min="0"><br>
+        <label for="height">Height</label>
+        <input placeholder="in" id="height" type="number" min="0"><br>
+        <button class="bmiSubmit">Submit</button>
+
+        <!-- BMI information displayed -->
+        <div id="bmi-dislplay">
+            <p id="heading"></p>
+            <p id="bmi-output"></p>
+            <p id="message"></p>
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./assets/js/bmi.js"></script>
+    <script src="./assets/js/exercise.js"></script>
+    <script src="./assets/js/dietaryLog.js"></script>
+</body>
+
+</html>

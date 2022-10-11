@@ -1,0 +1,102 @@
+/* header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 40px;
+}
+
+.logo {
+    max-width: 100px;
+}
+
+nav {
+    display: flex;
+    align-items: flex-end;
+}
+
+nav span {
+    margin: 0px 10px;
+    cursor: pointer;
+}
+
+/* general */
+input {
+    padding: 0px;
+}
+
+
+
+/* bmi section */
+.bmiSection {
+    text-align: center;
+}
+
+/* nutrition section */
+.nutrition {
+    text-align: center;
+}
+
+.setMacros {
+    display: none;
+}
+
+.notification {
+    display: none;
+}
+
+/* exercise section */
+.exercise {
+    text-align: center;
+}
+
+#exerciseSearch {
+    display: flex;
+    justify-content: center;
+}
+
+.exercise-selection-body{
+    display: flex;
+    flex-direction: column;
+}
+
+.saved-exercise-body {
+    display: none;
+}
+
+.exerciseLog {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+h4 {
+    margin-bottom: 15px;
+}
+
+.moreBtn{
+    margin-bottom: 15px;
+}
+
+.moreInfo {
+    display: none;
+}
+
+.modal-card{
+    overflow: auto;
+  }
+
+.muscleChoices {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.addItem {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+
+.setupInputs {
+    display: flex;
+    flex-direction: column;
+}

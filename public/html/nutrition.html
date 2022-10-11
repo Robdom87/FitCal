@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/format.css">
+    <link rel="stylesheet" href="./assets/css/responsive.css">
+    <title>FitCal - Fitness and Nutrition</title>
+</head>
+
+<body>
+    <!-- header with fitCal logo and date-->
+    <header class="header">
+        <a href="/"><img class='logo' src="./images/fitcal_logo.jpeg" alt="FitCal"></a>
+        <!-- Navigation bar three functionalities -->
+        <nav>
+            <a class='white' href="/bmi"><span id="bmiBtn">&nbsp;&nbsp;&nbsp;&nbsp;BMI&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+            <a class='white' href="/nutrition"><span id="nutriBtn">Nutrition</span></a>
+            <a class='white' href="/exercise"><span id="exerBtn">Exercise</span></a>
+        </nav>
+    </header>
+
+    <!-- Nutrition section -->
+    <section id="'nutrition" class="nutrition">
+        <br>
+        <button id="addItemBtn">Add Item</button>
+        <button id="setMacrosBtn">Set Macros</button>
+        <!-- input bar for nutrition modal -->
+        <section class="addItem">
+            <section class="amountItem">
+                <input id="amountInput" type="number" min="0" placeholder="Amount">
+                <select id="unitInput" name="measurement">
+                    <option value="lb">lb</option>
+                    <option value="oz">oz</option>
+                    <option value="g">g</option>
+                    <option value="item" class="itemAmount">item</option>
+                </select>
+            </section>
+            <input id="itemInput" type="text" placeholder="Food">
+            <button id="submitBtn" type="submit">Submit</button>
+        </section>
+        <!-- Macros box -->
+        <section class="setMacros">
+            <a href="https://www.calculator.net/macro-calculator.html" target="_blank">
+                <button class="calMacros">Calculate Macros</button>
+            </a>
+            <br>
+            <label for="protein">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Protein</label>
+            <input placeholder="g" id="protein" type="number" min="0">
+            <span>g</span>
+            <br>
+            <label for="carbs">Carbohydrates</label>
+            <input placeholder="g" id="carbs" type="number" min="0">
+            <span>g</span>
+            <br>
+            <label for="fat">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Fat</label>
+            <input placeholder="g" id="fat" type="number" min="0">
+            <span>g</span>
+            <br>
+            <label for="cals">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Calories</label>
+            <input placeholder="kCal" id="cals" type="number" min="0">
+            <span>kCal</span>
+            <br>
+            <button class="macroSubmit">Submit</button>
+        </section>
+
+        <!-- alert if API request fails -->
+        <div class="notification">
+            <button class="delete delBtn"></button>
+            <span class="notifText">Please submit a valid entry.</span>
+        </div>
+
+        <!-- table with all nutritional sections -->
+        <div class="table-container">
+            <table class="table is-flex is-justify-content-center nutritionTable" id="foodValues">
+                <tr>
+                    <th>Food</th>
+                    <th>Calories</th>
+                    <th>Protein</th>
+                    <th>Carbs</th>
+                    <th>Fat</th>
+                    <th class="is-hidden-mobile">Sodium</th>
+                    <th class="is-hidden-mobile">Cholestrol</th>
+                    <th></th>
+                </tr>
+
+                <!-- total row -->
+                <tr>
+                    <td>Totals (unit)</td>
+                    <td id="caloriesTot">kcal</td>
+                    <td id="proteinTot">g</td>
+                    <td id="carbsTot">g</td>
+                    <td id="fatTot">g</td>
+                    <td id="sodiumTot" class="is-hidden-mobile">mg</td>
+                    <td id="cholesterolTot" class="is-hidden-mobile">mg</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Macro Goal</td>
+                    <td id="calMacros">kcal</td>
+                    <td id="proteinMacros">g</td>
+                    <td id="carbMacros">g</td>
+                    <td id="fatMacros">g</td>
+                    <td class="is-hidden-mobile"></td>
+                    <td class="is-hidden-mobile"></td>
+                    <td></td>
+                </tr>
+                <!-- logged food inputted here -->
+            </table>
+        </div>
+
+        <!-- Clear Local Storage btn -->
+        <section>
+            <button class='deleteAllBtn'>Delete All</button>
+        </section>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./assets/js/bmi.js"></script>
+    <script src="./assets/js/exercise.js"></script>
+    <script src="./assets/js/dietaryLog.js"></script>
+</body>
+
+</html>

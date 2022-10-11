@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/format.css">
+    <link rel="stylesheet" href="./assets/css/responsive.css">
+    <title>FitCal - Fitness and Nutrition</title>
+</head>
+
+<body>
+    <!-- header with fitCal logo and date-->
+    <header class="header">
+        <a href="/"><img class='logo' src="./images/fitcal_logo.jpeg" alt="FitCal"></a>
+        <!-- Navigation bar three functionalities -->
+        <nav>
+            <a class='white' href="/bmi"><span
+                    id="bmiBtn">&nbsp;&nbsp;&nbsp;&nbsp;BMI&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+            <a class='white' href="/nutrition"><span id="nutriBtn">Nutrition</span></a>
+            <a class='white' href="/exercise"><span id="exerBtn">Exercise</span></a>
+        </nav>
+    </header>
+
+    <!-- Exercise -->
+    <section id='exercise' class="exercise">
+        <br>
+        <!-- <button type="button">Set Workout</button> -->
+        <h3>***In Development***</h3>
+        <button class="newWorkoutBtn" type="button">Create New Workout</button>
+        <br>
+        <br>
+        <form class='sessionSection' action="javascript:saveToDB();">
+            <section class="exerciseLog">
+                <div>
+                    <label for="date">Date:</label>
+                    <input type="date" class='date' name="workoutDate" min="2018-01-01" required>
+                </div>
+
+                <!-- exercise tables inputted here -->
+            </section>
+            <br>
+            <button type="submit" class="save_db">Save Session to Database</button>
+        </form>
+
+        <!-- program creation modal-->
+        <div class="modal createWorkout">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+                <header class="modal-card-head">
+                    <p class="modal-card-title">Create New Workout</p>
+                    <button class="delete" aria-label="close"></button>
+                </header>
+                <section class="modal-card-body">
+                    <!-- search box in modal -->
+                    <section class="searchSection">
+                        <section id="exerciseSearch">
+                            <section class="intensity">
+                                <p><u><b>Intensity</b></u></p>
+
+                                <select id="intensityOptions" name="intensity">
+                                    <option value=""></option>
+                                    <option value="beginner">Beginner</option>
+                                    <option value="intermediate">Intermediate</option>
+                                    <option value="Advanced">Advanced</option>
+                                </select>
+                            </section>
+
+                            <section class="type">
+                                <p><u><b>Type</b></u></p>
+
+                                <select id="typeOptions" name="type">
+                                    <option value=""></option>
+                                    <option value="cardio">Cardio</option>
+                                    <option value="strength">Strength</option>
+                                    <option value="stretching">Stretching</option>
+                                </select>
+                            </section>
+
+                            <section class="muscle">
+                                <p><u><b>Muscle Group</b></u></p>
+
+                                <select id="muscleOptions" name="muscle">
+                                    <option value=""></option>
+                                    <option value="abdominals">Abdominals</option>
+                                    <option value="abductors">Abductors</option>
+                                    <option value="biceps">Biceps</option>
+                                    <option value="calves">Calves</option>
+                                    <option value="chest">Chest</option>
+                                    <option value="forearms">Forearms</option>
+                                    <option value="glutes">Glutes</option>
+                                    <option value="hamstrings">Hamstrings</option>
+                                    <option value="lats">Lats</option>
+                                    <option value="lowerBack">Lower Back</option>
+                                    <option value="middleBack">Middle Back</option>
+                                    <option value="neck">Neck</option>
+                                    <option value="quadriceps">Quadriceps</option>
+                                    <option value="traps">Traps</option>
+                                    <option value="triceps">Triceps</option>
+                                </select>
+                            </section>
+                        </section>
+
+                        <button class="searchSave">Search</button>
+                        <!-- <button class="savedExercises">View Saved Workouts</button> -->
+
+                        <!-- section displaying search results -->
+                        <br>
+                        <br>
+                        <section class="searchResultSection">
+                            <h4>Search Results</h4>
+                            <section class="exercise-selection-body">
+                                <!-- search results displayed here -->
+                            </section>
+                            <button class="exerciseSave">Save</button>
+                        </section>
+                        <!-- section to view saved workouts -->
+                        <br>
+                        <section class="savedSection">
+                            <h4>Saved Workouts</h4>
+                            <section id="savedExercise" class="saved-exercise-body">
+                                <!-- saved workouts displayed here -->
+                            </section>
+                            <br>
+                            <button class="setupBtn">Continue Workout Setup</button>
+                            <button class="remove-button">Remove All</button>
+                        </section>
+                    </section>
+
+                    <!-- section to choose information for each workout to set up program -->
+                    <form action="javascript:finishSetup();">
+                        <section class="setupSection is-flex-direction-column">
+
+                            <!-- set up questions displayed here -->
+                        </section>
+                        <button type="submit" class="finishBtn">Finish</button>
+                    </form>
+                </section>
+                <footer class="modal-card-foot">
+                    <button class="cancel-button">Cancel</button>
+
+                </footer>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./assets/js/bmi.js"></script>
+    <script src="./assets/js/exercise.js"></script>
+    <script src="./assets/js/dietaryLog.js"></script>
+</body>
+
+</html>
