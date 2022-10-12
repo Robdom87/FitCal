@@ -2,7 +2,6 @@ const router = require('express').Router();
 const { Session, SessionWorkouts } = require('../../models');
 
 // The `/api/session` endpoint
-
 router.get('/', async (req, res) => {
   // find all sessions
   try {

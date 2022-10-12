@@ -1,5 +1,6 @@
 //global variable
 let displayedUnit = "";
+let fetchURL = "";
 
 //Food Input Validation
 //item validation
@@ -51,6 +52,11 @@ $("#setMacrosBtn").click(function () {
 //function to submit inputted macros
 $('.macroSubmit').click(function () {
     $('.setMacros').hide();
+    setMacros();
+})
+
+$('.macroTable').click(function(){
+    localStorage.removeItem("macroRow");
     setMacros();
 })
 
@@ -106,7 +112,7 @@ function inputData() {
         itemNotif();
         let itemUrl = 'https://api.api-ninjas.com/v1/nutrition?query=' + food;
         displayedUnit = "item";
-        getData(itemUrl);
+        getData(food);
         return;
     }
 
@@ -129,17 +135,13 @@ function inputData() {
     amount = Math.round(amount).toString();
 
     // call API with user input
-    let requestNutriUrl = 'https://api.api-ninjas.com/v1/nutrition?query=' + amount + '%20' + unit + '%20' + food;
+    let requestNutriUrl = amount + '%20' + unit + '%20' + food;
     getData(requestNutriUrl);
 }
 
 //function to fetch API info
 async function getData(url) {
-    let response = await fetch(url, {
-        headers: {
-            'X-Api-Key': 'GKg0l9hlc0fRJEHUdIsVzw==lti9bU3OVAYwF8Wk'
-        }
-    });
+    let response = await fetch(`/api/nutrition/${url}`);
     let data = await response.json();
     //check output if blank or name nan
     if (data.length === 0 || data[0].name === 'nan') {
