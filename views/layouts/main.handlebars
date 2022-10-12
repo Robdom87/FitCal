@@ -5,11 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitCal - Fitness and Nutrition</title>
+    <!-- CSS only -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/css/format.css">
     <link rel="stylesheet" href="./assets/css/responsive.css">
-    <title>FitCal - Fitness and Nutrition</title>
+
 </head>
 
 <body>
@@ -25,25 +27,12 @@
             <a class='white' href="/exercise"><span id="exerBtn">Exercise</span></a>
         </nav>
     </header>
-    <section class="homepage"> <br>
-        <h3>Welcome to FitCal!</h3>
-        <section class="homepageText">
-            <p>FitCal is a nutrition and exercise app with aims to assist users who are looking to improve their
-                health.<br><br>
-                We provide the three following functionalities:</p>
-            <ul>
-                <li><a href="/bmi">BMI Calculator</a></li>
-                <li><a href="/nutrition">Daily Consumption Calculator</a></li>
-                <li><a href="/exercise">Workout Log</a></li>
-            </ul>
-        </section>
-    </section>
+    <main class="container container-fluid mt-5">
+        {{{ body }}}
+    </main>
+    <footer>
 
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="./assets/js/bmi.js"></script>
-    <script src="./assets/js/exercise.js"></script>
-    <script src="./assets/js/dietaryLog.js"></script>
+    </footer>
 </body>
 
 </html>
