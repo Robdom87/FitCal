@@ -8,6 +8,7 @@ textInputVal.onkeydown = function (e) {
     }
 }
 
+
 //function to show new workout modal
 $(".newWorkoutBtn").click(function () {
     $('.createWorkout').show();
@@ -23,11 +24,6 @@ $(".searchBtn").click(function () {
     exerciseSearch();
     $('.searchResultContainer').show();
 });
-
-// $(".viewSavedBtn").click(function () {
-//     $('.saved-exercise-body').show();
-//     $('.savedExercisesContainer').show();
-// });
 
 //toggle saved exercise on and off
 $('.savedExercisesBtn').click(function () {
@@ -54,7 +50,6 @@ $(".setupBtn").click(function () {
     } else {
         alert('Must have workouts saved to proceed to setup.');
     }
-
 })
 
 //button to save program into local storage
@@ -222,7 +217,13 @@ function startSetup() {
         </span>
         <span>
         <label for="${i}Type">Weight Type</label>
-        <input placeholder="dumbbell" id="${i}Type" type="text" class='text' required>
+        <select id="${i}Type" name="typeOSU" required>
+                <option value="Barbell">Barbell</option>
+                <option value="Dumbbell">Dumbbell</option>
+                <option value="Machine">Machine</option>
+                <option value="Cable">Cable</option>
+                <option value="Body Weight">Body Weight</option>
+        </select>
         </span>
         </br>`);
         $('.setupSection').append(results);
@@ -284,12 +285,22 @@ function displaySetupWorkout() {
     </tr>`);
         workoutTable.append(tableHeader);
         for (let e = 0; e < workoutProgram[i].sets; e++) {
+             //how to make it be selected
             let tableRow = $(`<tr>
             <td class='set${i} set${i}${e}' id='set${i}${e}'>${e + 1}</td>
             <td><input id='reps${i}${e}' type="number" min="0" size="6" placeholder="${workoutProgram[i].reps}" required></td>
             <td><input id='weight${i}${e}' type="number" min="0" size="6" placeholder="${workoutProgram[i].weight}" required></td>
-            <td><input id='type${i}${e}' class='text' type="text" size="10" placeholder="${workoutProgram[i].type}" required></td>
-            <td><input id='comments${i}${e}' class='text' size="10" type="text" ></td>
+            <td>
+                <select id='type${i}${e}' class='text' name="typeOSU" required>
+                    <option value="${workoutProgram[i].type}">${workoutProgram[i].type}</option>
+                    <option value="Barbell">Barbell</option>
+                    <option value="Dumbbell">Dumbbell</option>
+                    <option value="Machine">Machine</option>
+                    <option value="Cable">Cable</option>
+                    <option value="Body Weight">Body Weight</option>
+                </select>
+            </td>
+            <td><input id='comments${i}${e}' class='text' size="10" type="text"></td>
         </tr>`)
             //<td><button class="removeBtn delete">X</button></td>
             workoutTable.append(tableRow);
