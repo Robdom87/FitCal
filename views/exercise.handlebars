@@ -1,18 +1,15 @@
 <!-- Exercise -->
-<section id='exercise' class="exercise">
-    <br>
-    <!-- <button type="button">Set Workout</button> -->
-    <h3>***In Development***</h3>
+<section class="exercise">
     <button class="newWorkoutBtn" type="button">Create New Workout</button>
     <br>
     <br>
-    <form class='sessionSection' action="javascript:saveToDB();">
-        <section class="exerciseLog">
-            <div>
-                <label for="date">Date:</label>
-                <input type="date" class='date' name="workoutDate" min="2018-01-01" required>
-            </div>
+    <form class='sessionForm' action="javascript:saveToDB();">
 
+        <div>
+            <label for="date">Date:</label>
+            <input type="date" class='date' name="workoutDate" min="2018-01-01" required>
+        </div>
+        <section class="exerciseLog">
             <!-- exercise tables inputted here -->
         </section>
         <br>
@@ -29,8 +26,8 @@
             </header>
             <section class="modal-card-body">
                 <!-- search box in modal -->
-                <section class="searchSection">
-                    <section id="exerciseSearch">
+                <section class="searchExercisesContainer">
+                    <section id="threeCriterias">
                         <section class="intensity">
                             <p><u><b>Intensity</b></u></p>
 
@@ -77,22 +74,23 @@
                         </section>
                     </section>
 
-                    <button class="searchSave">Search</button>
-                    <!-- <button class="savedExercises">View Saved Workouts</button> -->
+                    <button class="searchBtn">Search</button>
+                    {{!-- <button class="viewSavedBtn">Saved Exercises</button> --}}
+                    <button class="savedExercisesBtn">View Saved Workouts</button>
 
                     <!-- section displaying search results -->
                     <br>
                     <br>
-                    <section class="searchResultSection">
+                    <section class="searchResultContainer">
                         <h4>Search Results</h4>
                         <section class="exercise-selection-body">
                             <!-- search results displayed here -->
                         </section>
-                        <button class="exerciseSave">Save</button>
+                        <button class="exerciseSaveBtn">Save</button>
                     </section>
                     <!-- section to view saved workouts -->
                     <br>
-                    <section class="savedSection">
+                    <section class="savedExercisesContainer">
                         <h4>Saved Workouts</h4>
                         <section id="savedExercise" class="saved-exercise-body">
                             <!-- saved workouts displayed here -->
@@ -104,14 +102,14 @@
                 </section>
 
                 <!-- section to choose information for each workout to set up program -->
-                <form action="javascript:finishSetup();">
+                <form class='setupForm' action="javascript:finishSetup();">
                     <section class="setupSection is-flex-direction-column">
-
                         <!-- set up questions displayed here -->
                     </section>
                     <button type="submit" class="finishBtn">Finish</button>
                 </form>
             </section>
+
             <footer class="modal-card-foot">
                 <button class="cancel-button">Cancel</button>
 
