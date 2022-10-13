@@ -138,6 +138,7 @@ function exerciseSearch() {
                 return
             }
 
+
             //add data returned as input selectors within the modal
             for (let i = 0; i < data.length; i++) {
                 //create object for each workout returned
@@ -160,6 +161,10 @@ function exerciseSearch() {
                 //listens to change in any of the seledtable workout and executes if so
                 results.on("change", saveworkout)
                 $('.exercise-selection-body').append(results)
+                results.on("change", save)
+                $('.input-group').append(results)
+
+
             }
         });
 }
