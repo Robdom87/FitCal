@@ -40,6 +40,10 @@ input {
     display: none;
 }
 
+.macroRow {
+    display: none;
+}
+
 .notification {
     display: none;
 }
