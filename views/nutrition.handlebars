@@ -1,24 +1,14 @@
 <!-- Nutrition section -->
 <section id="'nutrition" class="nutrition">
-    <br>
     <button id="addItemBtn">Add Item</button>
     <button id="setMacrosBtn">Set Macros</button>
     <!-- input bar for nutrition modal -->
-    <section class="addItem">
-        <section class="amountItem">
-            <input id="amountInput" type="number" min="0" placeholder="Amount">
-            <select id="unitInput" name="measurement">
-                <option value="lb">lb</option>
-                <option value="oz">oz</option>
-                <option value="g">g</option>
-                <option value="item" class="itemAmount">item</option>
-            </select>
-        </section>
-        <input id="itemInput" type="text" placeholder="Food">
+    <form class="addItem">
+        <input id="itemInput" type="text" placeholder="Ex. 1lb Brisket" required>
         <button id="submitBtn" type="submit">Submit</button>
-    </section>
+    </form>
     <!-- Macros box -->
-    <section class="setMacros">
+    <form class="setMacros">
         <a href="https://www.calculator.net/macro-calculator.html" target="_blank">
             <button class="calMacros">Calculate Macros</button>
         </a>
@@ -26,28 +16,27 @@
         <label for="protein">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             Protein</label>
-        <input placeholder="g" id="protein" type="number" min="0">
+        <input placeholder="g" id="protein" type="number" min="0" required>
         <span>g</span>
         <br>
         <label for="carbs">Carbohydrates</label>
-        <input placeholder="g" id="carbs" type="number" min="0">
+        <input placeholder="g" id="carbs" type="number" min="0" required>
         <span>g</span>
         <br>
         <label for="fat">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             Fat</label>
-        <input placeholder="g" id="fat" type="number" min="0">
+        <input placeholder="g" id="fat" type="number" min="0" required>
         <span>g</span>
         <br>
         <label for="cals">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             Calories</label>
-        <input placeholder="kCal" id="cals" type="number" min="0">
+        <input placeholder="kCal" id="cals" type="number" min="0" required>
         <span>kCal</span>
         <br>
-        <button class="macroSubmit">Submit</button>
-    </section>
-
+        <button type='submit' class="macroSubmit">Submit</button>
+    </form>
     <!-- alert if API request fails -->
     <div class="notification">
         <button class="delete delBtn"></button>
@@ -79,7 +68,7 @@
                 <td id="cholesterolTot" class="is-hidden-mobile">mg</td>
                 <td></td>
             </tr>
-            <tr>
+            <tr class="macroRow">
                 <td>Macro Goal</td>
                 <td id="calMacros">kcal</td>
                 <td id="proteinMacros">g</td>
