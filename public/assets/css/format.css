@@ -1,3 +1,45 @@
+.setupSection {
+    display: none;
+}
+
+.savedExercisesContainer {
+    display: none;
+}
+
+.searchResultSection {
+    display: none;
+}
+
+.savedSection {
+    display: none;
+}
+
+.sessionSection {
+    display: none;
+}
+
+.finishBtn {
+    display: none;
+}
+
+.setMacros {
+    display: none;
+}
+
+.notification {
+    display: none;
+}
+
+.moreInfo {
+    display: none;
+}
+
+.addItem {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+
 /* header */
 .header {
     display: flex;
@@ -53,7 +95,7 @@ input {
     text-align: center;
 }
 
-#exerciseSearch {
+#threeCriterias {
     display: flex;
     justify-content: center;
 }
@@ -63,11 +105,7 @@ input {
     flex-direction: column;
 }
 
-.saved-exercise-body {
-    display: none;
-}
-
-.exerciseLog {
+.sessionForm {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -81,9 +119,7 @@ h4 {
     margin-bottom: 15px;
 }
 
-.moreInfo {
-    display: none;
-}
+
 
 .modal-card{
     overflow: auto;
@@ -94,11 +130,7 @@ h4 {
     flex-wrap: wrap;
 }
 
-.addItem {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-}
+
 
 .setupInputs {
     display: flex;
