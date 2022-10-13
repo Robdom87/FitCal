@@ -1,36 +1,15 @@
-//global variable
-let displayedUnit = "";
-let fetchURL = "";
-
-//Food Input Validation
 //item validation
 let itemInputVal = document.getElementById('itemInput');
-//check for all text input is either text, backspace or space
+//check for all text input is either text, backspace or space, dash and arrow keys, and numbers including numpad
 itemInputVal.onkeydown = function (e) {
     if (!((e.keyCode > 64 && e.keyCode < 91)
-        || e.keyCode == 8 || e.keyCode == 32 || e.keyCode == 46)) {
+        || e.keyCode == 8 || e.keyCode == 32 || e.keyCode == 46 || e.keyCode == 189
+        || e.keyCode == 37 || e.keyCode == 39
+        || (e.keyCode > 47 && e.keyCode < 66)
+        || (e.keyCode > 95 && e.keyCode < 106))) {
         return false;
     }
 }
-
-// // amount validation and macro validation
-//domSection.onkeydown = function (e) {
-//         //prevent negative numbers from being typed in Amount, html min="0" covers the up/down arrows
-//         if (!((e.keyCode > 95 && e.keyCode < 106)
-//             || (e.keyCode > 47 && e.keyCode < 58)
-//             || e.keyCode == 8)) {
-//             return false;
-//         }
-//     }
-// }
-
-//Buttons
-//functionality to display nutrition page
-$("#nutriBtn").click(function () {
-    $('.exercise').hide();
-    $(".bmiSection").hide();
-    $('.nutrition').show();
-});
 
 //toggle open box to input new foods
 $("#addItemBtn").click(function () {
@@ -38,9 +17,10 @@ $("#addItemBtn").click(function () {
     $('.addItem').toggle();
 });
 
-//submit button functionality 
-$('#submitBtn').on('click', function () {
+//add item submit button functionality 
+$('.addItem').submit(function (event) {
     inputData();
+    event.preventDefault();
 })
 
 //toggle open box to set Macros
@@ -50,20 +30,25 @@ $("#setMacrosBtn").click(function () {
 });
 
 //function to submit inputted macros
-$('.macroSubmit').click(function () {
+$('.setMacros').submit(function (event) {
     $('.setMacros').hide();
-    setMacros();
+    $('.macroRow').show();
+    saveMacros();
+    event.preventDefault();
 })
 
-$('.macroTable').click(function(){
+//fuunction to clear macros row
+$('.macroTable').click(function () {
     localStorage.removeItem("macroRow");
-    setMacros();
+    $('.macroRow').hide();
+    saveMacros();
 })
 
 //delete all button functionality to clear local storage for nutrition
 $(".deleteAllBtn").click(function () {
     localStorage.removeItem("nutritionRow");
     $('.logRow').remove();
+    sumTotal();
 });
 
 //remove button both removes the row from the display and local storage
@@ -84,19 +69,11 @@ $('.delBtn').click(function () {
 function inputData() {
     //hide notification
     $(".notification").hide();
-
-    let amount = '';
-    let unit = "";
-    let food = "";
-   
-    let amountInput = $('#amountInput');
-    let unitInput = $('#unitInput');
-    let itemInput = $('#itemInput');
-
-    food = itemInput.val();
+    //clean up food input
+    let food = $('#itemInput').val();
+    $('#itemInput').val("");
     food.trim().toLowerCase();
     food.split("");
-
     //remove any spaces within the item and replace with %20
     for (let i = 0; i < food.length; i++) {
         if (food[i] = " ") {
@@ -104,39 +81,8 @@ function inputData() {
         }
     }
     food.toString();
-
-    unit = unitInput.val();
-
-    //if unit input is used, use fetch request with only food item name
-    if (unit === "item") {
-        itemNotif();
-        let itemUrl = 'https://api.api-ninjas.com/v1/nutrition?query=' + food;
-        displayedUnit = "item";
-        getData(food);
-        return;
-    }
-
-    //assign user input to API queries and clean up extra spaces
-    amount = amountInput.val().trim();
-    displayedUnit = amount + unit;
-
-    if (amount === "") {
-        errorMessage();
-        return;
-    }
-
-    parseInt(amount, 10);
-    //exit request if amount is negative
-    if (amount < 0) {
-        return;
-    }
-
-    //round as only whole numbers are taken
-    amount = Math.round(amount).toString();
-
-    // call API with user input
-    let requestNutriUrl = amount + '%20' + unit + '%20' + food;
-    getData(requestNutriUrl);
+    getData(food);
+    return;
 }
 
 //function to fetch API info
@@ -148,26 +94,28 @@ async function getData(url) {
         errorMessage();
         return;
     }
-    addToArray(data);
-    printSavedNutrition(); 
+    saveRow(data);
+    printSavedNutrition();
 }
 
 //function used to add API returned data to an array
-function addToArray(data) {
+function saveRow(data) {
     let newSaved = [];
-
     if (localStorage.getItem('nutritionRow') !== null) {
         newSaved = JSON.parse(localStorage.getItem('nutritionRow'));
     }
-
-    newSaved.push(data[0].name + " (" + displayedUnit + ")");
-    newSaved.push(data[0].calories);
-    newSaved.push(data[0].protein_g);
-    newSaved.push(data[0].carbohydrates_total_g);
-    newSaved.push(data[0].fat_total_g);
-    newSaved.push(data[0].sodium_mg);
-    newSaved.push(data[0].cholesterol_mg);
-
+    //round all numbers up and pull into an object
+    let servingSize = Math.round(parseInt(data[0].serving_size_g));
+    let newRow = {
+        name: data[0].name + " (" + servingSize + "g)",
+        calories: Math.round(parseInt(data[0].calories)),
+        protein: Math.round(parseInt(data[0].protein_g)),
+        carbs: Math.round(parseInt(data[0].carbohydrates_total_g)),
+        fat: Math.round(parseInt(data[0].fat_total_g)),
+        sodium: Math.round(parseInt(data[0].sodium_mg)),
+        cholesterol: Math.round(parseInt(data[0].cholesterol_mg))
+    }
+    newSaved.push(newRow);
     //save row into local storage
     localStorage.setItem('nutritionRow', JSON.stringify(newSaved));
 }
@@ -177,47 +125,16 @@ function printSavedNutrition() {
     $('.logRow').remove();
     let table = $('.nutritionTable');
     let savedNArray = JSON.parse(localStorage.getItem('nutritionRow'));
-    for (let i = 0; i < (savedNArray.length / 7); i++) {
-        let base = 7;
-        base = base * i;
-
-        let newRow = $('<tr>');
-        newRow.addClass('logRow');
-
-        let itemInfo = $('<td>');
-        itemInfo.text(savedNArray[base]).addClass('nameInfo');
-        newRow.append(itemInfo);
-
-        let calInfo = $('<td>');
-        calInfo.text(savedNArray[base + 1]).addClass('calInfo');
-        newRow.append(calInfo);
-
-        let protInfo = $('<td>');
-        protInfo.text(savedNArray[base + 2]).addClass('protInfo');
-        newRow.append(protInfo);
-
-        let carInfo = $('<td>');
-        carInfo.text(savedNArray[base + 3]).addClass('carInfo');
-        newRow.append(carInfo);
-
-        let fatInfo = $('<td>');
-        fatInfo.text(savedNArray[base + 4]).addClass('fatInfo');
-        newRow.append(fatInfo);
-
-        let sodInfo = $('<td>');
-        sodInfo.text(savedNArray[base + 5]).addClass('sodInfo is-hidden-mobile');
-        newRow.append(sodInfo);
-
-        let cholInfo = $('<td>');
-        cholInfo.text(savedNArray[base + 6]).addClass('cholInfo is-hidden-mobile');
-        newRow.append(cholInfo);
-
-        let remove = $('<td>');
-        let removeBtn = $('<button>')
-        removeBtn.addClass('removeBtn delete').text('X');
-        remove.append(removeBtn);
-        newRow.append(remove);
-
+    for (let i = 0; i < savedNArray.length; i++) {
+        let newRow = `<tr class="logRow">
+        <td class="nameInfo">${savedNArray[i].name}</td>
+        <td class="calInfo">${savedNArray[i].calories} kcal</td>
+        <td class="protInfo">${savedNArray[i].protein} g</td>
+        <td class="carInfo">${savedNArray[i].carbs} g</td>
+        <td class="fatInfo">${savedNArray[i].fat} g</td>
+        <td class="sodInfo is-hidden-mobile">${savedNArray[i].sodium} mg</td>
+        <td class="cholInfo is-hidden-mobile">${savedNArray[i].cholesterol} mg</td>
+        <td><button class="removeBtn delete">X</button></td></tr>`;
         table.append(newRow);
         sumTotal();
     }
@@ -257,6 +174,18 @@ function sumTotal() {
         cholInfoTot = cholInfoTot + parseInt(totalchol);
     })
 
+
+    //if no cals, print all empty
+    if (calInfoTot === 0){
+        $("#caloriesTot").text("kcal");
+        $("#proteinTot").text("g");
+        $("#carbsTot").text("g");
+        $("#fatTot").text("g");
+        $("#sodiumTot").text("mg");
+        $("#cholesterolTot").text("mg");  
+        return;
+    }
+
     $("#caloriesTot").text(calInfoTot + " kcal");
     $("#proteinTot").text(protInfoTot + " g");
     $("#carbsTot").text(carInfoTot + " g");
@@ -266,40 +195,33 @@ function sumTotal() {
 }
 
 //add validation
-function setMacros() {
-    let proteinMacros = $('#protein').val();
-    let carbsMacros = $('#carbs').val();
-    let fatMacros = $('#fat').val();
-    let calMacros = $('#cals').val();
-    let saveMacros = [];
-
-    $("#calMacros").text(calMacros + " kcal");
-    $("#proteinMacros").text(proteinMacros + " g");
-    $("#carbMacros").text(carbsMacros + " g");
-    $("#fatMacros").text(fatMacros + " g");
-
-    saveMacros.push(calMacros);
-    saveMacros.push(proteinMacros);
-    saveMacros.push(carbsMacros);
-    saveMacros.push(fatMacros);
-    localStorage.setItem('macroRow', JSON.stringify(saveMacros));
+function saveMacros() {
+    let macroObj = {
+        protein: $('#protein').val(),
+        carbs: $('#carbs').val(),
+        fat: $('#fat').val(),
+        calories: $('#cals').val()
+    }
+    localStorage.setItem('macroRow', JSON.stringify(macroObj));
+    printMacros();
 }
 
 //print macros saved onto row
 function printMacros() {
     let macrosSaved = JSON.parse(localStorage.getItem('macroRow'));
-    $("#calMacros").text(macrosSaved[0] + " kcal");
-    $("#proteinMacros").text(macrosSaved[1] + " g");
-    $("#carbMacros").text(macrosSaved[2] + " g");
-    $("#fatMacros").text(macrosSaved[3] + " g");
+    console.log(macrosSaved);
+    $("#calMacros").text(macrosSaved.protein + " kcal");
+    $("#proteinMacros").text(macrosSaved.carbs + " g");
+    $("#carbMacros").text(macrosSaved.fat + " g");
+    $("#fatMacros").text(macrosSaved.calories + " g");
 }
 
 //update local storage after removing row
 function updateRow(removedName, removedCal) {
     let oldSaved = JSON.parse(localStorage.getItem('nutritionRow'));
     for (let i = 0; i < oldSaved.length; i++) {
-        if (oldSaved[i] === removedName && oldSaved[i + 1] == removedCal) {
-            oldSaved.splice(i, 7);
+        if (oldSaved[i].name === removedName && oldSaved[i].calories == removedCal) {
+            oldSaved.splice(i, 1);
             localStorage.setItem('nutritionRow', JSON.stringify(oldSaved));
             return;
         }
@@ -312,18 +234,21 @@ function errorMessage() {
     $(".notification").show();
 }
 
-//function to display notification if item unit is used
-function itemNotif() {
-    $(".notifText").text("Item unit only displays the nutritional info for one serving size.");
-    $(".notification").show();
-}
-
 //init functions
 //display information if any exists in local storage
-if (localStorage.getItem('nutritionRow') !== null) {
-    printSavedNutrition();
+function init() {
+    if (localStorage.getItem('nutritionRow') !== null) {
+        printSavedNutrition();
+    }
+    let savedMacro = JSON.parse(localStorage.getItem('macroRow'));
+    if ( savedMacro.protein !== "") {
+        printMacros();
+        $('.macroRow').show();
+    }
 }
-printMacros();
+
+init();
+
 
 
 

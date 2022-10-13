@@ -78,7 +78,17 @@ input {
     text-align: center;
 }
 
+.setMacros {
+    display: none;
+}
 
+.macroRow {
+    display: none;
+}
+
+.notification {
+    display: none;
+}
 
 /* exercise section */
 .exercise {
