@@ -149,7 +149,6 @@ async function exerciseSearch() {
 
 //function used to save selected workouts into local storage
 function saveworkout() {
-
     let workouts = [];
     let priorWorkouts = localStorage.getItem("workouts");
     if (priorWorkouts) {
@@ -181,7 +180,6 @@ function displayWorkout() {
     if (priorWorkouts) {
         workouts = JSON.parse(localStorage.getItem("workouts"));
     }
-
     for (let i = 0; i < workouts.length; i++) {
         let name = workouts[i].name
         let results = $(`<div><h5>${name}</h5></div>`);
@@ -231,31 +229,37 @@ function startSetup() {
 }
 
 //function to save new workout to local stroage and display
-function finishSetup() {
-    let workouts = [];
-    let priorWorkouts = localStorage.getItem("workouts");
-    if (priorWorkouts) {
-        workouts = JSON.parse(localStorage.getItem("workouts"));
-    }
-    console.log('1');
-    let workoutsProgram = [];
-    let workoutName = $('#workoutName').val();
-    workoutsProgram.push(workoutName);
+async function finishSetup() {
+
+    let exerciseInfo = JSON.parse(localStorage.getItem("workouts"));
+    let programName = $('#workoutName').val();
+    let programObject = {
+        program_name: programName
+    };
+    //fetch request to set program name and get id
+    let postUrl = `/api/program/`;
+    let response = await postData(postUrl, programObject);
+    let programId = response.id;
+    let programWkts = [];
 
     //save all user inputs into an array of objects
-    for (let i = 0; i < workouts.length; i++) {
-        let exerciseObject = {
-            name: workouts[i].name,
-            sets: $(`#${i}Set`).val(),
-            reps: $(`#${i}Reps`).val(),
+    for (let i = 0; i < exerciseInfo.length; i++) {
+        let programWktsObject = {
+            program_id: programId,
+            exercise_name: exerciseInfo[i].name,
+            exercise_equipment: exerciseInfo[i].equipment,
+            exercise_instructions: exerciseInfo[i].instructions,
+            set_amount: $(`#${i}Set`).val(),
+            rep_amount: $(`#${i}Reps`).val(),
             weight: $(`#${i}Weight`).val(),
-            type: $(`#${i}Type`).val()
+            weight_type: $(`#${i}Type`).val()
         }
-        workoutsProgram.push(exerciseObject);
+        programWkts.push(programWktsObject);
     }
-    console.log('2');
-    //save array of objects into local storage
-    localStorage.setItem("setupWorkout", JSON.stringify(workoutsProgram));
+    //save array of objects into database with fetch request
+    let programUrl = `/api/program/wkts/`;
+    let wktResponse = await postData(programUrl, programWkts);
+    console.log(wktResponse);
     $('.modal').hide();
     displaySetupWorkout();
 }
@@ -285,7 +289,7 @@ function displaySetupWorkout() {
     </tr>`);
         workoutTable.append(tableHeader);
         for (let e = 0; e < workoutProgram[i].sets; e++) {
-             //how to make it be selected
+            //how to make it be selected
             let tableRow = $(`<tr>
             <td class='set${i} set${i}${e}' id='set${i}${e}'>${e + 1}</td>
             <td><input id='reps${i}${e}' type="number" min="0" size="6" placeholder="${workoutProgram[i].reps}" required></td>
@@ -319,13 +323,8 @@ async function saveToDB() {
             date: chosenDate
         }
         let postUrl = `/api/session/`;
-        let id;
-        let useless = await postData(postUrl, sessionObject);
-
-        //get the id for the date just saved
-        let url = `/api/session/${chosenDate}`;
-        let dateObject = await getExerData(url);
-        id = dateObject.id;
+        let response = await postData(postUrl, sessionObject);
+        let id = response.id;
         let sessionWktArray = [];
 
 
@@ -357,7 +356,7 @@ async function saveToDB() {
         console.log(sessionWktArray);
         //push all workouts to data base
         let workoutUrl = `/api/session/wkts/`;
-        let another = await postDataWkt(workoutUrl, sessionWktArray);
+        let another = await postData(workoutUrl, sessionWktArray);
         // need to call for some reason for api to work
         if (another) {
             alert("Workout Saved Succesfully");
@@ -369,11 +368,10 @@ async function saveToDB() {
     }
 }
 
-//get data function
-async function getExerData(url) {
+//get data function (will be used in views)
+async function getData(url) {
     let response = await fetch(url);
     let data = await response.json();
-    console.log(data);
     return data;
 }
 
@@ -387,31 +385,21 @@ async function postData(url, data) {
             },
             body: JSON.stringify(data) // body data type must match "Content-Type" header
         });
-        return response;
+        return response.json();
     }
     catch (err) {
         console.log('failure');
     }
 }
 
-//function tp push all workouts for session dats
-async function postDataWkt(url = '', data = []) {
-    // Default options are marked with *
-    const response = await fetch(url, {
-        method: 'POST', // *GET, POST, PUT, DELETE, etc.
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data) // body data type must match "Content-Type" header
-    });
-    return response.json(); // parses JSON response into native JavaScript objects
+//init function
+function init(){
+    let programCheck = JSON.parse(localStorage.getItem("setupWorkout"));
+    if (programCheck) {
+        $('.sessionForm').show();
+        displaySetupWorkout();
+    }
 }
 
-//init function
-let programCheck = JSON.parse(localStorage.getItem("setupWorkout"));
-if (programCheck) {
-    console.log('show');
-    $('.sessionForm').show();
-    displaySetupWorkout();
-}
+init();
 
