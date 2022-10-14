@@ -56,6 +56,14 @@ $(".setupBtn").click(function () {
     }
 
 })
+$('.searchToggle').click(function(){
+    $(".quick").toggle();
+    $("#threeCriterias").toggle();
+    $(".searchBtn").toggle();
+    $(".savedExercisesBtn").toggle();
+
+})
+
 
 //button to save program into local storage
 $(".finishBtn").submit((event) => {
