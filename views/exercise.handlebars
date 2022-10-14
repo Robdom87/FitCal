@@ -1,6 +1,13 @@
 <!-- Exercise -->
 <section class="exercise">
     <button class="newWorkoutBtn" type="button">Create New Workout</button>
+    <button class="chooseProgBtn">Choose Program</button>
+    <section class="chooseProgContainer">
+        <select class="progOptionsSelect">
+             {{!-- list of all programs available appears --}}
+        </select>
+        <button class="selectProgBtn">Select</button>
+    </section>
     <br>
     <br>
     <form class='sessionForm' action="javascript:saveToDB();">

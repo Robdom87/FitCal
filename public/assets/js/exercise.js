@@ -19,6 +19,16 @@ $(".newWorkoutBtn").click(function () {
     $('.finishBtn').hide();
 });
 
+$(".chooseProgBtn").click(function () {
+    $('.chooseProgContainer').show();
+    showProgOptions();
+});
+
+$(".selectProgBtn").click(function () {
+    console.log('pressed');
+    displaySetupWorkout();
+});
+
 //button used to submit criteria to API
 $(".searchBtn").click(function () {
     exerciseSearch();
@@ -79,6 +89,7 @@ $(".save_db").submit(async (e) => {
     saveToDB();
     e.preventDefault();
 });
+
 
 // //remove button both removes the row from the display and local storage
 // $(".exerciseLog").on('click', '.removeBtn', function () {
@@ -144,6 +155,22 @@ async function exerciseSearch() {
         //listens to change in any of the seledtable workout and executes if so
         results.on("change", saveworkout)
         $('.exercise-selection-body').append(results)
+    }
+}
+
+async function showProgOptions(){
+    try {
+        let url = '/api/program/';
+        let response = await getData(url);
+        console.log(response);
+        let options = '';
+        for (let i = 0; i < response.length; i++){
+            options += `<option value="${response[i].id}">${response[i].program_name}</option>`;
+        }
+        $('.progOptionsSelect').append(options);
+    }
+    catch {
+        console.log('failure');
     }
 }
 
@@ -265,20 +292,23 @@ async function finishSetup() {
 }
 
 //display new program created to main exercise section
-function displaySetupWorkout() {
+async function displaySetupWorkout() {
+    console.log('inFunction');
     $('.exerciseName').empty();
     $('.exerciseTable').empty();
     $('.sessionForm').show();
 
-    let workoutProgram = JSON.parse(localStorage.getItem("setupWorkout"));
-    if (!workoutProgram) {
-        return;
-    }
+    let programId = $('.progOptionsSelect').val();
+    console.log(programId);
+    let url = `/api/program/id/${programId}`;
+    let response = await getData(url);
+    console.log(response);
+    
     let logBody = $('.exerciseLog');
-    logBody.append($(`<br><div><h3 class='program'>${workoutProgram[0]}</h3></div>`));
+    logBody.append($(`<br><div><h3 class='program'>${response.program_name}</h3></div>`));
     //i starts at 1, remember that when pulling information
-    for (let i = 1; i < workoutProgram.length; i++) {
-        logBody.append($(`<br><h4 class='exerciseName' id="workout${i}">${workoutProgram[i].name}</h4>`));
+    for (let i = 0; i < response.programWorkouts.length; i++) {
+        logBody.append($(`<br><h4 class='exerciseName' id="workout${i}">${response.programWorkouts[i].exercise_name}</h4>`));
         let workoutTable = $('<table class="exerciseTable">');
         let tableHeader = $(`<tr>
         <th>Set</th>
@@ -288,15 +318,15 @@ function displaySetupWorkout() {
         <th>Comments</th>
     </tr>`);
         workoutTable.append(tableHeader);
-        for (let e = 0; e < workoutProgram[i].sets; e++) {
+        for (let e = 0; e < response.programWorkouts[i].set_amount; e++) {
             //how to make it be selected
             let tableRow = $(`<tr>
             <td class='set${i} set${i}${e}' id='set${i}${e}'>${e + 1}</td>
-            <td><input id='reps${i}${e}' type="number" min="0" size="6" placeholder="${workoutProgram[i].reps}" required></td>
-            <td><input id='weight${i}${e}' type="number" min="0" size="6" placeholder="${workoutProgram[i].weight}" required></td>
+            <td><input id='reps${i}${e}' type="number" min="0" size="6" placeholder="${response.programWorkouts[i].rep_amount}" required></td>
+            <td><input id='weight${i}${e}' type="number" min="0" size="6" placeholder="${response.programWorkouts[i].weight}" required></td>
             <td>
                 <select id='type${i}${e}' class='text' name="typeOSU" required>
-                    <option value="${workoutProgram[i].type}">${workoutProgram[i].type}</option>
+                    <option value="${response.programWorkouts[i].weight_type}">${response.programWorkouts[i].weight_type}</option>
                     <option value="Barbell">Barbell</option>
                     <option value="Dumbbell">Dumbbell</option>
                     <option value="Machine">Machine</option>
@@ -397,7 +427,7 @@ function init(){
     let programCheck = JSON.parse(localStorage.getItem("setupWorkout"));
     if (programCheck) {
         $('.sessionForm').show();
-        displaySetupWorkout();
+        // displaySetupWorkout();
     }
 }
 

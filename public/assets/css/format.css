@@ -23,6 +23,10 @@
     display: none;
 }
 
+.chooseProgContainer {
+    display: none;
+}
+
 .setMacros {
     display: none;
 }
