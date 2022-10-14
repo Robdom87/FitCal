@@ -297,6 +297,8 @@ async function displaySetupWorkout() {
     $('.exerciseName').empty();
     $('.exerciseTable').empty();
     $('.sessionForm').show();
+    let logBody = $('.exerciseLog');
+    logBody.empty();
 
     let programId = $('.progOptionsSelect').val();
     console.log(programId);
@@ -304,7 +306,6 @@ async function displaySetupWorkout() {
     let response = await getData(url);
     console.log(response);
     
-    let logBody = $('.exerciseLog');
     logBody.append($(`<br><div><h3 class='program'>${response.program_name}</h3></div>`));
     //i starts at 1, remember that when pulling information
     for (let i = 0; i < response.programWorkouts.length; i++) {
