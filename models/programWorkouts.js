@@ -2,15 +2,15 @@ const { Model, DataTypes } = require('sequelize');
 
 const sequelize = require('../config/connection.js');
 
-class SessionWorkouts extends Model { }
+class ProgramWorkouts extends Model { }
 
-SessionWorkouts.init(
+ProgramWorkouts.init(
     {
         // define columns
-        session_id: {
+        program_id: {
             type: DataTypes.INTEGER,
             references: {
-              model: 'session',
+              model: 'program',
               key: 'id',
               unique: false
             }
@@ -19,9 +19,18 @@ SessionWorkouts.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        set_number: {
+        exercise_equipment: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        exercise_instructions: {
+            type: DataTypes.TEXT('medium'),
+            allowNull: false,
+        },
+        set_amount: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            defaultValue: 4,
             validate: {
                 isNumeric: true
             }
@@ -29,6 +38,7 @@ SessionWorkouts.init(
         rep_amount: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            defaultValue: 12,
             validate: {
                 isNumeric: true
             }
@@ -36,14 +46,12 @@ SessionWorkouts.init(
         weight: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            defaultValue: 0,
             validate: {
                 isNumeric: true
             }
         },
         weight_type: {
-            type: DataTypes.STRING,
-        },
-        comments: {
             type: DataTypes.STRING,
         }
     },
@@ -52,8 +60,8 @@ SessionWorkouts.init(
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'sessionWorkouts',
+        modelName: 'programWorkouts',
     }
 );
 
-module.exports = SessionWorkouts;
+module.exports = ProgramWorkouts;

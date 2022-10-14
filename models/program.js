@@ -2,9 +2,9 @@ const { Model, DataTypes } = require('sequelize');
 
 const sequelize = require('../config/connection.js');
 
-class Session extends Model {}
+class Program extends Model {}
 
-Session.init(
+Program.init(
   {
     // define columns
     id: {
@@ -13,8 +13,8 @@ Session.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    date: {
-        type: DataTypes.DATEONLY,
+    program_name: {
+      type: DataTypes.STRING,
     }
   },
   {
@@ -22,8 +22,8 @@ Session.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'session',
+    modelName: 'program',
   }
 );
 
-module.exports = Session;
+module.exports = Program;

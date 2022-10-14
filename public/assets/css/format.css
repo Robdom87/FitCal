@@ -6,6 +6,7 @@
     display: none;
 }
 
+
 .savedExercisesContainer {
     display: none;
 }
@@ -23,6 +24,10 @@
 }
 
 .finishBtn {
+    display: none;
+}
+
+.chooseProgContainer {
     display: none;
 }
 
