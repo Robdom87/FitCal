@@ -1,4 +1,4 @@
-const helpers = require('../../../utils/helpers');
+// const helpers = require('../../../utils/helpers');
 
 //validation
 let textInputVal = $('.text');

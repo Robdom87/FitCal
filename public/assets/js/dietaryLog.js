@@ -1,4 +1,4 @@
-const helpers = require('../../../utils/helpers');
+// const helpers = require('../../../utils/helpers');
 
 //item validation
 let itemInputVal = document.getElementById('itemInput');
