@@ -2,6 +2,14 @@
     display: none;
 }
 
+.setContainer {
+    display: none;
+}
+
+.workoutFrequency {
+    display: none;
+}
+
 
 .savedExercisesContainer {
     display: none;

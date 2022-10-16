@@ -1,25 +1,9 @@
 // import Chart from 'chart.js';
-
-
-let bgColorArr = [
-    'rgba(255, 99, 132, 0.2)',
-    'rgba(54, 162, 235, 0.2)',
-    'rgba(255, 206, 86, 0.2)',
-    'rgba(75, 192, 192, 0.2)',
-    'rgba(153, 102, 255, 0.2)',
-    'rgba(255, 159, 64, 0.2)'
-];
-let bColorArr = [
-    'rgba(255, 99, 132, 1)',
-    'rgba(54, 162, 235, 1)',
-    'rgba(255, 206, 86, 1)',
-    'rgba(75, 192, 192, 1)',
-    'rgba(153, 102, 255, 1)',
-    'rgba(255, 159, 64, 1)'
-];
-
 let setLabel = [];
 let setData = [];
+let freqData = [];
+let analLabels = [];
+let radioChoice;
 
 $('.setButton').click(function () {
     displayExercisesSet();
@@ -97,25 +81,160 @@ function printSetChart() {
     });
 }
 
+$('.setDates').submit(async function (e) {
+    e.preventDefault();
+    freqData = [];
+    let start = $('.startDate').val();
+    let end = $('.endDate').val();
+    //fetch request to get the count of times that the user has worked out in that time frame
+    let url = `/api/chart/dates?start=${start}&end=${end}`;
+    let data = await helpers.getData(url);
+    let daysWorked = data[0].workout_count;
+    freqData.push(daysWorked);
+    let startDate = new Date(start);
+    let endDate = new Date(end);
+    let timePeriod = Math.round(((endDate - startDate) / (1000 * 60 * 60 * 24)), 0);
+    let daysOff = timePeriod - daysWorked;
+    freqData.push(daysOff);
+    printFreqChart();
+
+})
+
+function printFreqChart() {
+    let freqChartCont = $('.freqChartContainer');
+    freqChartCont.empty();
+    let freqChartHtml = `<canvas id="freqChart"></canvas>`;
+    freqChartCont.append(freqChartHtml);
+    const freqElement = document.getElementById('freqChart').getContext('2d');
+    const freqChart = new Chart(freqElement, {
+        type: 'doughnut',
+        data: {
+            labels: [
+                'Working Out Days',
+                'Off'
+            ],
+            datasets: [{
+                label: 'Workout Frequency',
+                data: freqData,
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)'
+                ],
+                hoverOffset: 4
+            }]
+        }
+    });
+
+};
+
+$('.analysisBtn').click(function () {
+    displayExercisesAnal();
+})
+
+async function displayExercisesAnal() {
+    let url = `/api/chart/exercises`;
+    let data = await helpers.getData(url);
+    let radioboxes = $('.analysisCheckboxes');
+    radioboxes.empty();
+    for (let i = 0; i < data.length; i++) {
+        let radiobox = `<input type="radio" class='exerciseRadio' id="${data[i].exercise_name}" name="exercises" value="${data[i].exercise_name}" />
+                        <label for="${data[i].exercise_name}">${data[i].exercise_name}</label>`;
+        radioboxes.append(radiobox);
+    }
+    listenRadioBoxes();
+    return;
+};
+
+async function listenRadioBoxes() {
+    let allRadioBoxes = document.querySelectorAll('.exerciseRadio');
+    allRadioBoxes.forEach(radiobox => {
+        radiobox.addEventListener('click', async function () {
+            if (this.checked) {
+                radioChoice = $(this).val();
+            }
+        })
+    })
+}
+
+$('.analysisForm').submit(async function (e) {
+    e.preventDefault();
+    analLabels = [];
+    let start = $('.startDateA').val();
+    let end = $('.endDateA').val();
+    //fetch request to get the count of times that the user has worked out in that time frame
+    let urlDate = `/api/chart/dates?start=${start}&end=${end}`;
+    let dataDate = await helpers.getData(urlDate);
+    //pull all dates into anal labels
+    for (let i = 0; i < dataDate.length; i++){
+        analLabels.push(dataDate[i].date);
+    }
+    //pull sum of all weight for one workout
+    //then divide by workout count for average
+    let workoutCount = data[0].workout_count;
+    let urlWeight = `/api/chart/weight?name=${radioChoice}`;
+    let dataWeigt = await helpers.getData(urlWeight);
 
 
-// const SetChart = new Chart(setElement, {
-//     type: 'bar',
-//     data: {
-//         labels: setLabel,
-//         datasets: [{
-//             label: '# of Sets',
-//             data: setData,
-//             //backgroundColor: bgColorArr,
-//             // borderColor: bColorArr,
-//             borderWidth: 1
-//         }]
-//     },
-//     options: {
-//         scales: {
-//             y: {
-//                 beginAtZero: true
-//             }
-//         }
-//     }
-// });
+    printFreqChart();
+})
+
+
+let changingLineName = 'Max Weight Per Set';
+let changingLineData = [10, 20, 30, 40];
+let avgLineName = 'Average Weight';
+let avgLineData = [50, 50, 50, 50];
+let yTitleAnal = 'Weight(lbs)';
+
+const analElement = document.getElementById('analysisChart').getContext('2d');
+const analChart = new Chart(analElement, {
+    type: 'scatter',
+    data: {
+        labels: analLabels,
+        datasets: [{
+            type: 'line',
+            label: changingLineName,
+            data: changingLineData,
+            fill: false,
+            borderColor: 'rgb(255, 99, 132)'
+        }, {
+            type: 'line',
+            label: avgLineName,
+            data: avgLineData,
+            fill: false,
+            borderColor: 'rgb(54, 162, 235)'
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: yTitleAnal
+                  }
+            }
+        }
+    }
+});
+
+
+
+
+
+
+
+// let bgColorArr = [
+//     'rgba(255, 99, 132, 0.2)',
+//     'rgba(54, 162, 235, 0.2)',
+//     'rgba(255, 206, 86, 0.2)',
+//     'rgba(75, 192, 192, 0.2)',
+//     'rgba(153, 102, 255, 0.2)',
+//     'rgba(255, 159, 64, 0.2)'
+// ];
+// let bColorArr = [
+//     'rgba(255, 99, 132, 1)',
+//     'rgba(54, 162, 235, 1)',
+//     'rgba(255, 206, 86, 1)',
+//     'rgba(75, 192, 192, 1)',
+//     'rgba(153, 102, 255, 1)',
+//     'rgba(255, 159, 64, 1)'

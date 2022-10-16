@@ -42,6 +42,55 @@ router.get('/exercise', async (req, res) => {
     }
   });
 
+
+  router.get('/dates', async (req, res) => {
+    // find all exercises
+    try {
+      const exerciseData = await Session.findAll({ 
+            attributes: {
+                include: [
+                    [
+                        //find out how to do nested if statement count
+                        // Note the wrapping parentheses in the call below!
+                        sequelize.literal(`(
+                            SELECT COUNT(date) FROM session WHERE date BETWEEN '${req.query.start}' AND '${req.query.end}'
+                        )`),
+                        'workout_count'
+                    ]
+                ]
+            }
+    });
+      res.status(200).json(exerciseData);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  });
+
+  router.get('/weight', async (req, res) => {
+    // find weight
+    try {
+      const exerciseData = await SessionWorkouts.findAll({ 
+            attributes: {
+                include: [
+                    [
+                        // Note the wrapping parentheses in the call below!
+                        sequelize.literal(`(
+                            SELECT COUNT(exercise_name)
+                            FROM sessionWorkouts AS set_count
+                            WHERE
+                                exercise_name = "${req.query.name}"
+                        )`),
+                        'set_count'
+                    ]
+                ]
+            }
+    });
+      res.status(200).json(exerciseData);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  });
+
   //SELECT COUNT(exercise_name) FROM sessionWorkouts AS set_count WHERE exercise_name = ${req.params.name}
 
 // router.get('/:date', async (req, res) => {
