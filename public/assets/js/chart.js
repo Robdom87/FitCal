@@ -3,9 +3,17 @@ let setLabel = [];
 let setData = [];
 let freqData = [];
 let analLabels = [];
+let avgLineData = [];
+let changingLineData = [];
 let radioChoice;
+let changingLineName = '';
+let avgLineName = '';
+let yTitleAnal = '';
 
 $('.setButton').click(function () {
+    $('.setContainer').show();
+    $('.workoutFrequency').hide();
+    $('.analysisContainer').hide();
     displayExercisesSet();
 })
 
@@ -97,7 +105,6 @@ $('.setDates').submit(async function (e) {
     let daysOff = timePeriod - daysWorked;
     freqData.push(daysOff);
     printFreqChart();
-
 })
 
 function printFreqChart() {
@@ -128,6 +135,9 @@ function printFreqChart() {
 };
 
 $('.analysisBtn').click(function () {
+    $('.setContainer').hide();
+    $('.workoutFrequency').hide();
+    $('.analysisContainer').show();
     displayExercisesAnal();
 })
 
@@ -159,63 +169,122 @@ async function listenRadioBoxes() {
 $('.analysisForm').submit(async function (e) {
     e.preventDefault();
     analLabels = [];
+    avgLineData = [];
+    changingLineData = [];
     let start = $('.startDateA').val();
     let end = $('.endDateA').val();
+    let type = $('#typeAnalysis').val();
     //fetch request to get the count of times that the user has worked out in that time frame
-    let urlDate = `/api/chart/dates?start=${start}&end=${end}`;
-    let dataDate = await helpers.getData(urlDate);
-    //pull all dates into anal labels
-    for (let i = 0; i < dataDate.length; i++){
-        analLabels.push(dataDate[i].date);
+    if (type === 'max') {
+        changingLineName = 'Max Weight Per Set';
+        avgLineName = 'Average Weight';
+        yTitleAnal = 'Weight(lbs)';
+        let url = `/api/chart/weight?start=${start}&end=${end}&name=${radioChoice}`;
+        weigtAnalysis(url);
+    } else {
+        changingLineName = 'Total Volume Per Set';
+        avgLineName = 'Average Volume';
+        yTitleAnal = 'Weight(lbs)xReps';
+        let url = `/api/chart/volume?start=${start}&end=${end}&name=${radioChoice}`;
+        volumeAnalysis(url);
     }
-    //pull sum of all weight for one workout
-    //then divide by workout count for average
-    let workoutCount = data[0].workout_count;
-    let urlWeight = `/api/chart/weight?name=${radioChoice}`;
-    let dataWeigt = await helpers.getData(urlWeight);
+})
 
+async function weigtAnalysis(url) {
+    let data = await helpers.getData(url);
+    let setAmount = data.length;
+    let totalWeight = 0;
+    let dateArr = [];
+    for (let i = 0; i < setAmount; i++) {
+        if (!dateArr.includes(data[i].date)) {
+            dateArr.push(data[i].date);
+        }
+        totalWeight += data[i].weight;
+        }
+    analLabels = dateArr;
+    let avgWeight = totalWeight / setAmount;
+    for (let e = 0; e < dateArr.length; e++) {
+        avgLineData.push(avgWeight);
+        let maxWeight = 0;
+        for (let y = 0; y < setAmount; y++) {
+            if (dateArr[e] === data[y].date) {
+                if (data[y].weight > maxWeight) {
+                    maxWeight = data[y].weight;
+                }
+            }
+        }
+        changingLineData.push(maxWeight);
+    }
+    printAnalChart();
+}
 
-    printFreqChart();
+async function volumeAnalysis(url) {
+    let data = await helpers.getData(url);
+    let setAmount = data.length;
+    let totalVolume = 0;
+    let dateArr = [];
+    for (let i = 0; i < setAmount; i++) {
+        let concatDate = `${data[i].date} Set-${data[i].set_number}`;
+        dateArr.push(concatDate);
+        totalVolume += data[i].volume;
+        changingLineData.push(data[i].volume)
+    }
+    analLabels = dateArr;
+    let avgVolume = totalVolume / setAmount;
+    for (let e = 0; e < setAmount; e++) {
+        avgLineData.push(avgVolume);  
+    }
+    printAnalChart();
+}
+
+function printAnalChart() {
+    let analChartCont = $('.analysisChartContainer');
+    analChartCont.empty();
+    let analChartHtml = `<canvas id="analysisChart"></canvas>`;
+    analChartCont.append(analChartHtml);
+    const analElement = document.getElementById('analysisChart').getContext('2d');
+    const analChart = new Chart(analElement, {
+        type: 'scatter',
+        data: {
+            labels: analLabels,
+            datasets: [{
+                type: 'line',
+                label: changingLineName,
+                data: changingLineData,
+                fill: false,
+                borderColor: 'rgb(255, 99, 132)'
+            }, {
+                type: 'line',
+                label: avgLineName,
+                data: avgLineData,
+                fill: false,
+                borderColor: 'rgb(54, 162, 235)'
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: yTitleAnal
+                    }
+                }
+            }
+        }
+    });
+}
+
+$('.frequencyBtn').click(function () {
+    $('.setContainer').hide();
+    $('.workoutFrequency').show();
+    $('.analysisContainer').hide();
 })
 
 
-let changingLineName = 'Max Weight Per Set';
-let changingLineData = [10, 20, 30, 40];
-let avgLineName = 'Average Weight';
-let avgLineData = [50, 50, 50, 50];
-let yTitleAnal = 'Weight(lbs)';
 
-const analElement = document.getElementById('analysisChart').getContext('2d');
-const analChart = new Chart(analElement, {
-    type: 'scatter',
-    data: {
-        labels: analLabels,
-        datasets: [{
-            type: 'line',
-            label: changingLineName,
-            data: changingLineData,
-            fill: false,
-            borderColor: 'rgb(255, 99, 132)'
-        }, {
-            type: 'line',
-            label: avgLineName,
-            data: avgLineData,
-            fill: false,
-            borderColor: 'rgb(54, 162, 235)'
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true,
-                title: {
-                    display: true,
-                    text: yTitleAnal
-                  }
-            }
-        }
-    }
-});
+
+
 
 
 
