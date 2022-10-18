@@ -36,7 +36,10 @@ $(".searchBtn").click(function () {
     exerciseSearch();
     $('.searchResultContainer').show();
 });
-
+// $(".searchBtn").click(function () {
+//     quickSearch();
+//     $('.searchResultContainer').show();
+// });
 //toggle saved exercise on and off
 $('.savedExercisesBtn').click(function () {
     $(".savedExercisesContainer").toggle();
@@ -63,6 +66,52 @@ $(".setupBtn").click(function () {
         alert('Must have workouts saved to proceed to setup.');
     }
 })
+//Quick Search button function
+$('.searchToggle').click(function () {
+    $(".quick").toggle();
+    $("#threeCriterias").toggle();
+    $(".searchBtn").show();
+    $(".savedExercisesBtn").toggle();
+})
+
+
+
+async function quickSearch() {
+
+
+    let quickSearch = $(".search-bar").val();
+
+    //send API request using the user input
+    var requestUrl = `name=${quickSearch}`
+    let data = await helpers.getData(`/api/exercise/${requestUrl}`);
+    //if data returned is empty error message is displayed
+    if (data.length === 0) {
+        $('.exercise-selection-body').text("No Results Found")
+        return
+    }
+    //add data returned as input selectors within the modal
+    for (let i = 0; i < data.length; i++) {
+        //create object for each workout returned
+        let name = data[i].name
+        let equipment = data[i].equipment
+        let instructions = data[i].instructions
+        //add workout to
+        let results = $(`<input type="radio" name="result"
+                data-name="${name}" data-equipment="${equipment}" data-instructions="${instructions}"/>
+                <span>${name}</span>
+                    <button class="moreBtn">
+                      More
+                  </button>
+                  <div class='moreInfo'>
+                      <p><span>Equipment:&nbsp;</span>${equipment}</p>
+                      <p><span>Instructions:&nbsp;</span>${instructions}</p>
+                      </div>`);
+        //listens to change in any of the seledtable workout and executes if so
+        results.on("change", saveworkout)
+        $('.exercise-selection-body').append(results)
+    }
+}
+
 
 //button to save program into local storage
 $(".finishBtn").submit((event) => {
@@ -159,13 +208,13 @@ async function exerciseSearch() {
     }
 }
 
-async function showProgOptions(){
+async function showProgOptions() {
     try {
         let url = '/api/program/';
         let response = await helpers.getData(url);
         console.log(response);
         let options = '';
-        for (let i = 0; i < response.length; i++){
+        for (let i = 0; i < response.length; i++) {
             options += `<option value="${response[i].id}">${response[i].program_name}</option>`;
         }
         $('.progOptionsSelect').append(options);
@@ -306,7 +355,7 @@ async function displaySetupWorkout() {
     let url = `/api/program/id/${programId}`;
     let response = await helpers.getData(url);
     console.log(response);
-    
+
     logBody.append($(`<br><div><h3 class='program'>${response.program_name}</h3></div>`));
     //i starts at 1, remember that when pulling information
     for (let i = 0; i < response.programWorkouts.length; i++) {
@@ -401,7 +450,7 @@ async function saveToDB() {
 }
 
 //init function
-function init(){
+function init() {
     let programCheck = JSON.parse(localStorage.getItem("setupWorkout"));
     if (programCheck) {
         $('.sessionForm').show();
