@@ -36,7 +36,10 @@ $(".searchBtn").click(function () {
     exerciseSearch();
     $('.searchResultContainer').show();
 });
-
+// $(".searchBtn").click(function () {
+//     quickSearch();
+//     $('.searchResultContainer').show();
+// });
 //toggle saved exercise on and off
 $('.savedExercisesBtn').click(function () {
     $(".savedExercisesContainer").toggle();
@@ -69,45 +72,45 @@ $('.searchToggle').click(function () {
     $("#threeCriterias").toggle();
     $(".searchBtn").show();
     $(".savedExercisesBtn").toggle();
-    async function quickSearch() {
-
-
-        let quickSearch = $(".search-bar").val();
-
-        //send API request using the user input
-        var requestUrl = `name=${quickSearch}`
-        let data = await helpers.getData(`/api/exercise/${requestUrl}`);
-        //if data returned is empty error message is displayed
-        if (data.length === 0) {
-            $('.exercise-selection-body').text("No Results Found")
-            return
-        }
-        //add data returned as input selectors within the modal
-        for (let i = 0; i < data.length; i++) {
-            //create object for each workout returned
-            let name = data[i].name
-            let equipment = data[i].equipment
-            let instructions = data[i].instructions
-            //add workout to
-            let results = $(`<input type="radio" name="result"
-                    data-name="${name}" data-equipment="${equipment}" data-instructions="${instructions}"/>
-                    <span>${name}</span>
-                        <button class="moreBtn">
-                          More
-                      </button>
-                      <div class='moreInfo'>
-                          <p><span>Equipment:&nbsp;</span>${equipment}</p>
-                          <p><span>Instructions:&nbsp;</span>${instructions}</p>
-                          </div>`);
-            //listens to change in any of the seledtable workout and executes if so
-            results.on("change", saveworkout)
-            $('.exercise-selection-body').append(results)
-        }
-    }
 })
 
 
 
+async function quickSearch() {
+
+
+    let quickSearch = $(".search-bar").val();
+
+    //send API request using the user input
+    var requestUrl = `name=${quickSearch}`
+    let data = await helpers.getData(`/api/exercise/${requestUrl}`);
+    //if data returned is empty error message is displayed
+    if (data.length === 0) {
+        $('.exercise-selection-body').text("No Results Found")
+        return
+    }
+    //add data returned as input selectors within the modal
+    for (let i = 0; i < data.length; i++) {
+        //create object for each workout returned
+        let name = data[i].name
+        let equipment = data[i].equipment
+        let instructions = data[i].instructions
+        //add workout to
+        let results = $(`<input type="radio" name="result"
+                data-name="${name}" data-equipment="${equipment}" data-instructions="${instructions}"/>
+                <span>${name}</span>
+                    <button class="moreBtn">
+                      More
+                  </button>
+                  <div class='moreInfo'>
+                      <p><span>Equipment:&nbsp;</span>${equipment}</p>
+                      <p><span>Instructions:&nbsp;</span>${instructions}</p>
+                      </div>`);
+        //listens to change in any of the seledtable workout and executes if so
+        results.on("change", saveworkout)
+        $('.exercise-selection-body').append(results)
+    }
+}
 
 
 //button to save program into local storage

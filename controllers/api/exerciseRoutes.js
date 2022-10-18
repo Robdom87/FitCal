@@ -6,6 +6,7 @@ const fetch = require('node-fetch');
 // The `/api/exercise` endpoint
 router.get('/:query', async (req, res) => {
     // find all sessions
+    console.log(req.params.query)
     try {
         let response = await fetch(`https://api.api-ninjas.com/v1/exercises?${req.params.query}`, {
             headers: {
