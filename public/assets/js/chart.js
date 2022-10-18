@@ -97,7 +97,7 @@ $('.setDates').submit(async function (e) {
     //fetch request to get the count of times that the user has worked out in that time frame
     let url = `/api/chart/dates?start=${start}&end=${end}`;
     let data = await helpers.getData(url);
-    let daysWorked = data[0].workout_count;
+    let daysWorked = data.workout_count;
     freqData.push(daysWorked);
     let startDate = new Date(start);
     let endDate = new Date(end);
