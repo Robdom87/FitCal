@@ -19,14 +19,6 @@ ProgramWorkouts.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        exercise_equipment: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        exercise_instructions: {
-            type: DataTypes.TEXT('medium'),
-            allowNull: false,
-        },
         set_amount: {
             type: DataTypes.INTEGER,
             allowNull: false,

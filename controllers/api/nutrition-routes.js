@@ -2,11 +2,11 @@ const router = require('express').Router();
 const fetch = require('node-fetch');
 
 
-// The `/api/exercise` endpoint
-router.get('/:query', async (req, res) => {
-    // find all sessions
+// The `/api/nutrition` endpoint
+router.get('/:url', async (req, res) => {
+    // call Nutrition API from the backend
     try {
-        let response = await fetch(`https://api.api-ninjas.com/v1/exercises?${req.params.query}`, {
+        let response = await fetch(`https://api.api-ninjas.com/v1/nutrition?query=${req.params.url}`, {
             headers: {
                 'X-Api-Key': process.env.API_Key
             }

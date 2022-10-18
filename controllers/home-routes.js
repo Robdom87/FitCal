@@ -1,23 +1,34 @@
 const router = require('express').Router();
 
-router.get('/',(req, res) => {
+router.get('/', (req, res) => {
   res.render('homepage');
 });
-    
+
 router.get('/nutrition', (req, res) => {
-    res.render('nutrition');
+  res.render('nutrition');
 });
 
 router.get('/bmi', (req, res) => {
   res.render('bmi');
 });
 
+//exercise and chart both require log in to use
 router.get('/exercise', (req, res) => {
-  res.render('exercise');
+  if (req.session.logged_in) {
+    res.render('exercise');
+    return;
+  }
+  res.redirect('/login');
+
 });
 
 router.get('/chart', (req, res) => {
-  res.render('chart');
+  if (req.session.logged_in) {
+    res.render('chart');
+    return;
+  }
+  res.redirect('/login');
+
 });
 
 router.get('/login', (req, res) => {

@@ -1,14 +1,14 @@
 const router = require('express').Router();
 
-const sessionRoutes = require('./sessionRoutes');
-const nutritionRoutes = require('./nutritionRoutes');
-const userRoutes = require("./userRoutes");
-const exerciseRoutes = require('./exerciseRoutes');
-const programRoutes = require('./programRoutes');
-const chartRoutes = require('./chartRoutes');
+const sessionRoutes = require('./session-routes');
+const nutritionRoutes = require('./nutrition-routes');
+const userRoutes = require("./user-routes");
+const exerciseRoutes = require('./exercise-routes');
+const programRoutes = require('./program-routes');
+const chartRoutes = require('./chart-routes');
 //forum 
-const postRoutes = require('./postRoutes');
-const commentRoutes = require('./commentRoutes');
+const postRoutes = require('./post-routes');
+const commentRoutes = require('./comment-routes');
 
 
 router.use('/session', sessionRoutes);
