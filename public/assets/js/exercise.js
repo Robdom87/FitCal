@@ -1,3 +1,5 @@
+// const helpers = require('../../../utils/helpers');
+
 //validation
 let textInputVal = $('.text');
 //check for all text input is either text, backspace or space
@@ -125,8 +127,7 @@ async function exerciseSearch() {
     }
 
     //send API request using the user input 
-    let response = await fetch(`/api/exercise/${requestUrl}`);
-    let data = await response.json();
+    let data = await helpers.getData(`/api/exercise/${requestUrl}`);
 
     //if data returned is empty error message is displayed
     if (data.length === 0) {
@@ -161,7 +162,7 @@ async function exerciseSearch() {
 async function showProgOptions(){
     try {
         let url = '/api/program/';
-        let response = await getData(url);
+        let response = await helpers.getData(url);
         console.log(response);
         let options = '';
         for (let i = 0; i < response.length; i++){
@@ -265,7 +266,7 @@ async function finishSetup() {
     };
     //fetch request to set program name and get id
     let postUrl = `/api/program/`;
-    let response = await postData(postUrl, programObject);
+    let response = await helpers.postData(postUrl, programObject);
     let programId = response.id;
     let programWkts = [];
 
@@ -285,7 +286,7 @@ async function finishSetup() {
     }
     //save array of objects into database with fetch request
     let programUrl = `/api/program/wkts/`;
-    let wktResponse = await postData(programUrl, programWkts);
+    let wktResponse = await helpers.postData(programUrl, programWkts);
     console.log(wktResponse);
     $('.modal').hide();
     displaySetupWorkout();
@@ -303,7 +304,7 @@ async function displaySetupWorkout() {
     let programId = $('.progOptionsSelect').val();
     console.log(programId);
     let url = `/api/program/id/${programId}`;
-    let response = await getData(url);
+    let response = await helpers.getData(url);
     console.log(response);
     
     logBody.append($(`<br><div><h3 class='program'>${response.program_name}</h3></div>`));
@@ -354,7 +355,7 @@ async function saveToDB() {
             date: chosenDate
         }
         let postUrl = `/api/session/`;
-        let response = await postData(postUrl, sessionObject);
+        let response = await helpers.postData(postUrl, sessionObject);
         let id = response.id;
         let sessionWktArray = [];
 
@@ -387,7 +388,7 @@ async function saveToDB() {
         console.log(sessionWktArray);
         //push all workouts to data base
         let workoutUrl = `/api/session/wkts/`;
-        let another = await postData(workoutUrl, sessionWktArray);
+        let another = await helpers.postData(workoutUrl, sessionWktArray);
         // need to call for some reason for api to work
         if (another) {
             alert("Workout Saved Succesfully");
@@ -396,30 +397,6 @@ async function saveToDB() {
     }
     catch (err) {
         console.log(err);
-    }
-}
-
-//get data function (will be used in views)
-async function getData(url) {
-    let response = await fetch(url);
-    let data = await response.json();
-    return data;
-}
-
-//function to post data, used for session date
-async function postData(url, data) {
-    try {
-        let response = await fetch(url, {
-            method: 'POST', // *GET, POST, PUT, DELETE, etc.
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data) // body data type must match "Content-Type" header
-        });
-        return response.json();
-    }
-    catch (err) {
-        console.log('failure');
     }
 }
 
