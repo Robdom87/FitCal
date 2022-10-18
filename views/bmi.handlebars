@@ -1,21 +1,19 @@
 <!-- BMI Section -->
-<section id='bmiSection' class="bmiSection">
-    <br>
-    <h3>BMI Calculator</h3>
-    <!-- BMI input -->
-    <label for="weight">Weight</label>
-    <input placeholder="lbs" id="weight" type="number" min="0"><br>
-    <label for="height">Height</label>
-    <input placeholder="in" id="height" type="number" min="0"><br>
-    <button class="bmiSubmit">Submit</button>
-
-    <!-- BMI information displayed -->
-    <div id="bmi-dislplay">
-        <p id="heading"></p>
-        <p id="bmi-output"></p>
-        <p id="message"></p>
-    </div>
-</section>
+<div class="bmiSection">
+        <h1>BMI Calculator</h1>
+        <div class="display">
+            <p id="result">20.0</p>
+            <p id="category">Normal weight</p>
+         </div>
+         <div class="row">
+            <input type="range" min="20" max="500" value="20" id="weight" oninput="calculate()">
+            <span id="weight-val">20 lb</span>
+         </div>
+         <div class="row">
+            <input type="range" min="10" max="100" value="1" id="height" oninput="calculate()">
+            <span id="height-val">1 ft</span>
+          </div>
+      </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="./assets/js/bmi.js"></script>
