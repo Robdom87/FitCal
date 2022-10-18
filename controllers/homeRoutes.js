@@ -20,6 +20,10 @@ router.get('/chart', (req, res) => {
   res.render('chart');
 });
 
+router.get('/forum', (req, res) => {
+  res.render('forum');
+});
+
 router.get('/login', (req, res) => {
   //if user already logged in send him to the homepage
   if (req.session.logged_in) {
