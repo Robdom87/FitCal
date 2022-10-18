@@ -1,4 +1,4 @@
-//exercise section
+// const helpers = require('../../../utils/helpers');
 
 //validation
 let textInputVal = $('.text');
@@ -10,31 +10,37 @@ textInputVal.onkeydown = function (e) {
     }
 }
 
-//Buttons
-//exercise button functionality
-$("#exerBtn").click(function () {
-    $('.nutrition').hide();
-    $(".bmiSection").hide();
-    $('.exercise').show();
-});
 
 //function to show new workout modal
 $(".newWorkoutBtn").click(function () {
     $('.createWorkout').show();
-    $(".searchSection").show();
+    $(".searchExercisesContainer").show();
+    $('.searchResultContainer').hide();
+    $(".setupSection").removeClass('is-flex');
+    $(".setupSection").addClass('is-hidden');
+    $('.finishBtn').hide();
+});
+
+$(".chooseProgBtn").click(function () {
+    $('.chooseProgContainer').show();
+    showProgOptions();
+});
+
+$(".selectProgBtn").click(function () {
+    console.log('pressed');
+    displaySetupWorkout();
 });
 
 //button used to submit criteria to API
-$(".searchSave").click(function () {
+$(".searchBtn").click(function () {
     exerciseSearch();
-    $('.searchResultSection').show();
+    $('.searchResultContainer').show();
 });
 
 //toggle saved exercise on and off
-$('.savedExercises').click(function () {
-    $(".saved-exercise-body").toggle();
-  
-   
+$('.savedExercisesBtn').click(function () {
+    $(".savedExercisesContainer").toggle();
+    displayWorkout();
 })
 
 //button to show more info on exercises
@@ -46,9 +52,9 @@ $(".exercise-selection-body").on('click', '.moreBtn', function () {
 $(".setupBtn").click(function () {
     let cWorkouts = localStorage.getItem("workouts");
     if (cWorkouts) {
-        $('.savedSection').hide();
-        $('.searchResultSection').hide();
-        $(".searchSection").hide();
+        $('.savedExercisesContainer').hide();
+        $('.searchResultContainer').hide();
+        $(".searchExercisesContainer").hide();
         $(".setupSection").removeClass('is-hidden');
         $(".setupSection").addClass('is-flex');
         $('.finishBtn').show();
@@ -56,14 +62,12 @@ $(".setupBtn").click(function () {
     } else {
         alert('Must have workouts saved to proceed to setup.');
     }
-
 })
 
 //button to save program into local storage
 $(".finishBtn").submit((event) => {
-    $('.sessionSection').show();
+    $('.sessionForm').show();
     finishSetup();
-    $('.sessionSection').show();
     event.preventDefault();
 });
 
@@ -88,6 +92,7 @@ $(".save_db").submit(async (e) => {
     e.preventDefault();
 });
 
+
 // //remove button both removes the row from the display and local storage
 // $(".exerciseLog").on('click', '.removeBtn', function () {
 //     $(this).closest('tr').remove();
@@ -96,24 +101,20 @@ $(".save_db").submit(async (e) => {
 //called functionalities
 
 //searches and displays searches to page
-function exerciseSearch() {
+async function exerciseSearch() {
     $('.exercise-selection-body').empty();
-
     $('.modal').show();
-
     //check the user inputs fo intensity, type, and muscle
     let intensityValue = $("#intensityOptions").val();
     let typeValue = $("#typeOptions").val();
     let muscleValue = $("#muscleOptions").val();
-    let requestUrl = 'https://api.api-ninjas.com/v1/exercises?'
-
+    let requestUrl = '';
     //variables used to hold & if needed
     let intensityAnd = '';
     let typeAnd = '';
-
     //add section to URL depending on user input
     if (muscleValue.length) {
-        requestUrl = requestUrl + 'muscle=' + muscleValue;
+        requestUrl = 'muscle=' + muscleValue;
         intensityAnd = '&';
         typeAnd = '&';
     }
@@ -125,28 +126,23 @@ function exerciseSearch() {
         requestUrl = requestUrl + typeAnd + 'type=' + typeValue;
     }
 
-    //send API request using the user input  
-    fetch(requestUrl, {
-        headers: {
-            'X-Api-Key': 'GKg0l9hlc0fRJEHUdIsVzw==lti9bU3OVAYwF8Wk'
-        }
-    }).then(function (response) { return response.json(); })
-        .then(function (data) {
-            //if data returned is empty error message is displayed
-            if (data.length === 0) {
-                $('.exercise-selection-body').text("No Results Found")
-                return
-            }
+    //send API request using the user input 
+    let data = await helpers.getData(`/api/exercise/${requestUrl}`);
 
-            //add data returned as input selectors within the modal
-            for (let i = 0; i < data.length; i++) {
-                //create object for each workout returned
-                let name = data[i].name
-                let equipment = data[i].equipment
-                let instructions = data[i].instructions
+    //if data returned is empty error message is displayed
+    if (data.length === 0) {
+        $('.exercise-selection-body').text("No Results Found")
+        return
+    }
+    //add data returned as input selectors within the modal
+    for (let i = 0; i < data.length; i++) {
+        //create object for each workout returned
+        let name = data[i].name
+        let equipment = data[i].equipment
+        let instructions = data[i].instructions
 
-                //add workout to 
-                let results = $(`<input type="radio" name="result" 
+        //add workout to 
+        let results = $(`<input type="radio" name="result" 
                 data-name="${name}" data-equipment="${equipment}" data-instructions="${instructions}"/>
                 <span>${name}</span>
                     <button class="moreBtn">
@@ -156,17 +152,31 @@ function exerciseSearch() {
                       <p><span>Equipment:&nbsp;</span>${equipment}</p>
                       <p><span>Instructions:&nbsp;</span>${instructions}</p>
                       </div>`);
-                
-                //listens to change in any of the seledtable workout and executes if so
-                results.on("change", saveworkout)
-                $('.exercise-selection-body').append(results)
-            }
-        });
+
+        //listens to change in any of the seledtable workout and executes if so
+        results.on("change", saveworkout)
+        $('.exercise-selection-body').append(results)
+    }
+}
+
+async function showProgOptions(){
+    try {
+        let url = '/api/program/';
+        let response = await helpers.getData(url);
+        console.log(response);
+        let options = '';
+        for (let i = 0; i < response.length; i++){
+            options += `<option value="${response[i].id}">${response[i].program_name}</option>`;
+        }
+        $('.progOptionsSelect').append(options);
+    }
+    catch {
+        console.log('failure');
+    }
 }
 
 //function used to save selected workouts into local storage
 function saveworkout() {
-
     let workouts = [];
     let priorWorkouts = localStorage.getItem("workouts");
     if (priorWorkouts) {
@@ -182,10 +192,10 @@ function saveworkout() {
     }
     workouts.push(workout)
     //however it is only saved if the save button is clicked
-    $(".exerciseSave").on("click", function () {
+    $(".exerciseSaveBtn").on("click", function () {
         localStorage.setItem("workouts", JSON.stringify(workouts));
         $('.saved-exercise-body').show();
-        $('.savedSection').show();
+        $('.savedExercisesContainer').show();
         displayWorkout();
     })
 }
@@ -198,7 +208,6 @@ function displayWorkout() {
     if (priorWorkouts) {
         workouts = JSON.parse(localStorage.getItem("workouts"));
     }
-
     for (let i = 0; i < workouts.length; i++) {
         let name = workouts[i].name
         let results = $(`<div><h5>${name}</h5></div>`);
@@ -234,7 +243,13 @@ function startSetup() {
         </span>
         <span>
         <label for="${i}Type">Weight Type</label>
-        <input placeholder="dumbbell" id="${i}Type" type="text" class='text' required>
+        <select id="${i}Type" name="typeOSU" required>
+                <option value="Barbell">Barbell</option>
+                <option value="Dumbbell">Dumbbell</option>
+                <option value="Machine">Machine</option>
+                <option value="Cable">Cable</option>
+                <option value="Body Weight">Body Weight</option>
+        </select>
         </span>
         </br>`);
         $('.setupSection').append(results);
@@ -242,50 +257,60 @@ function startSetup() {
 }
 
 //function to save new workout to local stroage and display
-function finishSetup() {
-    let workouts = [];
-    let priorWorkouts = localStorage.getItem("workouts");
-    if (priorWorkouts) {
-        workouts = JSON.parse(localStorage.getItem("workouts"));
-    }
-    console.log('1');
-    let workoutsProgram = [];
-    let workoutName = $('#workoutName').val();
-    workoutsProgram.push(workoutName);
+async function finishSetup() {
+
+    let exerciseInfo = JSON.parse(localStorage.getItem("workouts"));
+    let programName = $('#workoutName').val();
+    let programObject = {
+        program_name: programName
+    };
+    //fetch request to set program name and get id
+    let postUrl = `/api/program/`;
+    let response = await helpers.postData(postUrl, programObject);
+    let programId = response.id;
+    let programWkts = [];
 
     //save all user inputs into an array of objects
-    for (let i = 0; i < workouts.length; i++) {
-        let exerciseObject = {
-            name: workouts[i].name,
-            sets: $(`#${i}Set`).val(),
-            reps: $(`#${i}Reps`).val(),
+    for (let i = 0; i < exerciseInfo.length; i++) {
+        let programWktsObject = {
+            program_id: programId,
+            exercise_name: exerciseInfo[i].name,
+            exercise_equipment: exerciseInfo[i].equipment,
+            exercise_instructions: exerciseInfo[i].instructions,
+            set_amount: $(`#${i}Set`).val(),
+            rep_amount: $(`#${i}Reps`).val(),
             weight: $(`#${i}Weight`).val(),
-            type: $(`#${i}Type`).val()
+            weight_type: $(`#${i}Type`).val()
         }
-        workoutsProgram.push(exerciseObject); 
+        programWkts.push(programWktsObject);
     }
-    console.log('2');
-    //save array of objects into local storage
-    localStorage.setItem("setupWorkout", JSON.stringify(workoutsProgram));
+    //save array of objects into database with fetch request
+    let programUrl = `/api/program/wkts/`;
+    let wktResponse = await helpers.postData(programUrl, programWkts);
+    console.log(wktResponse);
     $('.modal').hide();
     displaySetupWorkout();
 }
 
 //display new program created to main exercise section
-function displaySetupWorkout() {
+async function displaySetupWorkout() {
+    console.log('inFunction');
     $('.exerciseName').empty();
     $('.exerciseTable').empty();
-    $('.sessionSection').show();
-
-    let workoutProgram = JSON.parse(localStorage.getItem("setupWorkout"));
-    if (!workoutProgram){
-        return;
-    }
+    $('.sessionForm').show();
     let logBody = $('.exerciseLog');
-    logBody.append($(`<br><div><h3 class='program'>${workoutProgram[0]}</h3></div>`));
+    logBody.empty();
+
+    let programId = $('.progOptionsSelect').val();
+    console.log(programId);
+    let url = `/api/program/id/${programId}`;
+    let response = await helpers.getData(url);
+    console.log(response);
+    
+    logBody.append($(`<br><div><h3 class='program'>${response.program_name}</h3></div>`));
     //i starts at 1, remember that when pulling information
-    for (let i = 1; i < workoutProgram.length; i++) {
-        logBody.append($(`<br><h4 class='exerciseName' id="workout${i}">${workoutProgram[i].name}</h4>`));
+    for (let i = 0; i < response.programWorkouts.length; i++) {
+        logBody.append($(`<br><h4 class='exerciseName' id="workout${i}">${response.programWorkouts[i].exercise_name}</h4>`));
         let workoutTable = $('<table class="exerciseTable">');
         let tableHeader = $(`<tr>
         <th>Set</th>
@@ -295,15 +320,25 @@ function displaySetupWorkout() {
         <th>Comments</th>
     </tr>`);
         workoutTable.append(tableHeader);
-        for (let e = 0; e < workoutProgram[i].sets; e++) {
+        for (let e = 0; e < response.programWorkouts[i].set_amount; e++) {
+            //how to make it be selected
             let tableRow = $(`<tr>
             <td class='set${i} set${i}${e}' id='set${i}${e}'>${e + 1}</td>
-            <td><input id='reps${i}${e}' type="number" min="0" size="6" placeholder="${workoutProgram[i].reps}" required></td>
-            <td><input id='weight${i}${e}' type="number" min="0" size="6" placeholder="${workoutProgram[i].weight}" required></td>
-            <td><input id='type${i}${e}' class='text' type="text" size="10" placeholder="${workoutProgram[i].type}" required></td>
-            <td><input id='comments${i}${e}' class='text' size="10" type="text" ></td>
+            <td><input id='reps${i}${e}' type="number" min="0" size="6" placeholder="${response.programWorkouts[i].rep_amount}" required></td>
+            <td><input id='weight${i}${e}' type="number" min="0" size="6" placeholder="${response.programWorkouts[i].weight}" required></td>
+            <td>
+                <select id='type${i}${e}' class='text' name="typeOSU" required>
+                    <option value="${response.programWorkouts[i].weight_type}">${response.programWorkouts[i].weight_type}</option>
+                    <option value="Barbell">Barbell</option>
+                    <option value="Dumbbell">Dumbbell</option>
+                    <option value="Machine">Machine</option>
+                    <option value="Cable">Cable</option>
+                    <option value="Body Weight">Body Weight</option>
+                </select>
+            </td>
+            <td><input id='comments${i}${e}' class='text' size="10" type="text"></td>
         </tr>`)
-        //<td><button class="removeBtn delete">X</button></td>
+            //<td><button class="removeBtn delete">X</button></td>
             workoutTable.append(tableRow);
         }
         logBody.append(workoutTable);
@@ -320,13 +355,8 @@ async function saveToDB() {
             date: chosenDate
         }
         let postUrl = `/api/session/`;
-        let id;
-        let useless = await postData(postUrl, sessionObject);
-
-        //get the id for the date just saved
-        let url = `/api/session/${chosenDate}`;
-        let dateObject = await getExerData(url);
-        id = dateObject.id;
+        let response = await helpers.postData(postUrl, sessionObject);
+        let id = response.id;
         let sessionWktArray = [];
 
 
@@ -358,61 +388,26 @@ async function saveToDB() {
         console.log(sessionWktArray);
         //push all workouts to data base
         let workoutUrl = `/api/session/wkts/`;
-        let another = await postDataWkt(workoutUrl, sessionWktArray);
+        let another = await helpers.postData(workoutUrl, sessionWktArray);
         // need to call for some reason for api to work
-        if(another){
+        if (another) {
             alert("Workout Saved Succesfully");
         }
-        
+
     }
     catch (err) {
         console.log(err);
     }
 }
 
-//get data function
-async function getExerData(url) {
-    let response = await fetch(url);
-    let data = await response.json();
-    console.log(data);
-    return data;
-}
-
-//function to post data, used for session date
-async function postData(url, data) {
-    try {
-        let response = await fetch(url, {
-            method: 'POST', // *GET, POST, PUT, DELETE, etc.
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data) // body data type must match "Content-Type" header
-        });
-        return response;
-    }
-    catch (err) {
-        console.log('failure');
-    }
-}
-
-//function tp push all workouts for session dats
-async function postDataWkt(url = '', data = []) {
-    // Default options are marked with *
-    const response = await fetch(url, {
-        method: 'POST', // *GET, POST, PUT, DELETE, etc.
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data) // body data type must match "Content-Type" header
-    });
-    return response.json(); // parses JSON response into native JavaScript objects
-}
-
 //init function
-let programCheck = JSON.parse(localStorage.getItem("setupWorkout"));
-    if (programCheck){
-        console.log('show');
-        $('.sessionSection').show();
-        displaySetupWorkout();
+function init(){
+    let programCheck = JSON.parse(localStorage.getItem("setupWorkout"));
+    if (programCheck) {
+        $('.sessionForm').show();
+        // displaySetupWorkout();
     }
+}
+
+init();
 

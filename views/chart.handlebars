@@ -1,0 +1,53 @@
+<button class="frequencyBtn">Workout Frequency</button>
+<button class="setButton">Exercise Frequency</button>
+<button class="analysisBtn">Exercise Analysis</button>
+
+<section class="setContainer">
+    <section class="setCheckboxes">
+        {{!-- add exercise buttons here --}}
+    </section>
+    <section class="setChartContainer">
+        <canvas id="setChart"></canvas>
+    </section>
+</section>
+
+<section class="workoutFrequency">
+    <form class="setDates">
+        {{!-- set dates here--}}
+        <label for="startDate">Start Date:</label>
+        <input type="date" class='startDate' name="startDate" min="2018-01-01">
+        <label for="endDate">End Date:</label>
+        <input type="date" class='endDate' name="endDate" min="2018-01-01">
+        <button type="submit">Set Dates</button>
+    </form>
+    <section class="freqChartContainer">
+        <canvas id="freqChart"></canvas>
+    </section>
+</section>
+
+<section class="analysisContainer">
+    <form class="analysisForm">
+        <label for="startDateA">Start Date:</label>
+        <input type="date" class='startDateA' name="startDateA" min="2018-01-01">
+        <label for="endDateA">End Date:</label>
+        <input type="date" class='endDateA' name="endDateA" min="2018-01-01">
+        <section class="analysisCheckboxes">
+            {{!-- add exercise buttons here --}}
+        </section>
+        <label for="type">Choose analysis type:</label>
+        <select name="type" id="typeAnalysis">
+            <option value="total">Total Volume</option>
+            <option value="max">Max Weight</option>
+        </select>
+        <button type="submit">Analyze</button>
+    </form>
+    <section class="analysisChartContainer">
+        <canvas id="analysisChart"></canvas>
+    </section>
+</section>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="./assets/js/helper.js"></script>
+<script src="./assets/js/chart.js"></script>

@@ -4,25 +4,7 @@
     color: white;
 }
 
-.setupSection {
-    display: none;
-}
 
-.searchResultSection {
-    display: none;
-}
-
-.savedSection {
-    display: none;
-}
-
-.sessionSection {
-    display: none;
-}
-
-.finishBtn {
-    display: none;
-}
 
 /* * {
     border: red 1px solid;
