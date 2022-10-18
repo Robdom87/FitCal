@@ -15,7 +15,9 @@ router.get('/bmi', (req, res) => {
 //exercise and chart both require log in to use
 router.get('/exercise', (req, res) => {
   if (req.session.logged_in) {
-    res.render('exercise');
+    res.render('exercise', {
+      logged_in: req.session.logged_in,
+    });
     return;
   }
   res.redirect('/login');
@@ -24,7 +26,9 @@ router.get('/exercise', (req, res) => {
 
 router.get('/chart', (req, res) => {
   if (req.session.logged_in) {
-    res.render('chart');
+    res.render('chart', {
+      logged_in: req.session.logged_in,
+    });
     return;
   }
   res.redirect('/login');
