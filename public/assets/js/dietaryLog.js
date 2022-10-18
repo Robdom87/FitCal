@@ -1,3 +1,5 @@
+// const helpers = require('../../../utils/helpers');
+
 //item validation
 let itemInputVal = document.getElementById('itemInput');
 //check for all text input is either text, backspace or space, dash and arrow keys, and numbers including numpad
@@ -66,7 +68,7 @@ $('.delBtn').click(function () {
 })
 
 //function to pull info from inputs into API
-function inputData() {
+async function inputData() {
     //hide notification
     $(".notification").hide();
     //clean up food input
@@ -81,15 +83,8 @@ function inputData() {
         }
     }
     food.toString();
-    getData(food);
-    return;
-}
-
-//function to fetch API info
-async function getData(url) {
-    let response = await fetch(`/api/nutrition/${url}`);
-    let data = await response.json();
-    //check output if blank or name nan
+    let url = `/api/nutrition/${food}`;
+    let data = await helpers.getData(url);
     if (data.length === 0 || data[0].name === 'nan') {
         errorMessage();
         return;

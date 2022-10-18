@@ -15,6 +15,11 @@ router.get('/bmi', (req, res) => {
 router.get('/exercise', (req, res) => {
   res.render('exercise');
 });
+
+router.get('/chart', (req, res) => {
+  res.render('chart');
+});
+
 router.get('/login', (req, res) => {
   //if user already logged in send him to the homepage
   if (req.session.logged_in) {
