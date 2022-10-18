@@ -15,6 +15,14 @@ Session.init(
     },
     date: {
         type: DataTypes.DATEONLY,
+    },
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'user',
+        key: 'id'
+      }
     }
   },
   {

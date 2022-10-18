@@ -1,4 +1,5 @@
 // const helpers = require('../../../utils/helpers');
+let quick = 0;
 
 //validation
 let textInputVal = $('.text');
@@ -9,7 +10,6 @@ textInputVal.onkeydown = function (e) {
         return false;
     }
 }
-
 
 //function to show new workout modal
 $(".newWorkoutBtn").click(function () {
@@ -36,10 +36,7 @@ $(".searchBtn").click(function () {
     exerciseSearch();
     $('.searchResultContainer').show();
 });
-// $(".searchBtn").click(function () {
-//     quickSearch();
-//     $('.searchResultContainer').show();
-// });
+
 //toggle saved exercise on and off
 $('.savedExercisesBtn').click(function () {
     $(".savedExercisesContainer").toggle();
@@ -66,52 +63,17 @@ $(".setupBtn").click(function () {
         alert('Must have workouts saved to proceed to setup.');
     }
 })
+
 //Quick Search button function
 $('.searchToggle').click(function () {
     $(".quick").toggle();
     $("#threeCriterias").toggle();
-    $(".searchBtn").show();
-    $(".savedExercisesBtn").toggle();
+    if (quick === 0) {
+        quick = 1;
+    } else {
+        quick = 0;
+    }
 })
-
-
-
-async function quickSearch() {
-
-
-    let quickSearch = $(".search-bar").val();
-
-    //send API request using the user input
-    var requestUrl = `name=${quickSearch}`
-    let data = await helpers.getData(`/api/exercise/${requestUrl}`);
-    //if data returned is empty error message is displayed
-    if (data.length === 0) {
-        $('.exercise-selection-body').text("No Results Found")
-        return
-    }
-    //add data returned as input selectors within the modal
-    for (let i = 0; i < data.length; i++) {
-        //create object for each workout returned
-        let name = data[i].name
-        let equipment = data[i].equipment
-        let instructions = data[i].instructions
-        //add workout to
-        let results = $(`<input type="radio" name="result"
-                data-name="${name}" data-equipment="${equipment}" data-instructions="${instructions}"/>
-                <span>${name}</span>
-                    <button class="moreBtn">
-                      More
-                  </button>
-                  <div class='moreInfo'>
-                      <p><span>Equipment:&nbsp;</span>${equipment}</p>
-                      <p><span>Instructions:&nbsp;</span>${instructions}</p>
-                      </div>`);
-        //listens to change in any of the seledtable workout and executes if so
-        results.on("change", saveworkout)
-        $('.exercise-selection-body').append(results)
-    }
-}
-
 
 //button to save program into local storage
 $(".finishBtn").submit((event) => {
@@ -141,38 +103,38 @@ $(".save_db").submit(async (e) => {
     e.preventDefault();
 });
 
-
-// //remove button both removes the row from the display and local storage
-// $(".exerciseLog").on('click', '.removeBtn', function () {
-//     $(this).closest('tr').remove();
-// })
-
 //called functionalities
-
 //searches and displays searches to page
 async function exerciseSearch() {
     $('.exercise-selection-body').empty();
     $('.modal').show();
-    //check the user inputs fo intensity, type, and muscle
-    let intensityValue = $("#intensityOptions").val();
-    let typeValue = $("#typeOptions").val();
-    let muscleValue = $("#muscleOptions").val();
     let requestUrl = '';
-    //variables used to hold & if needed
-    let intensityAnd = '';
-    let typeAnd = '';
-    //add section to URL depending on user input
-    if (muscleValue.length) {
-        requestUrl = 'muscle=' + muscleValue;
-        intensityAnd = '&';
-        typeAnd = '&';
-    }
-    if (intensityValue.length) {
-        requestUrl = requestUrl + intensityAnd + 'difficulty=' + intensityValue;
-        typeAnd = '&';
-    }
-    if (typeValue.length) {
-        requestUrl = requestUrl + typeAnd + 'type=' + typeValue;
+    if (quick === 0) {
+        //check the user inputs fo intensity, type, and muscle
+        let intensityValue = $("#intensityOptions").val();
+        let typeValue = $("#typeOptions").val();
+        let muscleValue = $("#muscleOptions").val();
+
+        //variables used to hold & if needed
+        let intensityAnd = '';
+        let typeAnd = '';
+        //add section to URL depending on user input
+        if (muscleValue.length) {
+            requestUrl = 'muscle=' + muscleValue;
+            intensityAnd = '&';
+            typeAnd = '&';
+        }
+        if (intensityValue.length) {
+            requestUrl = requestUrl + intensityAnd + 'difficulty=' + intensityValue;
+            typeAnd = '&';
+        }
+        if (typeValue.length) {
+            requestUrl = requestUrl + typeAnd + 'type=' + typeValue;
+        }
+
+    } else {
+        let nameValue = $('.search-bar').val();
+        requestUrl = `name=${nameValue}`;
     }
 
     //send API request using the user input 
@@ -212,7 +174,6 @@ async function showProgOptions() {
     try {
         let url = '/api/program/';
         let response = await helpers.getData(url);
-        console.log(response);
         let options = '';
         for (let i = 0; i < response.length; i++) {
             options += `<option value="${response[i].id}">${response[i].program_name}</option>`;
@@ -324,12 +285,11 @@ async function finishSetup() {
         let programWktsObject = {
             program_id: programId,
             exercise_name: exerciseInfo[i].name,
-            exercise_equipment: exerciseInfo[i].equipment,
-            exercise_instructions: exerciseInfo[i].instructions,
             set_amount: $(`#${i}Set`).val(),
             rep_amount: $(`#${i}Reps`).val(),
             weight: $(`#${i}Weight`).val(),
-            weight_type: $(`#${i}Type`).val()
+            weight_type: $(`#${i}Type`).val(),
+            user_id: ""
         }
         programWkts.push(programWktsObject);
     }
@@ -411,7 +371,7 @@ async function saveToDB() {
 
         //pull all inputted information from the workout to an array of objects
         //per workout/table
-        for (let i = 1; i < $(".exerciseTable").length + 1; i++) {
+        for (let i = 0; i < $(".exerciseTable").length + 1; i++) {
             //e needs to change for each i
             //per table rows
             for (let e = 0; e < $(`.set${i}`).length; e++) {
@@ -429,7 +389,8 @@ async function saveToDB() {
                     rep_amount: rep_amount,
                     weight: weight,
                     weight_type: weight_type,
-                    comments: comments
+                    comments: comments,
+                    user_id: ""
                 }
                 sessionWktArray.push(sessionWkt);
             }
