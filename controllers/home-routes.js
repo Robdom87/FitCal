@@ -1,15 +1,24 @@
 const router = require('express').Router();
 
 router.get('/', (req, res) => {
-  res.render('homepage');
+  res.render('homepage',
+  {
+    logged_in: req.session.logged_in,
+  });
 });
 
 router.get('/nutrition', (req, res) => {
-  res.render('nutrition');
+  res.render('nutrition',
+  {
+    logged_in: req.session.logged_in,
+  });
 });
 
 router.get('/bmi', (req, res) => {
-  res.render('bmi');
+  res.render('bmi',
+  {
+    logged_in: req.session.logged_in,
+  });
 });
 
 //exercise and chart both require log in to use

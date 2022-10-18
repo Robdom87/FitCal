@@ -43,11 +43,11 @@ router.get('/id/:id', withAuth, async (req, res) => {
 router.get('/query', withAuth, async (req, res) => {
   // find program id with the name among the users workouts
   try {
-    const programData = await Program.findOne({ 
-      where: { 
+    const programData = await Program.findOne({
+      where: {
         user_id: req.session.user_id,
-        program_name : req.query.name 
-      } 
+        program_name: req.query.name
+      }
     });
     if (!programData) {
       res.status(404).json({ message: 'No program found with this name!' });
@@ -81,16 +81,20 @@ router.post('/wkts/', withAuth, async (req, res) => {
   try {
     //req.body for bulk create must be in array of objects
     //object should be like
-      // {
-      //     program_id: 
-      //     exercise_name:
-      //     exercise_equipment:
-      //     exercise_instructions:
-      //     set_amount: 
-      //     rep_amount: 
-      //     weight: 
-      //     weight_type: 
-      // }
+    // {
+    //     program_id: 
+    //     exercise_name:
+    //     exercise_equipment:
+    //     exercise_instructions:
+    //     set_amount: 
+    //     rep_amount: 
+    //     weight: 
+    //     weight_type: 
+    //     user_id:
+    // }
+    for (let i = 0; i < req.body.length; i++) {
+      req.body[i].user_id = req.session.user_id;
+    }
     const programData = await ProgramWorkouts.bulkCreate(req.body);
     res.status(200).json(programData);
   } catch (err) {

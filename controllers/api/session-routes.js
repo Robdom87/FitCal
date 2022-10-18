@@ -57,7 +57,7 @@ router.post('/', withAuth, async (req, res) => {
 });
 
 // The `/api/session/wkts` endpoint
-router.post('/wkts/',  withAuth, async (req, res) => {
+router.post('/wkts/', withAuth, async (req, res) => {
   // create a new program
   try {
     //req.body for bulk create must be in array of objects
@@ -70,8 +70,12 @@ router.post('/wkts/',  withAuth, async (req, res) => {
     //     weight: 
     //     weight_type: 
     //     comments:
+    //     user_id:
     // }
-
+    for (let i=0; i < req.body.length; i++){
+      req.body[i].user_id = req.session.user_id;
+    }
+    
     const sessionData = await SessionWorkouts.bulkCreate(req.body);
     res.status(200).json(sessionData);
   } catch (err) {

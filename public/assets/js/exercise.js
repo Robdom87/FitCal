@@ -63,6 +63,7 @@ $(".setupBtn").click(function () {
         alert('Must have workouts saved to proceed to setup.');
     }
 })
+
 //Quick Search button function
 $('.searchToggle').click(function () {
     $(".quick").toggle();
@@ -102,9 +103,7 @@ $(".save_db").submit(async (e) => {
     e.preventDefault();
 });
 
-
 //called functionalities
-
 //searches and displays searches to page
 async function exerciseSearch() {
     $('.exercise-selection-body').empty();
@@ -286,12 +285,11 @@ async function finishSetup() {
         let programWktsObject = {
             program_id: programId,
             exercise_name: exerciseInfo[i].name,
-            exercise_equipment: exerciseInfo[i].equipment,
-            exercise_instructions: exerciseInfo[i].instructions,
             set_amount: $(`#${i}Set`).val(),
             rep_amount: $(`#${i}Reps`).val(),
             weight: $(`#${i}Weight`).val(),
-            weight_type: $(`#${i}Type`).val()
+            weight_type: $(`#${i}Type`).val(),
+            user_id: ""
         }
         programWkts.push(programWktsObject);
     }
@@ -373,7 +371,7 @@ async function saveToDB() {
 
         //pull all inputted information from the workout to an array of objects
         //per workout/table
-        for (let i = 1; i < $(".exerciseTable").length + 1; i++) {
+        for (let i = 0; i < $(".exerciseTable").length + 1; i++) {
             //e needs to change for each i
             //per table rows
             for (let e = 0; e < $(`.set${i}`).length; e++) {
@@ -391,7 +389,8 @@ async function saveToDB() {
                     rep_amount: rep_amount,
                     weight: weight,
                     weight_type: weight_type,
-                    comments: comments
+                    comments: comments,
+                    user_id: ""
                 }
                 sessionWktArray.push(sessionWkt);
             }

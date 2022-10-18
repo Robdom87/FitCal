@@ -32,10 +32,9 @@ router.get('/exercise', withAuth, async (req, res) => {
             sequelize.literal(`(
                             SELECT COUNT(exercise_name)
                             FROM sessionWorkouts AS set_count
-                            JOIN session ON session.id = sessionWorkouts.session_id
                             WHERE
-                                session.id = ${req.session.user_id}
-                                AND sessionWorkouts.exercise_name = "${req.query.name}"
+                                user_id = ${req.session.user_id}
+                                AND exercise_name = "${req.query.name}"
                         )`),
             'set_count'
           ]
@@ -59,7 +58,7 @@ router.get('/dates', withAuth, async (req, res) => {
             sequelize.literal(`(
                             SELECT COUNT(date) FROM session 
                             WHERE 
-                              id = ${req.session.user_id}
+                              user_id = ${req.session.user_id}
                               AND date BETWEEN '${req.query.start}' AND '${req.query.end}'
                         )`),
             'workout_count'
@@ -84,7 +83,7 @@ router.get('/weight', withAuth, async (req, res) => {
     JOIN session ON session.id = sessionWorkouts.session_id 
     WHERE session.date BETWEEN '${req.query.start}' AND '${req.query.end}'
     AND sessionWorkouts.exercise_name = '${req.query.name}'
-    AND session.id = ${req.session.user_id}`, { type: sequelize.QueryTypes.SELECT });
+    AND sessionWorkouts.user_id = ${req.session.user_id}`, { type: sequelize.QueryTypes.SELECT });
     res.status(200).json(allSessionDates);
   } catch (err) {
     res.status(500).json(err.message);
@@ -102,7 +101,7 @@ router.get('/volume', withAuth, async (req, res) => {
     JOIN session ON session.id = sessionWorkouts.session_id 
     WHERE session.date BETWEEN '${req.query.start}' AND '${req.query.end}'
     AND sessionWorkouts.exercise_name = '${req.query.name}'
-    AND session.id = ${req.session.user_id}`, { type: sequelize.QueryTypes.SELECT });
+    AND sessionWorkouts.user_id = ${req.session.user_id}`, { type: sequelize.QueryTypes.SELECT });
     res.status(200).json(allSessionDates);
   } catch (err) {
     res.status(500).json(err.message);
