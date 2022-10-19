@@ -8,10 +8,14 @@
     <title>FitCal - Fitness and Nutrition</title>
     <!-- CSS only -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="stylesheet" href="./assets/css/format.css">
-    <link rel="stylesheet" href="./assets/css/responsive.css">
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="./assets/css/homepage.css">
     <link rel="stylesheet" href="./assets/css/bmi.css">
+    <link rel="stylesheet" href="./assets/css/nutrition.css">
+    <link rel="stylesheet" href="./assets/css/exercise.css">
+    <link rel="stylesheet" href="./assets/css/chart.css">
+    <link rel="stylesheet" href="./assets/css/forum.css">
+
 
 </head>
 
@@ -19,21 +23,20 @@
     <!-- header with fitCal logo and date-->
     <header class="header">
         <a href="/"><img class='logo' src="./images/fitcal_logo.jpeg" alt="FitCal"></a>
+        <a class='white' href="/login"><span id="loginBtn">Login</span></a>
 
-        <!-- Navigation bar three functionalities -->
-        <nav>
-            <a class='white' href="/bmi"><span id="bmiBtn">BMI</span></a>
-            <a class='white' href="/nutrition"><span id="nutriBtn">Nutrition</span></a>
-            {{#if logged_in}}
-            <a class='white' href="/exercise"><span id="exerBtn">Exercise</span></a>
-            <a class='white' href="/chart"><span>Chart</span></a>
-            {{/if}}
-            <a class='white' href="/login"><span id="loginBtn">Login</span></a>
-            {{#if logged_in}}
-            <a class='white' href="/forum"><span id="forumBtn">Forum</span></a>
-            {{/if}}
-        </nav>
     </header>
+    <!-- Navigation bar three functionalities -->
+    <nav>
+        <a class='white' href="/bmi"><span id="bmiBtn">BMI</span></a>
+        <a class='white' href="/nutrition"><span id="nutriBtn">Nutrition</span></a>
+        {{#if logged_in}}
+        <a class='white' href="/exercise"><span id="exerBtn">Exercise</span></a>
+        <a class='white' href="/chart"><span>Analysis</span></a>
+        <a class='white' href="/forum"><span id="forumBtn">Forum</span></a>
+        {{/if}}
+
+    </nav>
     <main class="container container-fluid mt-5">
         {{{ body }}}
     </main>

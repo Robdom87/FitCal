@@ -1,0 +1,103 @@
+/* exercise section */
+.exercise {
+    text-align: center;
+}
+
+.modal-card{
+    overflow: auto;
+  }
+
+/* search section in new program modal */
+#threeCriterias {
+    display: flex;
+    justify-content: center;
+}
+
+.muscleChoices {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.quick {
+    display: none;
+}
+
+/* search result section of modal */
+.exercise-selection-body {
+    background-color: white;
+}
+
+.searchResultSection {
+    display: none;
+}
+
+.moreInfo {
+    display: none;
+}
+
+.moreBtn{
+    margin-bottom: 15px;
+}
+
+.savedExercisesContainer {
+    display: none;
+}
+
+.savedSection {
+    display: none;
+}
+
+/* setup section of the modal */
+.setupSection {
+    display: none;
+    align-items: center;
+}
+
+.setupInputs {
+    display: flex;
+    flex-direction: column;
+}
+
+.finishBtn {
+    display: none;
+}
+
+/* buttons top of session input */
+.chooseProgContainer {
+    display: none;
+}
+
+.program {
+    font-weight: bold;
+    border-bottom: solid lightgray 2px;
+}
+
+.sessionSection {
+    display: none;
+}
+
+#workoutName {
+    width: fit-content;
+    text-align: center;
+ }
+
+.sessionForm {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+@media only screen and (max-width: 576px) {
+    /* formatting for exercise section */
+    .exercise-selection {
+        max-width: 375px;
+        word-wrap: break-word;
+    }
+    .saved-exercises {
+        max-width: 390px;
+        word-wrap: break-word;
+    }
+    .modal-card {
+        margin: 0px;
+    }
+}
