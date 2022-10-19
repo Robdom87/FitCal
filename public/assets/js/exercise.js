@@ -153,15 +153,15 @@ async function exerciseSearch() {
         let instructions = data[i].instructions
 
         //add workout to 
-        let results = $(`<input type="radio" name="result" 
+        let results = $(`<div class='resultRadio'><input type="radio" name="result" 
                 data-name="${name}" data-equipment="${equipment}" data-instructions="${instructions}"/>
-                <span>${name}</span>
+                <span>${name}</span></div>
                     <button class="moreBtn">
                       More
                   </button>
                   <div class='moreInfo'>  
-                      <p><span>Equipment:&nbsp;</span>${equipment}</p>
-                      <p><span>Instructions:&nbsp;</span>${instructions}</p>
+                      <p><u><b><span>Equipment:&nbsp;</span></b></u>${equipment}</p>
+                      <p><u><b><span>Instructions:&nbsp;</span></b></u>${instructions}</p>
                       </div>`);
 
         //listens to change in any of the seledtable workout and executes if so

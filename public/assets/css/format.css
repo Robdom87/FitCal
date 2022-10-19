@@ -4,6 +4,7 @@
 
 .setupSection {
     display: none;
+    align-items: center;
 }
 
 .setContainer {
@@ -83,8 +84,6 @@ input {
     padding: 0px;
 }
 
-
-
 /* bmi section */
 /* .bmiSection {
     text-align: center;
@@ -118,9 +117,13 @@ input {
 }
 
 .exercise-selection-body{
-    display: flex;
-    flex-direction: column;
+    /* display: flex;
+    flex-direction: column; */
 }
+#workoutName {
+    width: fit-content;
+    text-align: center;
+ }
 
 .sessionForm {
     display: flex;
@@ -136,8 +139,6 @@ h4 {
     margin-bottom: 15px;
 }
 
-
-
 .modal-card{
     overflow: auto;
   }
@@ -146,8 +147,6 @@ h4 {
     display: flex;
     flex-wrap: wrap;
 }
-
-
 
 .setupInputs {
     display: flex;

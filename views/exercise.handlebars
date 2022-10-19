@@ -28,7 +28,7 @@
         <div class="modal-background"></div>
         <div class="modal-card">
             <header class="modal-card-head">
-                <p class="modal-card-title">Create New Workout</p>
+                <p class="modal-card-title">Create New Program</p>
                 <button class="delete" aria-label="close"></button>
             </header>
             <section class="modal-card-body">
@@ -84,12 +84,19 @@
                     </section>
 
                     <button class="searchBtn">Search</button>
-                    <a href="#saved"><button class="savedExercisesBtn">View Saved Workouts</button></a>
+                    <button class="savedExercisesBtn">View Saved Exercises</button>
                     <button class="searchToggle">Quick Search</button>
 
-
-                    <!-- section displaying search results -->
                     <br>
+                    <section id='saved' class="savedExercisesContainer">
+                        <h4>Saved Exercises</h4>
+                        <section id="savedExercise" class="saved-exercise-body">
+                            <!-- saved workouts displayed here -->
+                        </section>
+                        <br>
+                        <button class="setupBtn">Continue Program Setup</button>
+                        <button class="remove-button">Remove All</button>
+                    </section>
                     <br>
                     <section class="searchResultContainer">
                         <h4>Search Results</h4>
@@ -100,15 +107,7 @@
                     </section>
                     <!-- section to view saved workouts -->
                     <br>
-                    <section id='saved' class="savedExercisesContainer">
-                        <h4>Saved Workouts</h4>
-                        <section id="savedExercise" class="saved-exercise-body">
-                            <!-- saved workouts displayed here -->
-                        </section>
-                        <br>
-                        <button class="setupBtn">Continue Workout Setup</button>
-                        <button class="remove-button">Remove All</button>
-                    </section>
+
                 </section>
 
                 <!-- section to choose information for each workout to set up program -->
@@ -134,4 +133,3 @@
 <script src="./assets/js/helper.js"></script>
 <script src="./assets/js/exercise.js"></script>
 {{/if}}
-
