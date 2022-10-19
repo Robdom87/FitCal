@@ -82,7 +82,7 @@ nav span {
         align-items: center;
         padding-bottom: 0px;
         padding-right: 20px;
-        padding-bottom: 20px;
+        /* padding-bottom: 20px; */
     }
     nav {
         flex-direction: column;

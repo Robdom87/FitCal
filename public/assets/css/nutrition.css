@@ -14,6 +14,28 @@
     text-align: center;
 }
 
+.tbody {
+    border: lightgray 1px solid;
+}
+
+.tHeader {
+    background-color: #024b94;
+}
+
+.table th {
+    color: white;
+    font-size: bold;
+}
+
+.totalRow {
+    background-color: rgb(141, 141, 141);
+}
+
+.whiteT {
+    color: white
+
+}
+
 .table th:not([align]) {
     text-align: center;
 }
@@ -23,8 +45,9 @@
 }
 
 .macroRow {
-    display: none;
+    background-color: lightgray;
 }
+
 
 .addItem {
     display: none;
