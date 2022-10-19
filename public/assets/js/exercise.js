@@ -174,6 +174,7 @@ async function showProgOptions() {
     try {
         let url = '/api/program/';
         let response = await helpers.getData(url);
+        $('.progOptionsSelect').empty();
         let options = '';
         for (let i = 0; i < response.length; i++) {
             options += `<option value="${response[i].id}">${response[i].program_name}</option>`;
