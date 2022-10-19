@@ -1,7 +1,7 @@
-const Program = require('./Program');
-const Session = require('./Session');
-const ProgramWorkouts = require('./ProgramWorkouts');
-const SessionWorkouts = require('./SessionWorkouts');
+const Program = require('./program');
+const Session = require('./session');
+const ProgramWorkouts = require('./programWorkouts');
+const SessionWorkouts = require('./sessionWorkouts');
 const User = require("./User");
 //forum
 const Post = require('./Post');
