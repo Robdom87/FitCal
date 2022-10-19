@@ -77,7 +77,7 @@ nav {
     border-bottom: solid lightgray 2px;
 
 }
-.frequencyBtn, .setButton, .analysisBtn, .submit {
+.frequencyBtn, .setButton, .analysisBtn, .anaylzeBtn {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     background-color: #1947c7; /* Blue */
     border: none;
