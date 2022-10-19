@@ -44,6 +44,17 @@ router.get('/chart', (req, res) => {
 
 });
 
+router.get('/forum', (req, res) => {
+  if (req.session.logged_in) {
+    res.render('chart', {
+      logged_in: req.session.logged_in,
+    });
+    return;
+  }
+  res.redirect('/login');
+
+});
+
 router.get('/login', (req, res) => {
   //if user already logged in send him to the homepage
   if (req.session.logged_in) {
