@@ -46,7 +46,7 @@ router.get('/chart', (req, res) => {
 
 router.get('/forum', (req, res) => {
   if (req.session.logged_in) {
-    res.render('chart', {
+    res.render('forum', {
       logged_in: req.session.logged_in,
     });
     return;
