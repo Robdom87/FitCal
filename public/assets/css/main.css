@@ -41,7 +41,9 @@ nav {
     align-items: flex-end;
     font-weight: bold;
     color: white;
-    background-image: linear-gradient(to bottom, #3e87e0,#3e87e0);
+    background-color: #3e87e0;
+    padding: 10px;
+    justify-content: space-around;
 }
 
 nav span {
@@ -76,15 +78,17 @@ nav span {
 @media only screen and (max-width: 576px) {
     /* formatting for header */
     .header {
-        flex-direction: column;
+        /* flex-direction: column; */
         align-items: center;
         padding-bottom: 0px;
+        padding-right: 20px;
+        padding-bottom: 20px;
     }
     nav {
-        margin-top: 20px;
         flex-direction: column;
         align-items: center;
         width: 100%;
+        padding: 0px;
     }
     nav a {
         display: flex;
