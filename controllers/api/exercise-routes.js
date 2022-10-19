@@ -1,13 +1,14 @@
 const router = require('express').Router();
-// require('dotenv').config();
 const fetch = require('node-fetch');
+const withAuth = require('../../utils/auth');
+
 
 
 // The `/api/exercise` endpoint
-router.get('/:query', async (req, res) => {
-    // find all sessions
+router.get('/:url', withAuth, async (req, res) => {
+    // used to call Exercise API
     try {
-        let response = await fetch(`https://api.api-ninjas.com/v1/exercises?${req.params.query}`, {
+        let response = await fetch(`https://api.api-ninjas.com/v1/exercises?${req.params.url}`, {
             headers: {
                 'X-Api-Key': process.env.API_Key
             }

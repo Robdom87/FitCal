@@ -39,7 +39,7 @@
             <option value="total">Total Volume</option>
             <option value="max">Max Weight</option>
         </select>
-        <button type="submit">Analyze</button>
+        <button class="anaylzeBtn" type="submit">Analyze</button> 
     </form>
     <section class="analysisChartContainer">
         <canvas id="analysisChart"></canvas>
@@ -47,7 +47,9 @@
 </section>
 
 
+{{#if logged_in}}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="./assets/js/helper.js"></script>
 <script src="./assets/js/chart.js"></script>
+{{/if}}
