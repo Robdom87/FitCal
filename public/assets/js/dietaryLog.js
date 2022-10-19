@@ -169,7 +169,6 @@ function sumTotal() {
         cholInfoTot = cholInfoTot + parseInt(totalchol);
     })
 
-
     //if no cals, print all empty
     if (calInfoTot === 0){
         $("#caloriesTot").text("kcal");
