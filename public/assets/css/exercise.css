@@ -25,10 +25,13 @@
 /* search result section of modal */
 .exercise-selection-body {
     background-color: white;
+    display: flex;
+    flex-direction: column;
 }
 
 .searchResultSection {
     display: none;
+   
 }
 
 .moreInfo {
@@ -39,8 +42,16 @@
     margin-bottom: 15px;
 }
 
+.resultRadio {
+    border-top: 2px dotted grey;
+}
+
 .savedExercisesContainer {
     display: none;
+    padding: 15px;
+    border: 1px solid grey;
+    background-color: lightgray;
+    margin-top: 10px;
 }
 
 .savedSection {

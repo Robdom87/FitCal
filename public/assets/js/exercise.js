@@ -153,15 +153,16 @@ async function exerciseSearch() {
         let instructions = data[i].instructions
 
         //add workout to 
-        let results = $(`<div class='resultRadio'><input type="radio" name="result" 
+        let results = $(`<input type="radio" name="result" 
                 data-name="${name}" data-equipment="${equipment}" data-instructions="${instructions}"/>
-                <span>${name}</span></div>
+                <span>${name}</span>
                     <button class="moreBtn">
                       More
                   </button>
                   <div class='moreInfo'>  
-                      <p><u><b><span>Equipment:&nbsp;</span></b></u>${equipment}</p>
-                      <p><u><b><span>Instructions:&nbsp;</span></b></u>${instructions}</p>
+                      <p><u><b><span>Equipment:</span></b></u>&nbsp;${equipment}</p>
+                      <p><u><b><span>Instructions:</span></b></u></p>
+                      <p>${instructions}</p>
                       </div>`);
 
         //listens to change in any of the seledtable workout and executes if so
@@ -201,7 +202,7 @@ function saveworkout() {
         equipment: this.dataset.equipment,
         instructions: this.dataset.instructions,
     }
-    workouts.push(workout)
+    workouts.push(workout);
     //however it is only saved if the save button is clicked
     $(".exerciseSaveBtn").on("click", function () {
         localStorage.setItem("workouts", JSON.stringify(workouts));
