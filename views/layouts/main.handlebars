@@ -23,12 +23,13 @@
     <!-- header with fitCal logo and date-->
     <header class="header">
         <a href="/"><img class='logo' src="./images/fitcal_logo.jpeg" alt="FitCal"></a>
-        {{#if logged_in}}
 
+        {{#if logged_in}}
         <a class="white" href="#"><span id="logout">Log Out</span></a>
         {{else}}
         <a class='white' href="/login"><span id="loginBtn">Login</span></a>
         {{/if}}
+
     </header>
     <!-- Navigation bar three functionalities -->
     <nav>
@@ -37,8 +38,27 @@
         <a class='white' href="/exercise"><span id="exerBtn">Exercise</span></a>
         <a class='white' href="/chart"><span>Analysis</span></a>
         <a class='white' href="/forum"><span id="forumBtn">Forum</span></a>
-
+<div class="nav-bar" id="burger">
+        <a class="navbar-burger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </a>
+    </div>
     </nav>
+    
+    <div class="navbar-menu" id="nav-links">
+        <div class="navbar-end">
+            <a class='navbar-item' href="/bmi"><span id="bmiBtn">BMI</span></a>
+            <a class='navbar-item' href="/nutrition"><span id="nutriBtn">Nutrition</span></a>
+            <a class='navbar-item' href="/exercise"><span id="exerBtn">Exercise</span></a>
+            <a class='navbar-item' href="/chart"><span>Analysis</span></a>
+            <a class='navbar-item' href="/forum"><span id="forumBtn">Forum</span></a>
+        </div>
+    </div>
+
+
+
     <main class="container container-fluid mt-5">
         {{{ body }}}
     </main>
@@ -46,6 +66,7 @@
 
     </footer>
     <script src="assets/js/logout.js"></script>
+    <script src="assets/js/mobile.js"></script>
 </body>
 
 </html>
