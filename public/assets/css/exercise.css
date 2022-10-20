@@ -1,0 +1,143 @@
+/* exercise section */
+.exercise {
+    text-align: center;
+}
+
+.modal-card{
+    overflow: auto;
+  }
+
+/* search section in new program modal */
+#threeCriterias {
+    display: flex;
+    justify-content: center;
+}
+
+.muscleChoices {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.quick {
+    display: none;
+}
+
+/* search result section of modal */
+.exercise-selection-body {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.searchResultSection {
+    display: none;
+   
+}
+
+.moreInfo {
+    display: none;
+}
+
+.moreBtn{
+    margin-bottom: 15px;
+}
+
+.resultRadio {
+    border-top: 2px dotted grey;
+}
+
+.savedExercisesContainer {
+    display: none;
+    padding: 15px;
+    border: 1px solid grey;
+    background-color: lightgray;
+    margin-top: 10px;
+}
+
+.savedSection {
+    display: none;
+}
+
+/* setup section of the modal */
+.setupSection {
+    display: none;
+    align-items: center;
+}
+
+#workoutName {
+    margin-bottom: 10px;
+
+}
+
+.setupInputs {
+    display: flex;
+    flex-direction: column;
+}
+
+.finishBtn {
+    display: none;
+}
+
+.exerciseLog {
+    border: solid 2px grey;
+}
+
+.fExerciseLog {
+    border: solid 2px grey;
+}
+
+.fExerciseLog th{
+    /* border: solid 1px grey; */
+    padding: 5px;
+}
+
+.fExerciseLog td{
+    border: solid 1px grey;
+    padding: 2px;
+}
+
+/* buttons top of session input */
+.chooseProgContainer {
+    display: none;
+}
+
+.program {
+    font-weight: bold;
+    border-bottom: solid lightgray 2px;
+    background-color: rgb(204, 204, 204);
+}
+
+.sessionSection {
+    display: none;
+}
+
+#workoutName {
+    width: fit-content;
+    text-align: center;
+ }
+
+ .exerciseName {
+    font-weight: bold;
+ }
+
+.sessionForm {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    
+}
+
+@media only screen and (max-width: 576px) {
+    /* formatting for exercise section */
+    .exercise-selection {
+        max-width: 375px;
+        word-wrap: break-word;
+    }
+    .saved-exercises {
+        max-width: 390px;
+        word-wrap: break-word;
+    }
+    .modal-card {
+        margin: 0px;
+    }
+}

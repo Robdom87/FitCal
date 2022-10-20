@@ -169,7 +169,6 @@ function sumTotal() {
         cholInfoTot = cholInfoTot + parseInt(totalchol);
     })
 
-
     //if no cals, print all empty
     if (calInfoTot === 0){
         $("#caloriesTot").text("kcal");
@@ -205,10 +204,10 @@ function saveMacros() {
 function printMacros() {
     let macrosSaved = JSON.parse(localStorage.getItem('macroRow'));
     console.log(macrosSaved);
-    $("#calMacros").text(macrosSaved.protein + " kcal");
-    $("#proteinMacros").text(macrosSaved.carbs + " g");
-    $("#carbMacros").text(macrosSaved.fat + " g");
-    $("#fatMacros").text(macrosSaved.calories + " g");
+    $("#calMacros").text(macrosSaved.calories + " kcal");
+    $("#proteinMacros").text(macrosSaved.protein + " g");
+    $("#carbMacros").text(macrosSaved.carbs + " g");
+    $("#fatMacros").text(macrosSaved.fat + " g");
 }
 
 //update local storage after removing row
@@ -233,6 +232,7 @@ function errorMessage() {
 //display information if any exists in local storage
 function init() {
     if (localStorage.getItem('nutritionRow') !== null) {
+        $('.sampleNutri').empty();
         printSavedNutrition();
     }
     let savedMacro = JSON.parse(localStorage.getItem('macroRow'));

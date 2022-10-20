@@ -1,5 +1,4 @@
-const logout = async (event) => {
-event.preventDefault()
+const logout = async () => {
     const response = await fetch('/api/users/logout', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
