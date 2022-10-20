@@ -3,6 +3,7 @@
 <button class="analysisBtn">Exercise Analysis</button>
 
 <section class="setContainer">
+ 
     <section class="setCheckboxes">
         {{!-- add exercise buttons here --}}
     </section>
@@ -18,7 +19,7 @@
         <input type="date" class='startDate' name="startDate" min="2018-01-01">
         <label for="endDate">End Date:</label>
         <input type="date" class='endDate' name="endDate" min="2018-01-01">
-        <button class= "setDate" type="submit">Set Dates</button>
+        <button style = "position:relative; right:80px; left:5px; top:1px"class= "setDate" type="submit">Set Dates</button>
     </form>
     <section class="freqChartContainer">
         <canvas id="freqChart"></canvas>
@@ -39,7 +40,12 @@
             <option value="total">Total Volume</option>
             <option value="max">Max Weight</option>
         </select>
-        <button class="anaylzeBtn" type="submit">Analyze</button> 
+      <body>
+      <div style = "position:relative; right:300px; left:300px; top:-27px;">
+         <button class="anaylzeBtn" type="submit">Analyze</button> 
+      </div>
+      </body>
+         
     </form>
     <section class="analysisChartContainer">
         <canvas id="analysisChart"></canvas>

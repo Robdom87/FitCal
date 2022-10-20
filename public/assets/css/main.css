@@ -73,6 +73,9 @@ nav span {
     color:  rgb(180, 179, 179);
 
 }
+.navbar-menu{
+    display:none;
+}
 
 .PurpleBtn {
     color: white;
