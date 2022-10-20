@@ -11,10 +11,7 @@
 .setButton,
 .analysisBtn,
 .anaylzeBtn
-/* .setDate, */
-/* .startDt, */
-/* .endDt, */
-/* .chooseAna  */
+
 {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
     background-color: #1947c7;
@@ -28,18 +25,6 @@
     font-size: 16px;
 }
 
-/* .anaylzeBtn {
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
-    background-color: #bb0a0a;
-    /* Blue */
-    border: none;
-    color: white;
-    padding: 5px 8px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-} */
 
 .dropdown {
     border-color: transparent transparent #fff transparent;
