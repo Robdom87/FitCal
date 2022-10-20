@@ -8,7 +8,7 @@
         {{!-- add exercise buttons here --}}
     </section>
     <section class="setChartContainer">
-        <canvas id="setChart"></canvas>
+        <canvas id="setChartSample"></canvas>
     </section>
 </section>
 
@@ -16,27 +16,27 @@
     <form class="setDates">
         {{!-- set dates here--}}
         <label for="startDate">Start Date:</label>
-        <input type="date" class='startDate' name="startDate" min="2018-01-01">
+        <input type="date" class='startDate' name="startDate" min="2018-01-01" required>
         <label for="endDate">End Date:</label>
-        <input type="date" class='endDate' name="endDate" min="2018-01-01">
+        <input type="date" class='endDate' name="endDate" min="2018-01-01" required>
         <button style = "position:relative; right:80px; left:5px; top:1px"class= "setDate" type="submit">Set Dates</button>
     </form>
     <section class="freqChartContainer">
-        <canvas id="freqChart"></canvas>
+        <canvas id="freqChartSample"></canvas>
     </section>
 </section>
 
 <section class="analysisContainer">
     <form class="analysisForm">
         <label for="startDateA" class="startDt">Start Date:</label>
-        <input type="date" class='startDateA' name="startDateA" min="2018-01-01">
+        <input type="date" class='startDateA' name="startDateA" min="2018-01-01" required>
         <label for="endDateA" class="endDt">End Date:</label>
-        <input type="date" class='endDateA' name="endDateA" min="2018-01-01">
+        <input type="date" class='endDateA' name="endDateA" min="2018-01-01" required>
         <section class="analysisCheckboxes">
             {{!-- add exercise buttons here --}}
         </section>
         <label for="type" class="chooseAna">Choose analysis type:</label>
-        <select name="type" id="typeAnalysis" class="dropdown">
+        <select name="type" id="typeAnalysis" class="dropdown" required>
             <option value="total">Total Volume</option>
             <option value="max">Max Weight</option>
         </select>
@@ -48,7 +48,7 @@
          
     </form>
     <section class="analysisChartContainer">
-        <canvas id="analysisChart"></canvas>
+        <canvas id="analysisChartSample"></canvas>
     </section>
 </section>
 
