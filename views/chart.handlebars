@@ -18,7 +18,7 @@
         <input type="date" class='startDate' name="startDate" min="2018-01-01">
         <label for="endDate">End Date:</label>
         <input type="date" class='endDate' name="endDate" min="2018-01-01">
-        <button type="submit">Set Dates</button>
+        <button class= "setDate" type="submit">Set Dates</button>
     </form>
     <section class="freqChartContainer">
         <canvas id="freqChart"></canvas>
@@ -27,15 +27,15 @@
 
 <section class="analysisContainer">
     <form class="analysisForm">
-        <label for="startDateA">Start Date:</label>
+        <label for="startDateA" class="startDt">Start Date:</label>
         <input type="date" class='startDateA' name="startDateA" min="2018-01-01">
-        <label for="endDateA">End Date:</label>
+        <label for="endDateA" class="endDt">End Date:</label>
         <input type="date" class='endDateA' name="endDateA" min="2018-01-01">
         <section class="analysisCheckboxes">
             {{!-- add exercise buttons here --}}
         </section>
-        <label for="type">Choose analysis type:</label>
-        <select name="type" id="typeAnalysis">
+        <label for="type" class="chooseAna">Choose analysis type:</label>
+        <select name="type" id="typeAnalysis" class="dropdown">
             <option value="total">Total Volume</option>
             <option value="max">Max Weight</option>
         </select>
