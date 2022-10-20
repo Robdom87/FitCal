@@ -51,6 +51,10 @@ nav span {
     cursor: pointer;
 }
 
+.nav-bar {
+    display: none;
+}
+
 .logo {
     max-width: 100px;
 }
@@ -85,13 +89,14 @@ nav span {
         /* padding-bottom: 20px; */
     }
     nav {
+        
         flex-direction: column;
         align-items: center;
         width: 100%;
         padding: 0px;
     }
     nav a {
-        display: flex;
+        display: none;
         flex-direction: column;
         align-items: center;
         padding-top: 15px;
@@ -99,4 +104,36 @@ nav span {
         width: 100%;
         border-top: 1px lightgray solid;
     }
+
+    .navbar-burger {
+        display: flex;
+        align-items: center;
+        padding-right: 10px;
+    }
+    .nav-bar {
+        display: flex;
+        
+        
+    }
+
+    .navbar-menu {
+        background-color: #3e87e0;
+        padding: .5rem 0;
+        
+        
+    }
+
+    .navbar-item {
+        color: white;
+    }
+
+    .navbar-end {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+    
+    /* .nav-bar {
+        display: block;
+    } */
 }
