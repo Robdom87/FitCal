@@ -7,9 +7,18 @@
     display: none;
 }
 
-.frequencyBtn, .setButton, .analysisBtn, .anaylzeBtn, .setDate, .startDt, .endDt, .chooseAna  {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19);
-    background-color: #1947c7; /* Blue */
+.frequencyBtn,
+.setButton,
+.analysisBtn,
+.anaylzeBtn
+/* .setDate, */
+/* .startDt, */
+/* .endDt, */
+/* .chooseAna  */
+{
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: #1947c7;
+    /* Blue */
     border: none;
     color: white;
     padding: 4px 10px;
@@ -17,27 +26,151 @@
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-  }
-  .dropdown {
+}
+
+/* .anaylzeBtn {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: #bb0a0a;
+    /* Blue */
+    border: none;
+    color: white;
+    padding: 5px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+} */
+
+.dropdown {
     border-color: transparent transparent #fff transparent;
     top: 5px;
-  }
-  .dropdown {
+}
+
+.dropdown {
     color: #f9f6f6;
-    padding: 7px 14px;
-    border: 1px solid transparent;
+    padding: 5px 10px;
+    border: 2px solid transparent;
     border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
     cursor: pointer;
     user-select: none;
-  }
-  
-  /*style items (options):*/
-  .dropdown {
+}
+
+/*style items (options):*/
+.dropdown {
     background-color: #076ae1;
     top: 100%;
     left: 0;
     right: 0;
     z-index: 99;
-  }
-  
-  
+}
+.setDate {
+  align-items: center;
+  background-color: #0A66C2;
+  border: 0;
+  border-radius: 100px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 20px;
+  max-width: 240px;
+  min-height: 20px;
+  min-width: 0px;
+  overflow: hidden;
+  padding: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: center;
+  touch-action: manipulation;
+  transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  top: 50px;
+}
+.anaylzeBtn {
+  align-items: center;
+  background-color: #0A66C2;
+  border: 0;
+  border-radius: 100px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 20px;
+  max-width: 280px;
+  min-height: 25px;
+  min-width: 0px;
+  overflow: hidden;
+  padding: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: center;
+  touch-action: manipulation;
+  transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  top: 50px;
+}
+.newWorkoutBtn, .chooseProgBtn, .savedExercisesBtn, .searchToggle {
+  align-items: center;
+  background-color: #0A66C2;
+  border: 0;
+  border-radius: 100px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 20px;
+  max-width: 240px;
+  min-height: 20px;
+  min-width: 0px;
+  overflow: hidden;
+  padding: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: center;
+  touch-action: manipulation;
+  transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  top: 50px;
+}
+
+.setDate:hover,
+.setDate:focus,
+.anaylzeBtn:hover,
+.anaylzeBtn:focus,
+.newWorkoutBtn:hover,.newWorkoutBtn:focus, 
+.chooseProgBtn:hover,.chooseProgBtn:focus, 
+.savedExercisesBtn:hover, .savedExercisesBtn:focus, 
+.searchToggle { 
+  background-color: #16437E;
+  color: #ffffff;
+}
+
+.setDate:active {
+  background: #09223b;
+  color: rgb(255, 255, 255, .7);
+}
+
+.setDate:disabled { 
+  cursor: not-allowed;
+  background: rgba(0, 0, 0, .08);
+  color: rgba(0, 0, 0, .3);
+}
+
