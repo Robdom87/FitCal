@@ -1,7 +1,7 @@
 async function commentFormHandler(event) {
     event.preventDefault();
  
-    const comment_text = document.querySelector('input[name="comment-content"]').value.trim(); //eliminate leading & trailing spaces
+    const comment_text = document.querySelector('textarea[name="comment-content"]').value.trim(); //eliminate leading & trailing spaces
  
     const post_id = window.location.toString().split('/')[ //toString used to be displayed as a text/string
         window.location.toString().split('/').length - 1
@@ -24,9 +24,8 @@ async function commentFormHandler(event) {
  
         } else {
             alert(response.statusText);
-            document.querySelector('#comment-form').style.display = "block";
         }
     }
 }
  
-document.querySelector('#comment-form').addEventListener('submit', commentFormHandler);
+document.querySelector('.comment-form').addEventListener('submit', commentFormHandler);
