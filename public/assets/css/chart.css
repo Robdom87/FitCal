@@ -106,7 +106,9 @@
 }
 .newWorkoutBtn, .chooseProgBtn, .savedExercisesBtn, 
 .searchToggle, .add, .set, .deleteAllBtn, 
-.sub, .saveSesh, .selectProgBtn, .searchBtn {
+.sub, .saveSesh, .selectProgBtn, .searchBtn,
+.calMacros, .macroSubmit, .setupBtn,
+.remove-button, .cancel-button {
   align-items: center;
   background-color: #0A66C2;
   border: 0;
@@ -148,8 +150,10 @@
 .frequencyBtn:focus,.frequencyBtn:hover,.setButton:hover,.setButton:focus,
 .analysisBtn:hover, .analysisBtn:focus, .deleteAllBtn:hover,.deleteAllBtn:focus
 .sub:focus, .sub:hover, .saveSesh:focus, .saveSesh:hover, 
-.selectProgBtn:hover, .selectProgBtn:focus,.searchBtn:hover, .searchBtn:focus
- { 
+.selectProgBtn:hover, .selectProgBtn:focus,.searchBtn:hover, .searchBtn:focus,
+.calMacros:focus, .calMacros:hover, .macroSubmit:focus, .macroSubmit:hover,
+.setupBtn:focus, .setupBtn:hover, .remove-button:focus, .remove-button:hover,
+.cancel-button:hover, .cancel-button:focus { 
   background-color: #16437E;
   color: #ffffff;
 }
