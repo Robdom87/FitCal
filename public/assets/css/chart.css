@@ -7,9 +7,7 @@
     display: none;
 }
 
-.frequencyBtn,
-.setButton,
-.analysisBtn,
+
 .anaylzeBtn
 
 {
@@ -106,7 +104,9 @@
   vertical-align: middle;
   top: 50px;
 }
-.newWorkoutBtn, .chooseProgBtn, .savedExercisesBtn, .searchToggle {
+.newWorkoutBtn, .chooseProgBtn, .savedExercisesBtn, 
+.searchToggle, .add, .set, .deleteAllBtn, 
+.sub, .saveSesh, .selectProgBtn, .searchBtn {
   align-items: center;
   background-color: #0A66C2;
   border: 0;
@@ -143,7 +143,13 @@
 .newWorkoutBtn:hover,.newWorkoutBtn:focus, 
 .chooseProgBtn:hover,.chooseProgBtn:focus, 
 .savedExercisesBtn:hover, .savedExercisesBtn:focus, 
-.searchToggle { 
+.searchToggle:hover, .searchToggle:focus, 
+.add:hover,.add:focus, .set:hover,.set:focus,
+.frequencyBtn:focus,.frequencyBtn:hover,.setButton:hover,.setButton:focus,
+.analysisBtn:hover, .analysisBtn:focus, .deleteAllBtn:hover,.deleteAllBtn:focus
+.sub:focus, .sub:hover, .saveSesh:focus, .saveSesh:hover, 
+.selectProgBtn:hover, .selectProgBtn:focus,.searchBtn:hover, .searchBtn:focus
+ { 
   background-color: #16437E;
   color: #ffffff;
 }
@@ -159,3 +165,72 @@
   color: rgba(0, 0, 0, .3);
 }
 
+.frequencyBtn,.setButton,
+.analysisBtn {
+  appearance: none;
+  backface-visibility: hidden;
+  background-color: #2f80ed;
+  border-radius: 10px;
+  border-style: none;
+  box-shadow: none;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Inter,-apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  height: 50px;
+  letter-spacing: normal;
+  line-height: 1.5;
+  outline: none;
+  overflow: hidden;
+  padding: 14px 30px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transform: translate3d(0, 0, 0);
+  transition: all .3s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.frequencyBtn,.setButton,
+.analysisBtn {
+  background-color: #1366d6;
+  box-shadow: rgba(0, 0, 0, .05) 0 5px 30px, rgba(0, 0, 0, .05) 0 1px 4px;
+  opacity: 1;
+  transform: translateY(0);
+  transition-duration: .35s;
+}
+
+.frequencyBtn:hover:after,
+.setButton:hover:after,
+.analysisBtn:hover:after {
+  opacity: .5;
+}
+
+.frequencyBtn:active,
+.setButton:active,
+.analysisBtn:active {
+  box-shadow: rgba(0, 0, 0, .1) 0 3px 6px 0, rgba(0, 0, 0, .1) 0 0 10px 0, rgba(0, 0, 0, .1) 0 1px 4px -1px;
+  transform: translateY(2px);
+  transition-duration: .35s;
+}
+
+.frequencyBtn:active:after
+.setButton:active:after,
+.analysisBtn:active:after {
+  opacity: 1;
+}
+
+@media (min-width: 768px) {
+  .frequencyBtn,.setButton,
+  .analysisBtn {
+    padding: 14px 22px;
+    width: 176px;
+  }
+}
