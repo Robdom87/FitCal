@@ -2,6 +2,10 @@ INSERT INTO user(name, email, password) VALUES
 ("robert", "robert@rob.com", 1234);
 
 
+INSERT INTO post(title, post_content, user_id, created_at, updated_at) VALUES
+("Hello", "Hello Again", 1 ,"2022-10-5 12:40:59", "2022-10-5 12:40:59"),
+("Goodbye", "Goodbye Again", 1, "2022-10-5 12:42:59", "2022-10-5 12:42:59");
+
 INSERT INTO program(program_name, user_id) VALUES
 ("Back",1),             
 ("Chest",1);
