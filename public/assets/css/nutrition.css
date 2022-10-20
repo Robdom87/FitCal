@@ -1,0 +1,88 @@
+.setMacros {
+    display: none;
+}
+
+.notification {
+    display: none;
+}
+
+.nutrition {
+    text-align: center;
+}
+
+.foodColumn {
+    text-align: center;
+}
+
+.tbody {
+    border: lightgray 1px solid;
+}
+
+.tHeader {
+    background-color: #024b94;
+}
+
+.table th {
+    color: white;
+    font-size: bold;
+}
+
+.totalRow {
+    background-color: rgb(141, 141, 141);
+}
+
+.whiteT {
+    color: white
+
+}
+
+.table th:not([align]) {
+    text-align: center;
+}
+
+.setMacros {
+    display: none;
+}
+
+.macroRow {
+    background-color: lightgray;
+}
+
+
+.addItem {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media only screen and (max-width: 576px) {
+     /* formatting for nutrition table */
+    .table th:not([align]) {
+        text-align: center;
+    }
+
+    .table {
+        font-size: small;
+    }
+
+    td {
+        max-width: 100px;
+        word-wrap: break-word;
+    }
+
+    .table td {
+        padding: 0.5em 0.2em;
+    }
+
+    .table th {
+        padding: 0.5em 0.2em;
+        word-wrap: break-word;
+    }
+
+    table td:not([align]) {
+        text-align: center;
+    }
+    input[type=number]{
+        width: 80px;
+    } 
+}

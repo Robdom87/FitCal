@@ -46,41 +46,87 @@
     <!-- table with all nutritional sections -->
     <div class="table-container">
         <table class="table is-flex is-justify-content-center nutritionTable" id="foodValues">
-            <tr>
-                <th>Food</th>
-                <th>Calories</th>
-                <th>Protein</th>
-                <th>Carbs</th>
-                <th>Fat</th>
-                <th class="is-hidden-mobile">Sodium</th>
-                <th class="is-hidden-mobile">Cholestrol</th>
-                <th></th>
-            </tr>
+            <tbody class="tbody">
+                <tr class="tHeader">
+                    <th class="foodColumn">Food</th>
+                    <th>Calories</th>
+                    <th>Protein</th>
+                    <th>Carbs</th>
+                    <th>Fat</th>
+                    <th class="is-hidden-mobile">Sodium</th>
+                    <th class="is-hidden-mobile">Cholestrol</th>
+                    <th></th>
+                </tr>
 
-            <!-- total row -->
-            <tr>
-                <td>Totals (unit)</td>
-                <td id="caloriesTot">kcal</td>
-                <td id="proteinTot">g</td>
-                <td id="carbsTot">g</td>
-                <td id="fatTot">g</td>
-                <td id="sodiumTot" class="is-hidden-mobile">mg</td>
-                <td id="cholesterolTot" class="is-hidden-mobile">mg</td>
-                <td></td>
-            </tr>
-            <tr class="macroRow">
-                <td>Macro Goal</td>
-                <td id="calMacros">kcal</td>
-                <td id="proteinMacros">g</td>
-                <td id="carbMacros">g</td>
-                <td id="fatMacros">g</td>
-                <td class="is-hidden-mobile"></td>
-                <td class="is-hidden-mobile"></td>
-                <td><button class="macroTable">Clear</button></td>
-            </tr>
+                <!-- total row -->
+                <tr class="totalRow">
+                    <td class="whiteT">Totals (unit)</td>
+                    <td class="whiteT" id="caloriesTot">kcal</td>
+                    <td class="whiteT" id="proteinTot">g</td>
+                    <td class="whiteT" id="carbsTot">g</td>
+                    <td class="whiteT" id="fatTot">g</td>
+                    <td id="sodiumTot" class="whiteT is-hidden-mobile">mg</td>
+                    <td id="cholesterolTot" class="whiteT is-hidden-mobile">mg</td>
+                    <td></td>
+                </tr>
+                <tr class="macroRow">
+                    <td>Macro Goal</td>
+                    <td id="calMacros">2500 kcal</td>
+                    <td id="proteinMacros">150 g</td>
+                    <td id="carbMacros">300 g</td>
+                    <td id="fatMacros">80 g</td>
+                    <td class="is-hidden-mobile"></td>
+                    <td class="is-hidden-mobile"></td>
+                    <td><button class="macroTable">Clear</button></td>
+                </tr>
+                <section class="sampleNutri">
+                    <tr class="logRow">
+                        <td class="nameInfo">brisket (453g)</td>
+                        <td class="calInfo">1312 kcal</td>
+                        <td class="protInfo">132 g</td>
+                        <td class="carInfo">0 g</td>
+                        <td class="fatInfo">82 g</td>
+                        <td class="sodInfo is-hidden-mobile">217 mg</td>
+                        <td class="cholInfo is-hidden-mobile">487 mg</td>
+                        <td><button class="removeBtn delete">X</button></td>
+                    </tr>
+                    <tr class="logRow">
+                        <td class="nameInfo">fries (50g)</td>
+                        <td class="calInfo">158 kcal</td>
+                        <td class="protInfo">1 g</td>
+                        <td class="carInfo">20 g</td>
+                        <td class="fatInfo">7 g</td>
+                        <td class="sodInfo is-hidden-mobile">106 mg</td>
+                        <td class="cholInfo is-hidden-mobile">0 mg</td>
+                        <td><button class="removeBtn delete">X</button></td>
+                    </tr>
+                    <tr class="logRow">
+                        <td class="nameInfo">hot dog (100g)</td>
+                        <td class="calInfo">330 kcal</td>
+                        <td class="protInfo">11 g</td>
+                        <td class="carInfo">2 g</td>
+                        <td class="fatInfo">29 g</td>
+                        <td class="sodInfo is-hidden-mobile">845 mg</td>
+                        <td class="cholInfo is-hidden-mobile">57 mg</td>
+                        <td><button class="removeBtn delete">X</button></td>
+                    </tr>
+                    <tr class="logRow">
+                        <td class="nameInfo">hamburger (100g)</td>
+                        <td class="calInfo">242 kcal</td>
+                        <td class="protInfo">15 g</td>
+                        <td class="carInfo">17 g</td>
+                        <td class="fatInfo">11 g</td>
+                        <td class="sodInfo is-hidden-mobile">349 mg</td>
+                        <td class="cholInfo is-hidden-mobile">54 mg</td>
+                        <td><button class="removeBtn delete">X</button></td>
+                    </tr>
+                </section>
+            </tbody>
             <!-- logged food inputted here -->
         </table>
     </div>
+
+
 
     <!-- Clear Local Storage btn -->
     <section>

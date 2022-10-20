@@ -160,8 +160,9 @@ async function exerciseSearch() {
                       More
                   </button>
                   <div class='moreInfo'>  
-                      <p><span>Equipment:&nbsp;</span>${equipment}</p>
-                      <p><span>Instructions:&nbsp;</span>${instructions}</p>
+                      <p><u><b><span>Equipment:</span></b></u>&nbsp;${equipment}</p>
+                      <p><u><b><span>Instructions:</span></b></u></p>
+                      <p>${instructions}</p>
                       </div>`);
 
         //listens to change in any of the seledtable workout and executes if so
@@ -174,6 +175,7 @@ async function showProgOptions() {
     try {
         let url = '/api/program/';
         let response = await helpers.getData(url);
+        $('.progOptionsSelect').empty();
         let options = '';
         for (let i = 0; i < response.length; i++) {
             options += `<option value="${response[i].id}">${response[i].program_name}</option>`;
@@ -200,7 +202,7 @@ function saveworkout() {
         equipment: this.dataset.equipment,
         instructions: this.dataset.instructions,
     }
-    workouts.push(workout)
+    workouts.push(workout);
     //however it is only saved if the save button is clicked
     $(".exerciseSaveBtn").on("click", function () {
         localStorage.setItem("workouts", JSON.stringify(workouts));
@@ -237,6 +239,7 @@ function startSetup() {
     $('.setupSection').append(programName);
     for (let i = 0; i < workouts.length; i++) {
         let name = workouts[i].name;
+        
         let results = $(`<div class='setupInputs'><h5 class='exerciseName'>${name}</h5></div>
         <span>
         <label for="${i}Set">Set Amount</label>
@@ -305,6 +308,7 @@ async function finishSetup() {
 async function displaySetupWorkout() {
     console.log('inFunction');
     $('.exerciseName').empty();
+    $('.fExerciseLog').empty();
     $('.exerciseTable').empty();
     $('.sessionForm').show();
     let logBody = $('.exerciseLog');
@@ -316,7 +320,7 @@ async function displaySetupWorkout() {
     let response = await helpers.getData(url);
     console.log(response);
 
-    logBody.append($(`<br><div><h3 class='program'>${response.program_name}</h3></div>`));
+    logBody.append($(`<div><h3 class='program'>${response.program_name}</h3></div>`));
     //i starts at 1, remember that when pulling information
     for (let i = 0; i < response.programWorkouts.length; i++) {
         logBody.append($(`<br><h4 class='exerciseName' id="workout${i}">${response.programWorkouts[i].exercise_name}</h4>`));

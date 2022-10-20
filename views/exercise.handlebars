@@ -1,6 +1,6 @@
 <!-- Exercise -->
 <section class="exercise">
-    <button class="newWorkoutBtn" type="button">Create New Workout</button>
+    <button class="newWorkoutBtn" type="button">Create New Program</button>
     <button class="chooseProgBtn">Choose Program</button>
     <section class="chooseProgContainer">
         <select class="progOptionsSelect">
@@ -9,15 +9,96 @@
         <button class="selectProgBtn">Select</button>
     </section>
     <br>
-    <br>
     <form class='sessionForm' action="javascript:saveToDB();">
 
         <div>
-            <label for="date">Date:</label>
+            <label for="date">Session Date:</label>
             <input type="date" class='date' name="workoutDate" min="2018-01-01" required>
         </div>
         <section class="exerciseLog">
             <!-- exercise tables inputted here -->
+        </section>
+        <section class="fExerciseLog">
+            <div>
+                <h3 class="program">Sample Session</h3>
+            </div><br>
+            <h4 class="exerciseName">Rickshaw Carry</h4>
+            <table class="exerciseTable">
+                <tr>
+                    <th>Set</th>
+                    <th>Reps</th>
+                    <th>Weight</th>
+                    <th>Type</th>
+                    <th>Comments</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>10</td>
+                    <td>135</td>
+                    <td>Barbell</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>9</td>
+                    <td>135</td>
+                    <td>Barbell</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>11</td>
+                    <td>135</td>
+                    <td>Barbell</td>
+                    <td>Good Push at the end.</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>12</td>
+                    <td>135</td>
+                    <td>Barbell</td>
+                    <td>Push to higher weight.</td>
+                </tr>
+            </table><br>
+            <h4 class="exerciseName">Squat</h4>
+            <table class="exerciseTable">
+                <tr>
+                    <th>Set</th>
+                    <th>Reps</th>
+                    <th>Weight</th>
+                    <th>Type</th>
+                    <th>Comments</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>5</td>
+                    <td>225</td>
+                    <td>Barbell</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>275</td>
+                    <td>Barbell</td>
+                    <td></td>
+
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>275</td>
+                    <td>Barbell</td>
+                    <td>Push to higher weight.</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>1</td>
+                    <td>305</td>
+                    <td>Barbell</td>
+                    <td>Not ready.</td>
+                </tr>
+            </table>
         </section>
         <br>
         <button type="submit" class="save_db">Save Session to Database</button>
@@ -28,11 +109,13 @@
         <div class="modal-background"></div>
         <div class="modal-card">
             <header class="modal-card-head">
-                <p class="modal-card-title">Create New Workout</p>
+                <p class="modal-card-title">Create New Program</p>
                 <button class="delete" aria-label="close"></button>
             </header>
             <section class="modal-card-body">
                 <section class="searchExercisesContainer">
+                    <button class="savedExercisesBtn">View Saved Exercises</button>
+                    <button class="searchToggle">Quick Search</button>
                     <section id="threeCriterias">
                         <section class="intensity">
                             <p><u><b>Intensity</b></u></p>
@@ -84,31 +167,28 @@
                     </section>
 
                     <button class="searchBtn">Search</button>
-                    <button class="savedExercisesBtn">View Saved Workouts</button>
-                    <button class="searchToggle">Quick Search</button>
 
-
-                    <!-- section displaying search results -->
                     <br>
+                    <section id='saved' class="savedExercisesContainer">
+                        <h4>Saved Exercises</h4>
+                        <section id="savedExercise" class="saved-exercise-body">
+                            <!-- saved workouts displayed here -->
+                        </section>
+                        <br>
+                        <button class="setupBtn">Continue Program Setup</button>
+                        <button class="remove-button">Remove All</button>
+                    </section>
                     <br>
                     <section class="searchResultContainer">
                         <h4>Search Results</h4>
                         <section class="exercise-selection-body">
                             <!-- search results displayed here -->
                         </section>
-                        <button class="exerciseSaveBtn">Save</button>
+                        <button class="exerciseSaveBtn">Save Selected</button>
                     </section>
                     <!-- section to view saved workouts -->
                     <br>
-                    <section class="savedExercisesContainer">
-                        <h4>Saved Workouts</h4>
-                        <section id="savedExercise" class="saved-exercise-body">
-                            <!-- saved workouts displayed here -->
-                        </section>
-                        <br>
-                        <button class="setupBtn">Continue Workout Setup</button>
-                        <button class="remove-button">Remove All</button>
-                    </section>
+
                 </section>
 
                 <!-- section to choose information for each workout to set up program -->
@@ -134,4 +214,3 @@
 <script src="./assets/js/helper.js"></script>
 <script src="./assets/js/exercise.js"></script>
 {{/if}}
-
