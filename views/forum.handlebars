@@ -1,0 +1,14 @@
+{{#each posts as |post| }}
+{{!-- //post box must encompass the hidden comments section --}}
+<div class="postBox">
+  <div>
+    <div class="titleStyle col-12">
+      <h2>{{post.title}}</h2>
+      <span>Posted by {{post.user.name}} on {{format_date post.created_at}}</span>
+    </div>
+    <div class="contentStyle col-12">
+      <p>{{post.post_content}}</p>
+    </div>
+  </div>
+</div>
+{{/each}}

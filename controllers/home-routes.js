@@ -1,24 +1,28 @@
 const router = require('express').Router();
+const { Post, User, Comment } = require('../models');
+const withAuth = require('../utils/auth');
+
+
 
 router.get('/', (req, res) => {
   res.render('homepage',
-  {
-    logged_in: req.session.logged_in,
-  });
+    {
+      logged_in: req.session.logged_in,
+    });
 });
 
 router.get('/nutrition', (req, res) => {
   res.render('nutrition',
-  {
-    logged_in: req.session.logged_in,
-  });
+    {
+      logged_in: req.session.logged_in,
+    });
 });
 
 router.get('/bmi', (req, res) => {
   res.render('bmi',
-  {
-    logged_in: req.session.logged_in,
-  });
+    {
+      logged_in: req.session.logged_in,
+    });
 });
 
 //exercise and chart both require log in to use
@@ -44,15 +48,42 @@ router.get('/chart', (req, res) => {
 
 });
 
-router.get('/forum', (req, res) => {
+router.get('/forum', withAuth, async (req, res) => {
   if (req.session.logged_in) {
-    res.render('forum', {
-      logged_in: req.session.logged_in,
+    try {
+      let allPostsData =  await Post.findAll({
+        attributes: ["id", "post_content", "title", "created_at"],
+        order: [
+            ["created_at", "DESC"]
+        ],
+        include: [{
+                model: User,
+                attributes: ["name"], //matches with User.js definition
+            },
+            {
+                model: Comment,
+                attributes: ["id", "comment_text", "post_id", "user_id", "created_at"],
+                include: {
+                    model: User,
+                    attributes: ["name"],
+                }
+            }
+        ]
     });
-    return;
+    console.log(allPostsData);
+      const posts = allPostsData.map((post) => post.get({ plain: true }));
+      res.render('forum', {
+        logged_in: req.session.logged_in,
+        posts
+      });
+    } catch (err) {
+      res.status(500).json(err.message);
+      
+    }
+  } else {
+    res.redirect('/login');
   }
-  res.redirect('/login');
-
+  
 });
 
 router.get('/login', (req, res) => {
