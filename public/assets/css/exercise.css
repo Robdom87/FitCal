@@ -64,6 +64,11 @@
     align-items: center;
 }
 
+#workoutName {
+    margin-bottom: 10px;
+
+}
+
 .setupInputs {
     display: flex;
     flex-direction: column;
@@ -71,6 +76,24 @@
 
 .finishBtn {
     display: none;
+}
+
+.exerciseLog {
+    border: solid 2px grey;
+}
+
+.fExerciseLog {
+    border: solid 2px grey;
+}
+
+.fExerciseLog th{
+    /* border: solid 1px grey; */
+    padding: 5px;
+}
+
+.fExerciseLog td{
+    border: solid 1px grey;
+    padding: 2px;
 }
 
 /* buttons top of session input */
@@ -81,6 +104,7 @@
 .program {
     font-weight: bold;
     border-bottom: solid lightgray 2px;
+    background-color: rgb(204, 204, 204);
 }
 
 .sessionSection {
@@ -92,10 +116,15 @@
     text-align: center;
  }
 
+ .exerciseName {
+    font-weight: bold;
+ }
+
 .sessionForm {
     display: flex;
     align-items: center;
     flex-direction: column;
+    
 }
 
 @media only screen and (max-width: 576px) {
