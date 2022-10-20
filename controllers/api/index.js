@@ -22,5 +22,4 @@ router.use('/posts', postRoutes);
 router.use('/comments', commentRoutes);
 
 
-
 module.exports = router;
