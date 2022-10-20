@@ -301,7 +301,6 @@ async function finishSetup() {
     let wktResponse = await helpers.postData(programUrl, programWkts);
     console.log(wktResponse);
     $('.modal').hide();
-    displaySetupWorkout();
 }
 
 //display new program created to main exercise section
