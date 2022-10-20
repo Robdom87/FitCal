@@ -23,7 +23,13 @@
     <!-- header with fitCal logo and date-->
     <header class="header">
         <a href="/"><img class='logo' src="./images/fitcal_logo.jpeg" alt="FitCal"></a>
+
+        {{#if logged_in}}
+
+        <a class="white" href="#"><span id="logout">Log Out</span></a>
+        {{else}}
         <a class='white' href="/login"><span id="loginBtn">Login</span></a>
+        {{/if}}
 
     </header>
     <!-- Navigation bar three functionalities -->
@@ -41,6 +47,7 @@
     <footer>
 
     </footer>
+    <script src="assets/js/logout.js"></script>
 </body>
 
 </html>
