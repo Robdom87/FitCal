@@ -9,6 +9,22 @@ let radioChoice;
 let changingLineName = '';
 let avgLineName = '';
 let yTitleAnal = '';
+let bgColorArr = [
+    'rgba(255, 99, 132, 0.2)',
+    'rgba(54, 162, 235, 0.2)',
+    'rgba(255, 206, 86, 0.2)',
+    'rgba(75, 192, 192, 0.2)',
+    'rgba(153, 102, 255, 0.2)',
+    'rgba(255, 159, 64, 0.2)'
+];
+let bColorArr = [
+    'rgba(255, 99, 132, 1)',
+    'rgba(54, 162, 235, 1)',
+    'rgba(255, 206, 86, 1)',
+    'rgba(75, 192, 192, 1)',
+    'rgba(153, 102, 255, 1)',
+    'rgba(255, 159, 64, 1)'
+];
 
 $('.setButton').click(function () {
     $('.setContainer').show();
@@ -74,8 +90,8 @@ function printSetChart() {
             datasets: [{
                 label: '# of Sets',
                 data: setData,
-                //backgroundColor: bgColorArr,
-                // borderColor: bColorArr,
+                backgroundColor: bgColorArr,
+                borderColor: bColorArr,
                 borderWidth: 1
             }]
         },
@@ -200,7 +216,7 @@ async function weigtAnalysis(url) {
             dateArr.push(data[i].date);
         }
         totalWeight += data[i].weight;
-        }
+    }
     analLabels = dateArr;
     let avgWeight = totalWeight / setAmount;
     for (let e = 0; e < dateArr.length; e++) {
@@ -232,7 +248,7 @@ async function volumeAnalysis(url) {
     analLabels = dateArr;
     let avgVolume = totalVolume / setAmount;
     for (let e = 0; e < setAmount; e++) {
-        avgLineData.push(avgVolume);  
+        avgLineData.push(avgVolume);
     }
     printAnalChart();
 }
@@ -281,6 +297,88 @@ $('.frequencyBtn').click(function () {
     $('.analysisContainer').hide();
 })
 
+let bgColorArrSample = [
+    'rgba(255, 99, 132, 0.2)',
+    'rgba(54, 162, 235, 0.2)'
+];
+let bColorArrSample = [
+    'rgba(255, 99, 132, 1)',
+    'rgba(54, 162, 235, 1)'
+];
+
+const setElementSample = document.getElementById('setChartSample').getContext('2d');
+const SetChartSample = new Chart(setElementSample, {
+    type: 'bar',
+    data: {
+        labels: ["Squat", "Bench Press"],
+        datasets: [{
+            label: '# of Sets',
+            data: [20, 30],
+            backgroundColor: bgColorArrSample,
+            borderColor: bColorArrSample,
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+const freqElementSample = document.getElementById('freqChartSample').getContext('2d');
+const freqChartSample = new Chart(freqElementSample, {
+    type: 'doughnut',
+    data: {
+        labels: [
+            'Working Out Days',
+            'Off'
+        ],
+        datasets: [{
+            label: 'Workout Frequency',
+            data: [70, 30],
+            backgroundColor: [
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)'
+            ],
+            hoverOffset: 4
+        }]
+    }
+});
+
+const analElementSample = document.getElementById('analysisChartSample').getContext('2d');
+const analChartSample = new Chart(analElementSample, {
+    type: 'scatter',
+    data: {
+        labels: ['07/13/2022','07/14/2022','07/15/2022','07/16/2022','07/17/2022'],
+        datasets: [{
+            type: 'line',
+            label: 'Total Volume',
+            data: ['5400','6000','5000','5200','5000'],
+            fill: false,
+            borderColor: 'rgb(255, 99, 132)'
+        }, {
+            type: 'line',
+            label: 'Avg Volume',
+            data: ['5320','5320','5320','5320','5320'],
+            fill: false,
+            borderColor: 'rgb(54, 162, 235)'
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: 'Bench Press'
+                }
+            }
+        }
+    }
+});
 
 
 
@@ -290,20 +388,6 @@ $('.frequencyBtn').click(function () {
 
 
 
+ 
 
 
-// let bgColorArr = [
-//     'rgba(255, 99, 132, 0.2)',
-//     'rgba(54, 162, 235, 0.2)',
-//     'rgba(255, 206, 86, 0.2)',
-//     'rgba(75, 192, 192, 0.2)',
-//     'rgba(153, 102, 255, 0.2)',
-//     'rgba(255, 159, 64, 0.2)'
-// ];
-// let bColorArr = [
-//     'rgba(255, 99, 132, 1)',
-//     'rgba(54, 162, 235, 1)',
-//     'rgba(255, 206, 86, 1)',
-//     'rgba(75, 192, 192, 1)',
-//     'rgba(153, 102, 255, 1)',
-//     'rgba(255, 159, 64, 1)'
