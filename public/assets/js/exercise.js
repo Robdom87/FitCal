@@ -1,4 +1,5 @@
 // const helpers = require('../../../utils/helpers');
+let quick = 0;
 
 //validation
 let textInputVal = $('.text');
@@ -9,7 +10,6 @@ textInputVal.onkeydown = function (e) {
         return false;
     }
 }
-
 
 //function to show new workout modal
 $(".newWorkoutBtn").click(function () {
@@ -64,6 +64,17 @@ $(".setupBtn").click(function () {
     }
 })
 
+//Quick Search button function
+$('.searchToggle').click(function () {
+    $(".quick").toggle();
+    $("#threeCriterias").toggle();
+    if (quick === 0) {
+        quick = 1;
+    } else {
+        quick = 0;
+    }
+})
+
 //button to save program into local storage
 $(".finishBtn").submit((event) => {
     $('.sessionForm').show();
@@ -92,38 +103,38 @@ $(".save_db").submit(async (e) => {
     e.preventDefault();
 });
 
-
-// //remove button both removes the row from the display and local storage
-// $(".exerciseLog").on('click', '.removeBtn', function () {
-//     $(this).closest('tr').remove();
-// })
-
 //called functionalities
-
 //searches and displays searches to page
 async function exerciseSearch() {
     $('.exercise-selection-body').empty();
     $('.modal').show();
-    //check the user inputs fo intensity, type, and muscle
-    let intensityValue = $("#intensityOptions").val();
-    let typeValue = $("#typeOptions").val();
-    let muscleValue = $("#muscleOptions").val();
     let requestUrl = '';
-    //variables used to hold & if needed
-    let intensityAnd = '';
-    let typeAnd = '';
-    //add section to URL depending on user input
-    if (muscleValue.length) {
-        requestUrl = 'muscle=' + muscleValue;
-        intensityAnd = '&';
-        typeAnd = '&';
-    }
-    if (intensityValue.length) {
-        requestUrl = requestUrl + intensityAnd + 'difficulty=' + intensityValue;
-        typeAnd = '&';
-    }
-    if (typeValue.length) {
-        requestUrl = requestUrl + typeAnd + 'type=' + typeValue;
+    if (quick === 0) {
+        //check the user inputs fo intensity, type, and muscle
+        let intensityValue = $("#intensityOptions").val();
+        let typeValue = $("#typeOptions").val();
+        let muscleValue = $("#muscleOptions").val();
+
+        //variables used to hold & if needed
+        let intensityAnd = '';
+        let typeAnd = '';
+        //add section to URL depending on user input
+        if (muscleValue.length) {
+            requestUrl = 'muscle=' + muscleValue;
+            intensityAnd = '&';
+            typeAnd = '&';
+        }
+        if (intensityValue.length) {
+            requestUrl = requestUrl + intensityAnd + 'difficulty=' + intensityValue;
+            typeAnd = '&';
+        }
+        if (typeValue.length) {
+            requestUrl = requestUrl + typeAnd + 'type=' + typeValue;
+        }
+
+    } else {
+        let nameValue = $('.search-bar').val();
+        requestUrl = `name=${nameValue}`;
     }
 
     //send API request using the user input 
@@ -159,13 +170,12 @@ async function exerciseSearch() {
     }
 }
 
-async function showProgOptions(){
+async function showProgOptions() {
     try {
         let url = '/api/program/';
         let response = await helpers.getData(url);
-        console.log(response);
         let options = '';
-        for (let i = 0; i < response.length; i++){
+        for (let i = 0; i < response.length; i++) {
             options += `<option value="${response[i].id}">${response[i].program_name}</option>`;
         }
         $('.progOptionsSelect').append(options);
@@ -275,12 +285,11 @@ async function finishSetup() {
         let programWktsObject = {
             program_id: programId,
             exercise_name: exerciseInfo[i].name,
-            exercise_equipment: exerciseInfo[i].equipment,
-            exercise_instructions: exerciseInfo[i].instructions,
             set_amount: $(`#${i}Set`).val(),
             rep_amount: $(`#${i}Reps`).val(),
             weight: $(`#${i}Weight`).val(),
-            weight_type: $(`#${i}Type`).val()
+            weight_type: $(`#${i}Type`).val(),
+            user_id: ""
         }
         programWkts.push(programWktsObject);
     }
@@ -306,7 +315,7 @@ async function displaySetupWorkout() {
     let url = `/api/program/id/${programId}`;
     let response = await helpers.getData(url);
     console.log(response);
-    
+
     logBody.append($(`<br><div><h3 class='program'>${response.program_name}</h3></div>`));
     //i starts at 1, remember that when pulling information
     for (let i = 0; i < response.programWorkouts.length; i++) {
@@ -362,7 +371,7 @@ async function saveToDB() {
 
         //pull all inputted information from the workout to an array of objects
         //per workout/table
-        for (let i = 1; i < $(".exerciseTable").length + 1; i++) {
+        for (let i = 0; i < $(".exerciseTable").length + 1; i++) {
             //e needs to change for each i
             //per table rows
             for (let e = 0; e < $(`.set${i}`).length; e++) {
@@ -380,7 +389,8 @@ async function saveToDB() {
                     rep_amount: rep_amount,
                     weight: weight,
                     weight_type: weight_type,
-                    comments: comments
+                    comments: comments,
+                    user_id: ""
                 }
                 sessionWktArray.push(sessionWkt);
             }
@@ -401,7 +411,7 @@ async function saveToDB() {
 }
 
 //init function
-function init(){
+function init() {
     let programCheck = JSON.parse(localStorage.getItem("setupWorkout"));
     if (programCheck) {
         $('.sessionForm').show();

@@ -24,18 +24,29 @@
         <nav>
             <a class='white' href="/bmi"><span id="bmiBtn">BMI</span></a>
             <a class='white' href="/nutrition"><span id="nutriBtn">Nutrition</span></a>
+            {{#if logged_in}}
             <a class='white' href="/exercise"><span id="exerBtn">Exercise</span></a>
             <a class='white' href="/chart"><span>Chart</span></a>
+            <a class="white" href="#"><span id="logout">Log Out</span></a>
+            {{else}}
             <a class='white' href="/login"><span id="loginBtn">Login</span></a>
+            {{/if}}
+
+            {{#if logged_in}}
             <a class='white' href="/forum"><span id="forumBtn">Forum</span></a>
+            {{/if}}
+            </div>
         </nav>
     </header>
     <main class="container container-fluid mt-5">
         {{{ body }}}
     </main>
-    <footer>
-
+    <footer class="footer">
+        <div class="content has-text-centered">
+        <p>Coppyright © FitCal</p>
+        </div>
     </footer>
+    <script src="assets/js/logout.js"></script>
 </body>
 
 </html>

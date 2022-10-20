@@ -4,7 +4,7 @@
     <button class="chooseProgBtn">Choose Program</button>
     <section class="chooseProgContainer">
         <select class="progOptionsSelect">
-             {{!-- list of all programs available appears --}}
+            {{!-- list of all programs available appears --}}
         </select>
         <button class="selectProgBtn">Select</button>
     </section>
@@ -32,12 +32,10 @@
                 <button class="delete" aria-label="close"></button>
             </header>
             <section class="modal-card-body">
-                <!-- search box in modal -->
                 <section class="searchExercisesContainer">
                     <section id="threeCriterias">
                         <section class="intensity">
                             <p><u><b>Intensity</b></u></p>
-
                             <select id="intensityOptions" name="intensity">
                                 <option value=""></option>
                                 <option value="beginner">Beginner</option>
@@ -80,10 +78,15 @@
                             </select>
                         </section>
                     </section>
+                    <section class="quick">
+                        <label for="quickSearch">Search</label>
+                        <input id='quickSearch' type='text' class="search-bar" placeholder="Ex. Bench Press">
+                    </section>
 
                     <button class="searchBtn">Search</button>
-                    {{!-- <button class="viewSavedBtn">Saved Exercises</button> --}}
                     <button class="savedExercisesBtn">View Saved Workouts</button>
+                    <button class="searchToggle">Quick Search</button>
+
 
                     <!-- section displaying search results -->
                     <br>
@@ -126,6 +129,9 @@
 </section>
 
 
+{{#if logged_in}}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="./assets/js/helper.js"></script>
 <script src="./assets/js/exercise.js"></script>
+{{/if}}
+
