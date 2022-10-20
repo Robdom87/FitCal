@@ -96,6 +96,8 @@ function printSetChart() {
             }]
         },
         options: {
+            responsive: true,
+            maintainAspectRatio: true,
             scales: {
                 y: {
                     beginAtZero: true
@@ -145,6 +147,10 @@ function printFreqChart() {
                 ],
                 hoverOffset: 4
             }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
         }
     });
 
@@ -278,6 +284,8 @@ function printAnalChart() {
             }]
         },
         options: {
+            responsive: true,
+            maintainAspectRatio: true,
             scales: {
                 y: {
                     beginAtZero: true,
@@ -320,6 +328,8 @@ const SetChartSample = new Chart(setElementSample, {
         }]
     },
     options: {
+        responsive: true,
+        maintainAspectRatio: true,
         scales: {
             y: {
                 beginAtZero: true
@@ -345,6 +355,10 @@ const freqChartSample = new Chart(freqElementSample, {
             ],
             hoverOffset: 4
         }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
     }
 });
 
@@ -352,22 +366,24 @@ const analElementSample = document.getElementById('analysisChartSample').getCont
 const analChartSample = new Chart(analElementSample, {
     type: 'scatter',
     data: {
-        labels: ['07/13/2022','07/14/2022','07/15/2022','07/16/2022','07/17/2022'],
+        labels: ['07/13/2022', '07/14/2022', '07/15/2022', '07/16/2022', '07/17/2022'],
         datasets: [{
             type: 'line',
             label: 'Total Volume',
-            data: ['5400','6000','5000','5200','5000'],
+            data: ['5400', '6000', '5000', '5200', '5000'],
             fill: false,
             borderColor: 'rgb(255, 99, 132)'
         }, {
             type: 'line',
             label: 'Avg Volume',
-            data: ['5320','5320','5320','5320','5320'],
+            data: ['5320', '5320', '5320', '5320', '5320'],
             fill: false,
             borderColor: 'rgb(54, 162, 235)'
         }]
     },
     options: {
+        responsive: true,
+        maintainAspectRatio: true,
         scales: {
             y: {
                 beginAtZero: true,
@@ -381,6 +397,11 @@ const analChartSample = new Chart(analElementSample, {
 });
 
 
+function init(){
+    displayExercisesAnal();
+}
+
+init();
 
 
 
@@ -388,6 +409,5 @@ const analChartSample = new Chart(analElementSample, {
 
 
 
- 
 
 

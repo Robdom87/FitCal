@@ -1,4 +1,3 @@
-
 .setContainer {
     display: none;
 }
@@ -7,10 +6,7 @@
     display: none;
 }
 
-
-.anaylzeBtn
-
-{
+.anaylzeBtn {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
     background-color: #1947c7;
     /* Blue */
@@ -23,6 +19,11 @@
     font-size: 16px;
 }
 
+.analysisCheckboxes {
+
+}
+
+.setCheckboxes {}
 
 .dropdown {
     border-color: transparent transparent #fff transparent;
@@ -104,6 +105,7 @@
   vertical-align: middle;
   top: 50px;
 }
+
 .newWorkoutBtn, .chooseProgBtn, .savedExercisesBtn, 
 .searchToggle, .add, .set, .deleteAllBtn, 
 .sub, .saveSesh, .selectProgBtn, .searchBtn,
@@ -231,10 +233,28 @@
   opacity: 1;
 }
 
+.freqChartContainer {
+ display: flex;
+ justify-content: center;
+}
+
+.chartBtns {
+  margin-bottom: 15px;
+}
+
 @media (min-width: 768px) {
   .frequencyBtn,.setButton,
   .analysisBtn {
     padding: 14px 22px;
     width: 176px;
   }
+}
+
+@media only screen and (max-width: 576px) {
+  /* formatting for exercise section */
+  .chartBtns {
+    display: flex;
+    flex-direction: column;
+  }
+
 }

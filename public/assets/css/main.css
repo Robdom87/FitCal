@@ -1,9 +1,16 @@
 * {
-    font-family:  "Source Sans Pro", Helvetica, sans-serif;;
+    font-family: "Source Sans Pro", Helvetica, sans-serif;
+    ;
 }
 
-body {
+.body {
     background-color: white;
+    position: relative;
+    min-height: 100vh;
+}
+
+main {
+    padding-bottom: 2.5rem;
 }
 
 h2 {
@@ -70,11 +77,12 @@ nav span {
 
 .btnColor {
     font-weight: bold;
-    color:  rgb(180, 179, 179);
+    color: rgb(180, 179, 179);
 
 }
-.navbar-menu{
-    display:none;
+
+.navbar-menu {
+    display: none;
 }
 
 .PurpleBtn {
@@ -83,17 +91,22 @@ nav span {
 }
 
 footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem; 
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    background-color: cornflowerblue;
-    bottom: 0;
+    /* position: absolute; */
+    background-color: rgb(213, 213, 213);
+    /* bottom: 0;
     width: 100%;
-    height:5%;
-    }
+    height: 5%; */
+}
 
 @media only screen and (max-width: 576px) {
+
     /* formatting for header */
     .header {
         /* flex-direction: column; */
@@ -102,13 +115,15 @@ footer {
         padding-right: 20px;
         /* padding-bottom: 20px; */
     }
+
     nav {
-        
+
         flex-direction: column;
         align-items: center;
         width: 100%;
         padding: 0px;
     }
+
     nav a {
         display: none;
         flex-direction: column;
@@ -124,17 +139,18 @@ footer {
         align-items: center;
         padding-right: 10px;
     }
+
     .nav-bar {
         display: flex;
-        
-        
+
+
     }
 
     .navbar-menu {
         background-color: #3e87e0;
         padding: .5rem 0;
-        
-        
+
+
     }
 
     .navbar-item {
@@ -146,8 +162,11 @@ footer {
         align-items: center;
         flex-direction: column;
     }
-    
-    
+
+    /*     
+    footer {
+        bottom:auto;
+    } */
     /* .nav-bar {
         display: block;
     } */
