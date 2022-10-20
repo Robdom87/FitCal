@@ -1,0 +1,145 @@
+.white {
+    color: white;
+}
+
+
+
+/* * {
+    border: red 1px solid;
+} */
+
+h3 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.homepage {
+    text-align: center;
+}
+
+.homepageText * {
+    font-size: 20px;
+}
+
+h4 {
+    background-color: white;
+    font-weight: bold;
+}
+
+.exercise-selection-body {
+    background-color: white;
+}
+
+* {
+    font-family: "Source Sans Pro", Helvetica, sans-serif;
+    ;
+}
+
+.header {
+    background-color: #076ae1;
+}
+
+h2 {
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* .headerSect {
+    background-image: linear-gradient(to bottom, #076ae1, #3e87e0);
+
+} */
+
+body {
+    background-color: white;
+}
+
+nav {
+    color: white;
+    font-weight: bold;
+    /* background-image: linear-gradient(to bottom, #3e87e0,#3e87e0); */
+}
+
+.btnColor {
+    font-weight: bold;
+    color: rgb(180, 179, 179);
+
+}
+
+.PurpleBtn {
+    color: white;
+    background-color: #076ae1;
+}
+
+.program {
+    font-weight: bold;
+    border-bottom: solid lightgray 2px;
+
+}
+
+.frequencyBtn,
+.setButton,
+.analysisBtn,
+.anaylzeBtn,
+/* .setDate, */
+/* .startDt, */
+/* .endDt, */
+.chooseAna {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: #1947c7;
+    /* Blue */
+    border: none;
+    color: white;
+    padding: 4px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+.setDate, .startDt, .endDt {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: #1ba450;
+    /* Blue */
+    border: none;
+    color: white;
+    padding: 3px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+.anaylzeBtn {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: #bb0a0a;
+    /* Blue */
+    border: none;
+    color: white;
+    padding: 3px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.dropdown {
+    border-color: transparent transparent #fff transparent;
+    top: 5px;
+}
+
+.dropdown {
+    color: #f9f6f6;
+    padding: 5px 10px;
+    border: 2px solid transparent;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+    cursor: pointer;
+    user-select: none;
+}
+
+/*style items (options):*/
+.dropdown {
+    background-color: #076ae1;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+}
