@@ -1,5 +1,3 @@
-
-
 .white {
     color: white;
 }
@@ -33,7 +31,8 @@ h4 {
 }
 
 * {
-    font-family:  "Source Sans Pro", Helvetica, sans-serif;;
+    font-family: "Source Sans Pro", Helvetica, sans-serif;
+    ;
 }
 
 .header {
@@ -63,7 +62,7 @@ nav {
 
 .btnColor {
     font-weight: bold;
-    color:  rgb(180, 179, 179);
+    color: rgb(180, 179, 179);
 
 }
 
@@ -77,9 +76,18 @@ nav {
     border-bottom: solid lightgray 2px;
 
 }
-.frequencyBtn, .setButton, .analysisBtn, .anaylzeBtn, .setDate, .startDt, .endDt, .chooseAna  {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19);
-    background-color: #1947c7; /* Blue */
+
+.frequencyBtn,
+.setButton,
+.analysisBtn,
+.anaylzeBtn,
+/* .setDate, */
+/* .startDt, */
+/* .endDt, */
+.chooseAna {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: #1947c7;
+    /* Blue */
     border: none;
     color: white;
     padding: 4px 10px;
@@ -87,27 +95,51 @@ nav {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-  }
-  .dropdown {
+}
+.setDate, .startDt, .endDt {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: #1ba450;
+    /* Blue */
+    border: none;
+    color: white;
+    padding: 3px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+.anaylzeBtn {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: #bb0a0a;
+    /* Blue */
+    border: none;
+    color: white;
+    padding: 3px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.dropdown {
     border-color: transparent transparent #fff transparent;
     top: 5px;
-  }
-  .dropdown {
+}
+
+.dropdown {
     color: #f9f6f6;
-    padding: 7px 14px;
-    border: 1px solid transparent;
+    padding: 5px 10px;
+    border: 2px solid transparent;
     border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
     cursor: pointer;
     user-select: none;
-  }
-  
-  /*style items (options):*/
-  .dropdown {
+}
+
+/*style items (options):*/
+.dropdown {
     background-color: #076ae1;
     top: 100%;
     left: 0;
     right: 0;
     z-index: 99;
-  }
-  
-  
+}
