@@ -21,12 +21,15 @@
     <div class="title-message-box">
       <h2>{{post.title}}</h2>
     </div>
+    <table style="table-layout:fixed; width:1343px">
+    <tr>
     <div class="post-message">
-      <p class= "post-list">{{post.post_content}}</p>
+      <td class="wrapword">{{post.post_content}}</td>
       <span class="meta-data">Posted by <b>{{post.user.name}}</b> on <b>{{format_date post.created_at}}</b></span>
+    </tr>
+      {{/each}}
+</table>
     </div>
-  </div>
-  {{/each}}
   </div>
 
 
