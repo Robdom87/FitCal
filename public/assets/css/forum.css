@@ -121,7 +121,10 @@ h2 {
     color: rgb(245, 244, 244)
 }
 
-.post-list {
+.wrapword {
+    white-space: -webkit-pre-wrap;
+    word-break: break-all;
+    white-space: normal;
     color:rgb(5, 5, 5);
     background-color: rgb(224, 222, 222);
     display: block;
