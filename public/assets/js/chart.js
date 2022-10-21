@@ -338,29 +338,6 @@ const SetChartSample = new Chart(setElementSample, {
     }
 });
 
-const freqElementSample = document.getElementById('freqChartSample').getContext('2d');
-const freqChartSample = new Chart(freqElementSample, {
-    type: 'doughnut',
-    data: {
-        labels: [
-            'Working Out Days',
-            'Off'
-        ],
-        datasets: [{
-            label: 'Workout Frequency',
-            data: [70, 30],
-            backgroundColor: [
-                'rgb(255, 99, 132)',
-                'rgb(54, 162, 235)'
-            ],
-            hoverOffset: 4
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-    }
-});
 
 const analElementSample = document.getElementById('analysisChartSample').getContext('2d');
 const analChartSample = new Chart(analElementSample, {
