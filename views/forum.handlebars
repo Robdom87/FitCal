@@ -21,15 +21,15 @@
     <div class="title-message-box">
       <h2>{{post.title}}</h2>
     </div>
+    <div class="post-message"></div>
     <table style="table-layout:fixed; width:1343px">
     <tr>
     <div class="post-message">
-      <td class="wrapword">{{post.post_content}}</td>
-      <span class="meta-data">Posted by <b>{{post.user.name}}</b> on <b>{{format_date post.created_at}}</b></span>
-    </tr>
-      {{/each}}
-</table>
+      <td class="wrapword">{{post.post_content}}</td></tr>
+    </table>
+        <span class="meta-data">Posted by <b>{{post.user.name}}</b> on <b>{{format_date post.created_at}}</b></span>
     </div>
+ {{/each}}
   </div>
 
 
