@@ -1,4 +1,4 @@
-# FitCal
+# FitCal 2.0
 ![badmath](https://img.shields.io/github/languages/top/lernantino/badmath)
 
 ## Description
@@ -15,18 +15,22 @@ FitCal is a continuation for the FitCal project (linked below). It expands on it
 
 ## Usage
 
-User can find the original deployed app at [FitCal](https://robdom87.github.io/FitCal/)
+User can find the original deployed app at [FitCal](https://fitcalxxii.herokuapp.com/)
 
-Repo for original app can be found at: (https://github.com/Robdom87/FitCal)
+Repo for original app can be found at: (https://github.com/Robdom87/FitCalv2)
 
-## Features
+## Features added in v2.0
+- Users can create an account using secure registration and login.
+- User friendly BMI with easy to use slider mechanics and hight conversion into feet. 
+- Redesigned exercise nutrition section with improved mechanics and clean look 
+- Completely redesigned and improved exercise section with an ability create your own exercise routine.
+- New analysis section to supplement user’s workout routine and keep all the necessary data easy to monitor fitness goals.
+- And in addition, we added a completely new section for the registered user to participate in community forum (under development).
+- The FitCal v2.0 is now compatible with mobile devices.  
 
-The User can search and save workout with a new and updated search section. 
-
-The saved workouts can also be setup for sets, reps, weight, and weight type to create a workout program.
 
 *** IN DEVELOPMENT ***
-The User will be able to input their reps, weight, weight type, and comments and save it into our database as well as be able to recall old workout sessions information.
+Fully functioning community forum where users can engage in fitness and wellbeing discussions, comment and search for useful advices from other users. 
 
 ## Credits
 
@@ -38,7 +42,8 @@ Yoon, Gi Won <br>
 Chavez, Juan 
 <br>
 <br>
-Third-party Assets:
+
+## Technologies Used:
 - Bulma
 - Jquery
 - [API Ninjas](https://api-ninjas.com/)
@@ -47,3 +52,8 @@ Third-party Assets:
 - Express.js
 - MySQL
 - Sequelize
+- Handlebars
+- Chart.js
+
+## Screenshots
+![alt FitCal_v2](./public/assets/images/FitCal_v2.png)
