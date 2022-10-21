@@ -1,0 +1,34 @@
+<div class="posts-section">
+    <button class="new-post-btn" id="btn">+ Create New Post</button>
+    <form class="new-post-form">
+    <h3 class="card-header">New Post</h3>
+    <div class="form-row">
+        <label class="post-title">Title</label>
+        <br>
+        <input type="text" id="post-title" name="post-title" class="title-form" required/>
+    </div>
+    <div class="form-row">
+        <label class="content-title">Content</label>
+        <br>
+        <input type="text" id="content" name="post-content" class="post-form" required />
+    </div>  
+    <button class="submit-btn" type="submit" id="btn">Submit!</button>
+    </form>
+
+{{#each posts as |post| }}
+{{!-- //post box must encompass the hidden comments section --}}
+<div class="postBox">
+    <div class="title-message-box">
+      <h2>{{post.title}}</h2>
+    </div>
+    <div class="post-message">
+      <p>{{post.post_content}}</p>
+      <span class="meta-data">Posted by <b>{{post.user.name}}</b> on <b>{{format_date post.created_at}}</b></span>
+    </div>
+  </div>
+  {{/each}}
+  </div>
+
+
+<script src="./assets/js/add-post.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

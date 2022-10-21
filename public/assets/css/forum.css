@@ -1,0 +1,118 @@
+.new-post-form {
+    display:none;
+}
+
+.card-header {
+    margin-bottom: 20px;
+}
+
+.new-post-btn {
+    margin-bottom: 30px;
+}
+
+#btn {
+    font-size: 20px;
+    width: 220px;
+    height: 50px;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: rgb(239, 235, 235);
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+}
+
+#btn:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+#btn:active {
+    color: white
+}
+
+#btn:active:after {
+    background: transparent;
+}
+
+#btn:hover:before {
+    opacity: 1;
+}
+
+#btn:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgb(6, 159, 247);
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+
+.card-header {
+   justify-content: center;
+}
+
+.form-row {
+    margin-bottom: 20px;
+  }
+
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.postBox {
+    text-align:center;
+}
+.card-header {
+    padding:10px;
+}
+
+.posts-section {
+    text-align: center;
+    white-space: nowrap;
+    margin: 0 auto;
+}
+
+#new-post-form {
+    padding: .10em 45%;
+    margin: 0 auto;
+}
+
+.submit-btn {
+    margin-bottom: 12px;
+}
+
+.title-message-box {
+    background-color: rgb(5, 102, 247);
+    display: block;
+    padding: 4px;
+    font-size: 50px;
+}
+
