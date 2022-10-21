@@ -5,12 +5,12 @@
     <div class="form-row">
         <label class="post-title">Title</label>
         <br>
-        <input type="text" id="post-title" name="post-title" class="title-form" required/>
+        <input type="text" id="forum-input" name="post-title" class="title-form" required/>
     </div>
     <div class="form-row">
         <label class="content-title">Content</label>
         <br>
-        <input type="text" id="content" name="post-content" class="post-form" required />
+        <input type="text" id="forum-input" name="post-content" class="post-form" required />
     </div>  
     <button class="submit-btn" type="submit" id="btn">Submit!</button>
     </form>
@@ -22,7 +22,7 @@
       <h2>{{post.title}}</h2>
     </div>
     <div class="post-message">
-      <p>{{post.post_content}}</p>
+      <p class= "post-list">{{post.post_content}}</p>
       <span class="meta-data">Posted by <b>{{post.user.name}}</b> on <b>{{format_date post.created_at}}</b></span>
     </div>
   </div>
