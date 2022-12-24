@@ -18,7 +18,7 @@ Deployed app at [FitCal](https://fitcalxxii.herokuapp.com/)
 
 User can find the original deployed app at [FitCalv1](https://robdom87.github.io/FitCalv1/)
 
-Repo for original app can be found at: (https://github.com/Robdom87/FitCalv1)
+Repo for original app can be found at: [Link](https://github.com/Robdom87/FitCalv1)
 
 ## Features added
 - Users can create an account using secure registration and login.
