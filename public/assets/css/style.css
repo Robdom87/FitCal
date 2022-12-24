@@ -1,145 +1,371 @@
-.white {
-    color: white;
+:root {
+    --primary: #076ae1;
+    --secondary: #3e87e0;
+    --bcColor: white;
+    --textColor: white;
 }
 
 
+/* General */
+* {
+    font-family: "Source Sans Pro", Helvetica, sans-serif;
+    /* color: var(--textColor); */
+}
 
-/* * {
-    border: red 1px solid;
-} */
+.body {
+    background-color: var(--bcColor);
+}
+
+body {
+    background-color: var(--bcColor);
+}
+
+h2 {
+    font-weight: bold;
+    font-size: 1vw;
+    color: var(--textColor);
+}
 
 h3 {
     font-size: 24px;
     font-weight: bold;
 }
 
-.homepage {
-    text-align: center;
-}
-
-.homepageText * {
-    font-size: 20px;
-}
-
 h4 {
-    background-color: white;
+    background-color: var(--bcColor);
     font-weight: bold;
 }
 
-.exercise-selection-body {
-    background-color: white;
-}
-
-* {
-    font-family: "Source Sans Pro", Helvetica, sans-serif;
-    ;
-}
-
-.header {
-    background-color: #076ae1;
-}
-
-h2 {
-    color: white;
+.white {
+    color: var(--textColor);
     font-weight: bold;
-    font-size: 18px;
-}
-
-/* .headerSect {
-    background-image: linear-gradient(to bottom, #076ae1, #3e87e0);
-
-} */
-
-body {
-    background-color: white;
-}
-
-nav {
-    color: white;
-    font-weight: bold;
-    /* background-image: linear-gradient(to bottom, #3e87e0,#3e87e0); */
 }
 
 .btnColor {
     font-weight: bold;
-    color: rgb(180, 179, 179);
-
+    color: var(--textColor);
 }
 
 .PurpleBtn {
     color: white;
-    background-color: #076ae1;
+    background-color: var(--primary);
+}
+
+/* header */
+header {
+    background-color:var(--primary);
+}
+
+nav {
+    font-weight: bold;
+    color: var(--textColor);
+    background-color: var(--secondary);
+}
+
+nav span {
+    cursor: pointer;
+}
+
+/* homepage */
+.homepageText * {
+    font-size: 20px;
+}
+
+/* bmi */
+.bmiSection {
+    background-color: var(--bcColor);
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 25px 25px 30px rgba(0, 0, 0, 0.15);
+}
+
+.bmiSection h1 {
+    background: #024b94;
+    color: white;
+    font-size: 23px;
+    letter-spacing: 1px;
+}
+
+.display {
+    box-shadow: 0 0 20px rgba(0, 139, 253, 0.25);
+}
+
+#result {
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #0be881;
+}
+
+#category {
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.row span {
+    font-weight: 500;
+}
+
+.col-md-6 {
+    border: grey solid 2px;
+    background-color: rgb(232, 232, 232);
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #dcdcdc;
+    border-radius: 3px;
+    outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #1c1c1c;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* nutrition */
+.tbody {
+    border: lightgray 1px solid;
+}
+
+.tHeader {
+    background-color: #024b94;
+}
+
+.table th {
+    color: white;
+    font-size: bold;
+}
+
+.totalRow {
+    background-color: rgb(141, 141, 141);
+}
+
+.whiteT {
+    color: white
+}
+
+.macroRow {
+    background-color: lightgray;
+}
+
+/* exercise section */
+.exercise-selection-body {
+    background-color: white;
+}
+
+.resultRadio {
+    border-top: 2px dotted grey;
+}
+
+.savedExercisesContainer {
+    border: 1px solid grey;
+    background-color: lightgray;
+}
+
+.exerciseLog {
+    border: solid 2px grey;
+}
+
+.fExerciseLog {
+    border: solid 2px grey;
+}
+
+.fExerciseLog td {
+    border: solid 1px grey;
 }
 
 .program {
     font-weight: bold;
     border-bottom: solid lightgray 2px;
-
+    background-color: rgb(204, 204, 204);
 }
 
+.exerciseName {
+    font-weight: bold;
+}
+
+/* analysis */
 .frequencyBtn,
 .setButton,
 .analysisBtn,
-.anaylzeBtn,
-/* .setDate, */
-/* .startDt, */
-/* .endDt, */
-.chooseAna {
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
-    background-color: #1947c7;
-    /* Blue */
-    border: none;
-    color: white;
-    padding: 4px 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-}
-.setDate, .startDt, .endDt {
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
-    background-color: #1ba450;
-    /* Blue */
-    border: none;
-    color: white;
-    padding: 3px 8px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-}
 .anaylzeBtn {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
-    background-color: #bb0a0a;
+    background-color: #1366d6;  
+    border: none;
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.frequencyBtn:active,
+.setButton:active,
+.analysisBtn:active {
+  box-shadow: rgba(0, 0, 0, .1) 0 3px 6px 0, rgba(0, 0, 0, .1) 0 0 10px 0, rgba(0, 0, 0, .1) 0 1px 4px -1px;
+}
+
+.anaylzeBtn,
+.newWorkoutBtn, .chooseProgBtn, .savedExercisesBtn, 
+.searchToggle, .add, .set, .deleteAllBtn, 
+.sub, .saveSesh, .selectProgBtn, .searchBtn,
+.calMacros, .macroSubmit, .setupBtn,
+.remove-button, .cancel-button {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
     /* Blue */
     border: none;
     color: white;
-    padding: 3px 8px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
     font-size: 16px;
+    background-color: #0A66C2;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 20px;
 }
 
-.dropdown {
-    border-color: transparent transparent #fff transparent;
-    top: 5px;
+.setDate,
+.startDt,
+.endDt,
+.chooseAna {
+    /* Blue */
+    border: none;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 20px;
 }
+
+.setDate:hover,
+.setDate:focus,
+.anaylzeBtn:hover,
+.anaylzeBtn:focus,
+.newWorkoutBtn:hover,.newWorkoutBtn:focus, 
+.chooseProgBtn:hover,.chooseProgBtn:focus, 
+.savedExercisesBtn:hover, .savedExercisesBtn:focus, 
+.searchToggle:hover, .searchToggle:focus, 
+.add:hover,.add:focus, .set:hover,.set:focus,
+.frequencyBtn:focus,.frequencyBtn:hover,.setButton:hover,.setButton:focus,
+.analysisBtn:hover, .analysisBtn:focus, .deleteAllBtn:hover,.deleteAllBtn:focus
+.sub:focus, .sub:hover, .saveSesh:focus, .saveSesh:hover, 
+.selectProgBtn:hover, .selectProgBtn:focus,.searchBtn:hover, .searchBtn:focus,
+.calMacros:focus, .calMacros:hover, .macroSubmit:focus, .macroSubmit:hover,
+.setupBtn:focus, .setupBtn:hover, .remove-button:focus, .remove-button:hover,
+.cancel-button:hover, .cancel-button:focus { 
+  background-color: #16437E;
+  color: #ffffff;
+}
+
+.setDate:active {
+    background: #09223b;
+    color: rgb(255, 255, 255, .7);
+  }
+  
+  .setDate:disabled { 
+    cursor: not-allowed;
+    background: rgba(0, 0, 0, .08);
+    color: rgba(0, 0, 0, .3);
+  }
 
 .dropdown {
     color: #f9f6f6;
-    padding: 5px 10px;
     border: 2px solid transparent;
     border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
     cursor: pointer;
     user-select: none;
+    background-color: #076ae1;
 }
 
-/*style items (options):*/
-.dropdown {
-    background-color: #076ae1;
-    top: 100%;
-    left: 0;
-    right: 0;
-    z-index: 99;
+/* forum */
+#btn {
+    font-size: 20px;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: rgb(239, 235, 235);
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+#btn:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    background-size: 400%;
+    filter: blur(5px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+#btn:active {
+    color: white
+}
+
+#btn:active:after {
+    background: transparent;
+}
+
+#btn:hover:before {
+    opacity: 1;
+}
+
+#btn:after {
+    content: '';
+    background: rgb(6, 159, 247);
+    border-radius: 10px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+
+#forum-input {
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.title-message-box {
+    background-color: rgb(5, 102, 247);
+    font-size: 50px;
+}
+
+.wrapword {
+    white-space: -webkit-pre-wrap;
+    word-break: break-all;
+    white-space: normal;
+    color:rgb(5, 5, 5);
+    background-color: rgb(224, 222, 222);
+    font-size: 20px;
+}
+
+.meta-data {
+    font-size: 14px;
+}
+
+/* footer */
+footer {
+    background-color: rgba(213, 213, 213, 0.463);
+}
+
+@media only screen and (max-width: 576px) {
+    nav a {
+        border-top: 1px lightgray solid;
+    }
+
+    .navbar-menu {
+        background-color: #3e87e0;
+    }
+
+    .navbar-item {
+        color: white;
+    }
 }

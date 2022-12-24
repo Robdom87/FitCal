@@ -1,32 +1,25 @@
-* {
-    font-family: "Source Sans Pro", Helvetica, sans-serif;
-    ;
+*,
+*:before,
+*:after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 .body {
-    background-color: white;
     position: relative;
     min-height: 100vh;
+}
+
+body {
+    height: 100vh;
 }
 
 main {
     padding-bottom: 2.5rem;
 }
 
-h2 {
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
-}
-
-h3 {
-    font-size: 24px;
-    font-weight: bold;
-}
-
 h4 {
-    background-color: white;
-    font-weight: bold;
     margin-bottom: 15px;
 }
 
@@ -46,16 +39,12 @@ input {
 nav {
     display: flex;
     align-items: flex-end;
-    font-weight: bold;
-    color: white;
-    background-color: #3e87e0;
     padding: 10px;
     justify-content: space-around;
 }
 
 nav span {
     margin: 0px 10px;
-    cursor: pointer;
 }
 
 .nav-bar {
@@ -66,28 +55,12 @@ nav span {
     max-width: 100px;
 }
 
-.white {
-    color: white;
-    font-weight: bold;
-}
-
-.header {
-    background-color: #076ae1;
-}
-
-.btnColor {
-    font-weight: bold;
-    color: rgb(180, 179, 179);
-
-}
-
 .navbar-menu {
     display: none;
 }
 
-.PurpleBtn {
-    color: white;
-    background-color: #076ae1;
+.homepage {
+    text-align: center;
 }
 
 footer {
@@ -98,22 +71,15 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* position: absolute; */
-    background-color: rgb(213, 213, 213);
-    /* bottom: 0;
-    width: 100%;
-    height: 5%; */
 }
 
 @media only screen and (max-width: 576px) {
 
     /* formatting for header */
     .header {
-        /* flex-direction: column; */
         align-items: center;
         padding-bottom: 0px;
         padding-right: 20px;
-        /* padding-bottom: 20px; */
     }
 
     nav {
@@ -131,7 +97,6 @@ footer {
         padding-top: 15px;
         padding-bottom: 15px;
         width: 100%;
-        border-top: 1px lightgray solid;
     }
 
     .navbar-burger {
@@ -142,19 +107,10 @@ footer {
 
     .nav-bar {
         display: flex;
-
-
     }
 
     .navbar-menu {
-        background-color: #3e87e0;
         padding: .5rem 0;
-
-
-    }
-
-    .navbar-item {
-        color: white;
     }
 
     .navbar-end {
@@ -162,12 +118,4 @@ footer {
         align-items: center;
         flex-direction: column;
     }
-
-    /*     
-    footer {
-        bottom:auto;
-    } */
-    /* .nav-bar {
-        display: block;
-    } */
 }

@@ -24,7 +24,6 @@
 
 /* search result section of modal */
 .exercise-selection-body {
-    background-color: white;
     display: flex;
     flex-direction: column;
 }
@@ -42,15 +41,9 @@
     margin-bottom: 15px;
 }
 
-.resultRadio {
-    border-top: 2px dotted grey;
-}
-
 .savedExercisesContainer {
     display: none;
     padding: 15px;
-    border: 1px solid grey;
-    background-color: lightgray;
     margin-top: 10px;
 }
 
@@ -78,33 +71,18 @@
     display: none;
 }
 
-.exerciseLog {
-    border: solid 2px grey;
-}
-
-.fExerciseLog {
-    border: solid 2px grey;
-}
-
 .fExerciseLog th{
     /* border: solid 1px grey; */
     padding: 5px;
 }
 
 .fExerciseLog td{
-    border: solid 1px grey;
     padding: 2px;
 }
 
 /* buttons top of session input */
 .chooseProgContainer {
     display: none;
-}
-
-.program {
-    font-weight: bold;
-    border-bottom: solid lightgray 2px;
-    background-color: rgb(204, 204, 204);
 }
 
 .sessionSection {
@@ -114,10 +92,6 @@
 #workoutName {
     width: fit-content;
     text-align: center;
- }
-
- .exerciseName {
-    font-weight: bold;
  }
 
 .sessionForm {
